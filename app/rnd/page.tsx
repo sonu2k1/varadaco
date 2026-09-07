@@ -36,10 +36,38 @@ const phases = [
 ];
 
 const labEquipment = [
-  { title: "HPLC & UHPLC-MS/MS", desc: "Ultra-high performance liquid chromatography with tandem mass spectrometry for accurate bioactive quantification and contaminant screening.", icon: Gauge },
-  { title: "USP Automated Dissolution Testers", desc: "Multi-vessel real-time spectrophotometric dissolution testing to ensure targeted enteric release within narrow GI transit windows.", icon: Beaker },
-  { title: "Particle Size & Zeta Potential Analyzers", desc: "Laser diffraction nano-sizing down to 20nm for colloidal emulsions and liposomal suspension stability verification.", icon: Dna },
-  { title: "Accelerated ICH Stability Chambers", desc: "Automated climate-controlled chambers operating at 40°C / 75% RH for stability forecasting and shelf-life certification.", icon: ShieldCheck },
+  {
+    title: "HPLC & UHPLC-MS/MS",
+    desc: "Ultra-high performance liquid chromatography with tandem mass spectrometry for accurate bioactive quantification and contaminant screening.",
+    icon: Gauge,
+    tag: "Assay Accuracy",
+    badge: "0.01 PPM Sensitivity",
+    theme: "teal",
+  },
+  {
+    title: "USP Automated Dissolution Testers",
+    desc: "Multi-vessel real-time spectrophotometric dissolution testing to ensure targeted enteric release within narrow GI transit windows.",
+    icon: Beaker,
+    tag: "Dissolution Kinetics",
+    badge: "USP Apparatus I & II",
+    theme: "blue",
+  },
+  {
+    title: "Particle Size & Zeta Potential Analyzers",
+    desc: "Laser diffraction nano-sizing down to 20nm for colloidal emulsions and liposomal suspension stability verification.",
+    icon: Dna,
+    tag: "Nano-Colloidal",
+    badge: "Down to 20nm Sizing",
+    theme: "purple",
+  },
+  {
+    title: "Accelerated ICH Stability Chambers",
+    desc: "Automated climate-controlled chambers operating at 40°C / 75% RH for stability forecasting and shelf-life certification.",
+    icon: ShieldCheck,
+    tag: "Shelf-Life Testing",
+    badge: "Zone IVb (40°C / 75% RH)",
+    theme: "emerald",
+  },
 ];
 
 
@@ -97,7 +125,7 @@ export default function RndPage() {
           <h2>Our 4-phase clinical R&D <em>framework.</em></h2>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+        <div className="rnd-phases-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "20px" }}>
           {phases.map((p, idx) => {
             const Icon = p.icon;
             return (
@@ -180,34 +208,37 @@ export default function RndPage() {
       </section>
 
       {/* Laboratory Instrumentation */}
-      <section className="page-wrapper">
-        <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 50px" }}>
+      <section className="page-wrapper" style={{ paddingBottom: "110px" }}>
+        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 52px" }}>
           <p className="eyebrow" style={{ justifyContent: "center" }}>Instrumentation & Rigor</p>
           <h2>Analytical testing <em>infrastructure.</em></h2>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+        <div className="rnd-equip-grid">
           {labEquipment.map((eq, i) => {
             const Icon = eq.icon;
             return (
               <motion.div
                 key={eq.title}
-                className="card-panel"
-                initial={{ opacity: 0, y: 20 }}
+                className={`rnd-equip-card rnd-equip-${eq.theme}`}
+                initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4 }}
-                whileHover={{ y: -6 }}
               >
-                <div className="icon-box" style={{ background: "rgba(21, 128, 61, 0.1)", color: "#15803D" }}>
-                  <Icon size={24} />
+                <div className="rnd-equip-accent" />
+                <div className="rnd-equip-header">
+                  <div className="rnd-equip-icon-box">
+                    <Icon size={22} />
+                  </div>
+                  <span className="rnd-equip-tag">{eq.tag}</span>
                 </div>
-                <h4 style={{ fontSize: "17px", fontWeight: 700, color: "var(--ink)", marginBottom: "8px" }}>
-                  {eq.title}
-                </h4>
-                <p style={{ fontSize: "13px", color: "#475569", lineHeight: "1.6" }}>
-                  {eq.desc}
-                </p>
+                <h4 className="rnd-equip-title">{eq.title}</h4>
+                <p className="rnd-equip-desc">{eq.desc}</p>
+                <div className="rnd-equip-badge">
+                  <span className="rnd-equip-badge-dot" />
+                  <span>{eq.badge}</span>
+                </div>
               </motion.div>
             );
           })}

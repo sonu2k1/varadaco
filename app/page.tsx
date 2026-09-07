@@ -65,10 +65,38 @@ const timelineSteps = [
 ];
 
 const process = [
-  ["01", "Research & Development", "Insights that make an idea worth making.", Microscope],
-  ["02", "Formulation", "Ingredients calibrated for efficacy and experience.", FlaskConical],
-  ["03", "Testing & Quality", "Rigorous controls at every decision point.", ShieldCheck],
-  ["04", "Manufacturing", "Repeatable quality at meaningful scale.", PackageCheck]
+  {
+    num: "01",
+    phase: "Discovery",
+    title: "Research & Development",
+    desc: "Insights that make an idea worth making.",
+    Icon: Microscope,
+    theme: "emerald",
+  },
+  {
+    num: "02",
+    phase: "Formulation",
+    title: "Formulation",
+    desc: "Ingredients calibrated for efficacy and experience.",
+    Icon: FlaskConical,
+    theme: "blue",
+  },
+  {
+    num: "03",
+    phase: "Quality",
+    title: "Testing & Quality",
+    desc: "Rigorous controls at every decision point.",
+    Icon: ShieldCheck,
+    theme: "amber",
+  },
+  {
+    num: "04",
+    phase: "Delivery",
+    title: "Manufacturing",
+    desc: "Repeatable quality at meaningful scale.",
+    Icon: PackageCheck,
+    theme: "purple",
+  },
 ];
 
 const portfolioItems = [
@@ -268,8 +296,7 @@ export default function Home() {
             </div>
 
             <h1 className="pharma-hero-title">
-              From scientific idea to<br />
-              market-ready product.
+              From scientific idea to <br className="pharma-title-br" />market-ready product.
             </h1>
 
             <p className="pharma-hero-desc">
@@ -363,25 +390,34 @@ export default function Home() {
       </section>
 
       <section className="section process" id="capabilities">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fade}>
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fade} className="process-header">
           <p className="eyebrow">The Varadaco difference</p>
           <h2>From scientific idea to<br />market-ready product.</h2>
         </motion.div>
         <div className="process-grid">
-          {process.map(([num, title, desc, Icon], i) => (
+          {process.map((item, i) => (
             <motion.article
-              key={String(num)}
+              key={item.num}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
               variants={fade}
+              className={`process-card process-card-${item.theme}`}
             >
-              <span>{num as string}</span>
-              <Icon size={27} />
-              <h3>{title as string}</h3>
-              <p>{desc as string}</p>
-              <ArrowDownRight />
+              <div className="process-card-accent" />
+              <div className="process-card-top">
+                <span className="process-card-num">{item.num}</span>
+                <span className="process-card-phase">{item.phase}</span>
+              </div>
+              <div className="process-icon-wrapper">
+                <item.Icon size={24} />
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+              <div className="process-card-arrow">
+                <ArrowDownRight size={17} />
+              </div>
             </motion.article>
           ))}
         </div>
