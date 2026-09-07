@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import OrderConfirmationModal from "./OrderConfirmationModal";
 import {
   Check,
   ChevronRight,
@@ -312,6 +313,7 @@ export default function ProductJourneyModal({
   const [selectedMoq, setSelectedMoq] = useState<number>(500);
 
   const [sampleOrdered, setSampleOrdered] = useState(false);
+  const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
   const [sampleForm, setSampleForm] = useState({
     name: "",
     brand: "",
@@ -1795,18 +1797,52 @@ export default function ProductJourneyModal({
                   }}
                   className="summary-launch-grid"
                 >
-                  {/* Left Pill: Step 7 Summary */}
-                  <div style={{ background: "#0D2619", borderRadius: "16px", padding: "20px 18px", color: "#FFFFFF", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  {/* Left Pill: Step 7 Summary - Clickable to open Order Confirmation Popup */}
+                  <div
+                    onClick={() => setShowOrderConfirmation(true)}
+                    role="button"
+                    tabIndex={0}
+                    title="Click to view Order Confirmation & Invoice"
+                    style={{
+                      background: "#0D2619",
+                      borderRadius: "16px",
+                      padding: "20px 18px",
+                      color: "#FFFFFF",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      cursor: "pointer",
+                      position: "relative",
+                      transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                      border: "2px solid transparent",
+                      boxShadow: "0 4px 18px rgba(13, 38, 25, 0.25)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                      e.currentTarget.style.boxShadow = "0 10px 28px rgba(21, 128, 61, 0.4)";
+                      e.currentTarget.style.borderColor = "#22C55E";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0px)";
+                      e.currentTarget.style.boxShadow = "0 4px 18px rgba(13, 38, 25, 0.25)";
+                      e.currentTarget.style.borderColor = "transparent";
+                    }}
+                  >
                     <div>
-                      <span style={{ display: "inline-block", background: "#15803D", color: "#FFFFFF", fontSize: "11px", fontWeight: 700, padding: "2px 7px", borderRadius: "5px", textTransform: "uppercase", marginBottom: "6px" }}>
-                        STEP 7
-                      </span>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                        <span style={{ display: "inline-block", background: "#15803D", color: "#FFFFFF", fontSize: "11px", fontWeight: 700, padding: "2px 7px", borderRadius: "5px", textTransform: "uppercase", marginBottom: "6px" }}>
+                          STEP 7
+                        </span>
+                        <span style={{ fontSize: "10.5px", color: "#86EFAC", fontWeight: 600, display: "flex", alignItems: "center", gap: "2px" }}>
+                          View Invoice ↗
+                        </span>
+                      </div>
                       <h3 style={{ fontSize: "19px", fontWeight: 700, color: "#FFFFFF", margin: "2px 0 4px" }}>Summary</h3>
-                      <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>Review your product and proceed.</p>
+                      <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.75)", lineHeight: 1.4 }}>Review your product and proceed.</p>
                     </div>
 
                     <div style={{ marginTop: "14px", display: "flex", justifyContent: "flex-end" }}>
-                      <div style={{ width: "42px", height: "50px", background: "#C29B38", borderRadius: "6px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                      <div style={{ width: "42px", height: "50px", background: "#C29B38", borderRadius: "6px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
                         <div style={{ width: "22px", height: "5px", background: "#E5E7EB", borderRadius: "2px", position: "absolute", top: "-3px" }} />
                         <div style={{ width: "24px", height: "2px", background: "#78350F", margin: "2px 0" }} />
                         <div style={{ width: "24px", height: "2px", background: "#78350F", margin: "2px 0" }} />
@@ -1932,6 +1968,32 @@ export default function ProductJourneyModal({
           </AnimatePresence>
         </div>
       </motion.div>
+
+      {/* Order Confirmation & Invoice Modal (Exact Image 1 Spec) */}
+      <OrderConfirmationModal
+        isOpen={showOrderConfirmation}
+        onClose={() => setShowOrderConfirmation(false)}
+        data={{
+          productTitle: `${productName} Capsules`,
+          productImage: selectedBottle.image || "/packaging/hdpe_white.jpg",
+          bottleName: selectedBottle.name,
+          outerName: selectedOuter.name,
+          labelName: selectedLabel.name,
+          quantity: selectedMoq,
+          unitPrice: calculations.currentTier.sellingPrice,
+          discountPerUnit: 15.0,
+          totalInvestment: calculations.totalInvestment,
+          profitPerUnit: calculations.currentTier.profitPerUnit,
+          customerName: sampleForm.name || "Vikram Malhotra",
+          customerAddress: sampleForm.address || "Plot 42, Okhla Industrial Area Ph-III",
+          customerCityState: "New Delhi, Delhi",
+          customerZip: "110020",
+          customerCountry: "India",
+          paymentMethod: "Visa **** 4242",
+          shippingMethod: "Standard shipping",
+          orderId: "ID12345",
+        }}
+      />
     </div>
   );
 }

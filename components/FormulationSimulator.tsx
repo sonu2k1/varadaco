@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import OrderConfirmationModal from "./OrderConfirmationModal";
 import {
   Check,
   TrendingUp,
@@ -133,6 +134,7 @@ export default function FormulationSimulator() {
   const [ingredients, setIngredients] = useState<IngredientState[]>(INITIAL_INGREDIENTS);
   const [selectedMoq, setSelectedMoq] = useState<number>(500);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
+  const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -710,6 +712,10 @@ export default function FormulationSimulator() {
       >
         {/* LEFT PILL: STEP 7 SUMMARY */}
         <div
+          onClick={() => setShowOrderConfirmation(true)}
+          role="button"
+          tabIndex={0}
+          title="Click to view Order Confirmation & Invoice"
           style={{
             background: "#0D2619",
             borderRadius: "18px",
@@ -720,29 +726,48 @@ export default function FormulationSimulator() {
             justifyContent: "space-between",
             position: "relative",
             overflow: "hidden",
+            cursor: "pointer",
+            transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+            border: "2px solid transparent",
+            boxShadow: "0 4px 18px rgba(13, 38, 25, 0.25)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-4px)";
+            e.currentTarget.style.boxShadow = "0 10px 28px rgba(21, 128, 61, 0.4)";
+            e.currentTarget.style.borderColor = "#22C55E";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0px)";
+            e.currentTarget.style.boxShadow = "0 4px 18px rgba(13, 38, 25, 0.25)";
+            e.currentTarget.style.borderColor = "transparent";
           }}
         >
           <div>
-            <span
-              style={{
-                display: "inline-block",
-                background: "#15803D",
-                color: "#FFFFFF",
-                fontSize: "11px",
-                fontWeight: 700,
-                padding: "3px 8px",
-                borderRadius: "6px",
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-                marginBottom: "8px",
-              }}
-            >
-              STEP 7
-            </span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span
+                style={{
+                  display: "inline-block",
+                  background: "#15803D",
+                  color: "#FFFFFF",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  padding: "3px 8px",
+                  borderRadius: "6px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  marginBottom: "8px",
+                }}
+              >
+                STEP 7
+              </span>
+              <span style={{ fontSize: "10.5px", color: "#86EFAC", fontWeight: 600 }}>
+                View Invoice ↗
+              </span>
+            </div>
             <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#FFFFFF", margin: "2px 0 4px" }}>
               Summary
             </h3>
-            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", lineHeight: 1.4 }}>
+            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.75)", lineHeight: 1.4 }}>
               Review your product and proceed.
             </p>
           </div>
@@ -1181,6 +1206,30 @@ export default function FormulationSimulator() {
           </div>
         </div>
       )}
+
+      {/* Order Confirmation Modal */}
+      <OrderConfirmationModal
+        isOpen={showOrderConfirmation}
+        onClose={() => setShowOrderConfirmation(false)}
+        data={{
+          productTitle: "Ashwagandha Formulation",
+          productImage: "/packaging/hdpe_white.jpg",
+          bottleName: "HDPE White Bottle",
+          quantity: selectedMoq,
+          unitPrice: 149.0,
+          discountPerUnit: 15.0,
+          totalInvestment: stats.totalInvestment,
+          profitPerUnit: stats.profitPerUnit,
+          customerName: formData.name || "Vikram Malhotra",
+          customerAddress: formData.address || "Plot 42, Okhla Industrial Area Ph-III",
+          customerCityState: "New Delhi, Delhi",
+          customerZip: "110020",
+          customerCountry: "India",
+          paymentMethod: "Visa **** 4242",
+          shippingMethod: "Standard shipping",
+          orderId: "ID12345",
+        }}
+      />
     </div>
   );
 }
