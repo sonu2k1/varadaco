@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderConfirmationModal from "./OrderConfirmationModal";
+import RazorpayModal, { RazorpayPaymentDetails } from "./RazorpayModal";
 import {
   Check,
   TrendingUp,
@@ -135,6 +136,7 @@ export default function FormulationSimulator() {
   const [selectedMoq, setSelectedMoq] = useState<number>(500);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
+  const [showRazorpay, setShowRazorpay] = useState(false);
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -936,15 +938,15 @@ export default function FormulationSimulator() {
 
           <button
             type="button"
-            onClick={() => setSampleModalOpen(true)}
+            onClick={() => setShowRazorpay(true)}
             style={{
               marginTop: "16px",
               background: "#15803D",
               color: "#FFFFFF",
               border: "none",
-              borderRadius: "10px",
-              padding: "13px 20px",
-              fontSize: "14px",
+              borderRadius: "12px",
+              padding: "14px",
+              fontSize: "15px",
               fontWeight: 700,
               cursor: "pointer",
               display: "flex",
@@ -957,7 +959,7 @@ export default function FormulationSimulator() {
             onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
             onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
-            Order Sample Now
+            💳 Order Sample Now
           </button>
         </div>
       </div>
@@ -1228,6 +1230,20 @@ export default function FormulationSimulator() {
           paymentMethod: "Visa **** 4242",
           shippingMethod: "Standard shipping",
           orderId: "ID12345",
+        }}
+      />
+
+      {/* Razorpay Checkout Modal */}
+      <RazorpayModal
+        isOpen={showRazorpay}
+        onClose={() => setShowRazorpay(false)}
+        productName="Ashwagandha Formulation"
+        bottleName="HDPE White Bottle"
+        amount={99}
+        onSuccess={() => {
+          setShowRazorpay(false);
+          setOrderSubmitted(true);
+          setSampleModalOpen(true);
         }}
       />
     </div>

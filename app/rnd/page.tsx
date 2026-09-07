@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Atom, Beaker, Check, CheckCircle2, ChevronRight, Dna, FileText, FlaskConical, Gauge, Microscope, ShieldCheck, Sparkles, TestTubes } from "lucide-react";
+import { Atom, Beaker, Check, CheckCircle2, ChevronRight, Dna, FlaskConical, Gauge, Microscope, ShieldCheck, Sparkles, TestTubes } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -42,26 +42,6 @@ const labEquipment = [
   { title: "Accelerated ICH Stability Chambers", desc: "Automated climate-controlled chambers operating at 40°C / 75% RH for stability forecasting and shelf-life certification.", icon: ShieldCheck },
 ];
 
-const whitepapers = [
-  {
-    title: "Enhancing Curcuminoid Bioavailability via Self-Emulsifying Drug Delivery Systems (SEDDS)",
-    date: "Published Q4 2025",
-    pages: "24 Pages",
-    tag: "Bioavailability",
-  },
-  {
-    title: "Clinical Efficacy of Spore-Forming Bacillus Coagulans on Intestinal Mucosal Barrier Integrity",
-    date: "Published Q2 2025",
-    pages: "18 Pages",
-    tag: "Microbiome",
-  },
-  {
-    title: "Comparative Cellular Uptake of Low Molecular Weight (500Da) Fish Collagen Tripeptides",
-    date: "Published Q1 2026",
-    pages: "32 Pages",
-    tag: "Peptide Science",
-  },
-];
 
 export default function RndPage() {
   return (
@@ -69,35 +49,41 @@ export default function RndPage() {
       <Navbar />
 
       {/* Subpage Hero with Full Background Image */}
-      <section className="subpage-hero">
+      <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
             src="https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=1920&q=85"
             alt="Biomedical laboratory research and analytical science"
+            style={{ objectPosition: "center 40%" }}
           />
         </div>
 
-        <div className="subpage-hero-inner">
-          <div className="breadcrumbs">
+        <div className="subpage-hero-inner" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div className="breadcrumbs" style={{ justifyContent: "center" }}>
             <Link href="/">Home</Link>
             <ChevronRight size={14} />
             <span>Research & Development</span>
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="hero-tag-pill" style={{ backgroundColor: "rgba(124, 168, 50, 0.15)", borderColor: "rgba(124, 168, 50, 0.35)", color: "#7CA832" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
+          >
+            <div className="hero-tag-pill" style={{ backgroundColor: "rgba(124, 168, 50, 0.15)", borderColor: "rgba(124, 168, 50, 0.35)", color: "#7CA832", margin: "0 auto 14px" }}>
               <Microscope size={14} />
               <span>Clinical R&D Hub</span>
               <span className="pill-dot" style={{ backgroundColor: "#7CA832" }} />
               <span>Evidence-Led Science</span>
             </div>
 
-            <h1 style={{ maxWidth: "880px" }}>
+            <h1 style={{ maxWidth: "880px", textAlign: "center", margin: "0 auto" }}>
               Translating molecular science into<br />
               <em style={{ color: "#7CA832" }}>bioavailable nutrition.</em>
             </h1>
 
-            <p className="hero-text" style={{ maxWidth: "620px", fontSize: "16px", color: "#d1e8b0", margin: "14px 0 0" }}>
+            <p className="hero-text" style={{ maxWidth: "660px", fontSize: "16px", color: "#d1e8b0", margin: "16px auto 0", textAlign: "center" }}>
               Solving complex formulation challenges: enhanced cellular uptake, solubility kinetics, and active stabilization.
             </p>
           </motion.div>
@@ -228,75 +214,7 @@ export default function RndPage() {
         </div>
       </section>
 
-      {/* Published Whitepapers / Research */}
-      <section style={{ background: "linear-gradient(135deg, #FAF8F5 0%, #F0F4EF 50%, #F5F2EB 100%)", padding: "80px 4.5vw", borderTop: "1px solid #E2E8DF", borderBottom: "1px solid #E2E8DF" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "20px", marginBottom: "40px" }}>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <p className="eyebrow">Scientific Publications</p>
-              <h2>Recent research <em>whitepapers.</em></h2>
-            </motion.div>
-            <Link href="/contact?inquiry=whitepaper" className="text-link">
-              Request full research access <ArrowRight size={16} />
-            </Link>
-          </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-            {whitepapers.map((doc, idx) => (
-              <motion.div
-                key={doc.title}
-                className="card-panel"
-                style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px", padding: "24px 30px" }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.45 }}
-                whileHover={{ y: -5 }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
-                  <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(21, 128, 61, 0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#15803D", flexShrink: 0 }}>
-                    <FileText size={22} />
-                  </div>
-                  <div>
-                    <span style={{ fontSize: "11px", fontWeight: 700, textTransform: "uppercase", color: "#15803D", letterSpacing: "0.05em" }}>
-                      {doc.tag} • {doc.date}
-                    </span>
-                    <h4 style={{ fontSize: "16px", fontWeight: 700, color: "var(--ink)", marginTop: "2px" }}>
-                      {doc.title}
-                    </h4>
-                  </div>
-                </div>
-                <Link
-                  href="/contact?inquiry=whitepaper"
-                  className="button button-dark"
-                  style={{ padding: "8px 16px", fontSize: "12px" }}
-                >
-                  Download Dossier
-                  <ArrowRight size={14} />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Box */}
-      <section className="contact">
-        <div className="contact-mark">R</div>
-        <p className="eyebrow light">Scientific Collaboration</p>
-        <h2>Have a clinical hypothesis to <em>validate?</em></h2>
-        <p>Partner with our Ph.D. biochemists and formulation pharmacists to bring your clinical concept to life.</p>
-        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-          <Link href="/contact" className="button button-light">
-            Book an R&D Consultation
-            <ArrowRight size={17} />
-          </Link>
-          <Link href="/products" className="button button-dark" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
-            View Finished Formulations
-            <ArrowRight size={17} />
-          </Link>
-        </div>
-      </section>
 
       <Footer />
     </main>

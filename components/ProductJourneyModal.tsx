@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderConfirmationModal from "./OrderConfirmationModal";
+import RazorpayModal, { RazorpayPaymentDetails } from "./RazorpayModal";
 import {
   Check,
   ChevronRight,
@@ -314,6 +315,8 @@ export default function ProductJourneyModal({
 
   const [sampleOrdered, setSampleOrdered] = useState(false);
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
+  const [showRazorpay, setShowRazorpay] = useState(false);
+  const [razorpayPayment, setRazorpayPayment] = useState<RazorpayPaymentDetails | null>(null);
   const [sampleForm, setSampleForm] = useState({
     name: "",
     brand: "",
@@ -1923,7 +1926,7 @@ export default function ProductJourneyModal({
                     </div>
 
                     <button
-                      onClick={() => setSampleOrdered(true)}
+                      onClick={() => setShowRazorpay(true)}
                       style={{
                         marginTop: "12px",
                         background: "#15803D",
@@ -1937,11 +1940,15 @@ export default function ProductJourneyModal({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        gap: "6px",
+                        gap: "8px",
                         boxShadow: "0 4px 14px rgba(21, 128, 61, 0.3)",
+                        transition: "all 0.2s ease",
                       }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = "#166534")}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = "#15803D")}
                     >
-                      Order Sample Now
+                      <span style={{ fontSize: "15px" }}>💳</span>
+                      <span>Order Sample Now</span>
                     </button>
                   </div>
                 </div>
@@ -1956,6 +1963,26 @@ export default function ProductJourneyModal({
                     <p style={{ fontSize: "13.5px", color: "#166534", margin: 0, lineHeight: 1.5 }}>
                       We have registered your formulation order for <strong>{productName}</strong> ({selectedMoq} Units batch scale). Our lab team will courier your sample batch with Certificate of Analysis (CoA) within 48 hours.
                     </p>
+                    {razorpayPayment && (
+                      <div
+                        style={{
+                          marginTop: "12px",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          background: "#FFFFFF",
+                          border: "1px solid #86EFAC",
+                          borderRadius: "8px",
+                          padding: "6px 14px",
+                          fontSize: "12px",
+                          color: "#166534",
+                          fontWeight: 600,
+                        }}
+                      >
+                        <ShieldCheck size={14} color="#15803D" />
+                        <span>Secured via Razorpay: {razorpayPayment.paymentId} (₹{razorpayPayment.amount}.00 via {razorpayPayment.method})</span>
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -1992,6 +2019,20 @@ export default function ProductJourneyModal({
           paymentMethod: "Visa **** 4242",
           shippingMethod: "Standard shipping",
           orderId: "ID12345",
+        }}
+      />
+
+      {/* Razorpay Standard Checkout Modal */}
+      <RazorpayModal
+        isOpen={showRazorpay}
+        onClose={() => setShowRazorpay(false)}
+        productName={productName}
+        bottleName={selectedBottle.name}
+        amount={99}
+        onSuccess={(details) => {
+          setRazorpayPayment(details);
+          setShowRazorpay(false);
+          setSampleOrdered(true);
         }}
       />
     </div>
