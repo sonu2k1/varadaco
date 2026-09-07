@@ -75,7 +75,7 @@ const serviceList = [
       "ICH stability testing chambers (Zone IVb real-time & accelerated)",
       "Complete batch manufacturing records (BMR) & full traceability",
     ],
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80",
+    image: "/images/pharma-cleanroom-bg.jpg",
     icon: Factory,
     badge: "WHO-GMP Certified",
     cta: "Explore CRAMS Capacity",
@@ -102,23 +102,35 @@ const serviceList = [
 const turnkeySteps = [
   {
     step: "01",
+    stage: "Stage 01",
     title: "Discovery & Target Profiling",
-    desc: "Ingredient selection, active standardization, and feasibility mapping.",
+    desc: "Active ingredient selection, standardisation assays, feasibility mapping, and raw material sourcing.",
+    icon: Sparkles,
+    spec: "Target Purity: 99%+",
   },
   {
     step: "02",
+    stage: "Stage 02",
     title: "Bioavailability & Formulation",
-    desc: "Organoleptic testing, pilot batches, and real-time dissolution assays.",
+    desc: "Organoleptic testing, pilot batches, pharmacokinetics optimization, and real-time dissolution assays.",
+    icon: FlaskConical,
+    spec: "Zone IVb Stability",
   },
   {
     step: "03",
+    stage: "Stage 03",
     title: "Cleanroom Commercial Scaling",
-    desc: "Automated Class 100,000 cleanroom production with zero cross-contamination.",
+    desc: "Automated Class 100,000 cleanroom production with zero cross-contamination and continuous QA batch records.",
+    icon: Factory,
+    spec: "Class 100k Suite",
   },
   {
     step: "04",
+    stage: "Stage 04",
     title: "Packaging & Global Dispatch",
-    desc: "High-barrier sealing, certified CoAs, and expedited international export.",
+    desc: "High-barrier blister sealing, tamper-evident induction foil, certified CoAs, and expedited export dispatch.",
+    icon: Package,
+    spec: "30+ Export Clearance",
   },
 ];
 
@@ -161,7 +173,7 @@ export default function ServicesPage() {
       <Navbar />
 
       {/* Subpage Hero with Full Background Image */}
-      <section className="subpage-hero">
+      <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
             src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1920&q=85"
@@ -169,20 +181,26 @@ export default function ServicesPage() {
           />
         </div>
 
-        <div className="subpage-hero-inner">
-          <div className="breadcrumbs">
+        <div className="subpage-hero-inner" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div className="breadcrumbs" style={{ justifyContent: "center" }}>
             <Link href="/">Home</Link>
             <ChevronRight size={14} />
             <span>Our Services</span>
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5 }}
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
+          >
             <div
               className="hero-tag-pill"
               style={{
                 backgroundColor: "rgba(124, 168, 50, 0.15)",
                 borderColor: "rgba(124, 168, 50, 0.35)",
                 color: "#a3e635",
+                margin: "0 auto 14px",
               }}
             >
               <Layers size={14} />
@@ -191,7 +209,7 @@ export default function ServicesPage() {
               <span>Concept to Shelf</span>
             </div>
 
-            <h1 style={{ maxWidth: "880px" }}>
+            <h1 style={{ maxWidth: "880px", textAlign: "center", margin: "0 auto" }}>
               End-to-end solutions for<br />
               <em style={{ color: "#7CA832" }}>global health leaders.</em>
             </h1>
@@ -203,14 +221,15 @@ export default function ServicesPage() {
                 fontSize: "16.5px",
                 color: "#FAF8F5",
                 fontWeight: 500,
-                margin: "14px 0 24px",
+                margin: "14px auto 24px",
                 lineHeight: "1.7",
+                textAlign: "center",
               }}
             >
               From private labelling and turnkey batch scaling to international regulatory dossiers and high-barrier smart packaging.
             </p>
 
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
               <div
                 style={{
                   display: "inline-flex",
@@ -335,91 +354,77 @@ export default function ServicesPage() {
         })}
       </section>
 
-      {/* Turnkey Process Workflow (How We Partner) */}
-      <section
-        style={{
-          background: "linear-gradient(135deg, #F0F4EF 0%, #F5F8F3 50%, #FAF8F5 100%)",
-          padding: "90px 5vw",
-          borderTop: "1px solid #E2E8DF",
-          borderBottom: "1px solid #E2E8DF",
-        }}
-      >
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 55px" }}>
-            <p className="eyebrow" style={{ justifyContent: "center" }}>
-              Turnkey Production Lifecycle
-            </p>
+      {/* Turnkey Process Workflow (How We Partner - Modern Redesign) */}
+      <section className="turnkey-lifecycle-section">
+        <div style={{ maxWidth: "1280px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 60px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                background: "#EBF5E9",
+                border: "1px solid #D4E8CE",
+                padding: "6px 16px",
+                borderRadius: "100px",
+                fontSize: "12px",
+                fontWeight: 800,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                color: "#15803D",
+                marginBottom: "16px",
+              }}
+            >
+              <Layers size={14} color="#15803D" />
+              <span>Turnkey Production Lifecycle</span>
+            </div>
             <h2 style={{ fontSize: "clamp(2.4rem, 3.8vw, 3.2rem)", fontWeight: 900, color: "#1E251F" }}>
               How we take your product to <em>commercial scale.</em>
             </h2>
-            <p style={{ marginTop: "14px", color: "#475569", fontSize: "16px", fontWeight: 500 }}>
+            <p style={{ marginTop: "14px", color: "#475569", fontSize: "16.5px", fontWeight: 500, lineHeight: "1.7" }}>
               A disciplined, stage-gated manufacturing framework engineered to deliver pharmaceutical consistency with rapid time-to-market.
             </p>
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: "24px",
-            }}
-          >
-            {turnkeySteps.map((step, idx) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.4 }}
-                style={{
-                  background: "#ffffff",
-                  border: "1.5px solid #E2E8DF",
-                  borderRadius: "20px",
-                  padding: "30px 24px",
-                  boxShadow: "0 10px 28px rgba(13, 38, 25, 0.05)",
-                  position: "relative",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div>
-                  <span
-                    style={{
-                      fontSize: "32px",
-                      fontWeight: 900,
-                      color: "#15803D",
-                      fontFamily: "Georgia, serif",
-                      display: "block",
-                      marginBottom: "12px",
-                    }}
-                  >
-                    {step.step}
-                  </span>
-                  <h4 style={{ fontSize: "18px", fontWeight: 800, color: "#1E251F", marginBottom: "8px" }}>
-                    {step.title}
-                  </h4>
-                  <p style={{ fontSize: "13.5px", color: "#475569", lineHeight: "1.6" }}>
-                    {step.desc}
-                  </p>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    marginTop: "20px",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    color: "#7CA832",
-                  }}
+          <div className="turnkey-grid">
+            {turnkeySteps.map((step, idx) => {
+              const StepIcon = step.icon;
+              return (
+                <motion.div
+                  key={step.step}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.45 }}
+                  className="turnkey-card"
                 >
-                  <Check size={14} />
-                  <span>Quality Validated</span>
-                </div>
-              </motion.div>
-            ))}
+                  <div>
+                    <div className="turnkey-card-header">
+                      <div className="turnkey-icon-wrapper">
+                        <StepIcon size={22} />
+                      </div>
+                      <span className="turnkey-step-watermark">{step.step}</span>
+                    </div>
+
+                    <span className="turnkey-stage-badge">{step.stage}</span>
+                    <h4 className="turnkey-card-title">{step.title}</h4>
+                    <p className="turnkey-card-desc">{step.desc}</p>
+                    <div className="turnkey-spec-tag">
+                      <span className="turnkey-pulse-dot" />
+                      <span>{step.spec}</span>
+                    </div>
+                  </div>
+
+                  <div className="turnkey-card-footer">
+                    <div className="turnkey-valid-badge">
+                      <CheckCircle2 size={15} color="#15803D" />
+                      <span>Stage-Gate Validated</span>
+                    </div>
+                    <span className="turnkey-step-counter">Step {idx + 1} of 4</span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -493,35 +498,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Box */}
-      <section className="contact">
-        <div className="contact-mark">V</div>
-        <p className="eyebrow light">Collaborate With Varadaco</p>
-        <h2>
-          Ready to engineer your <em>next breakthrough?</em>
-        </h2>
-        <p style={{ maxWidth: "580px", margin: "14px auto 32px" }}>
-          Talk to our contract manufacturing and private label specialists to request technical documentation, formulation feasibility, or pilot batches.
-        </p>
-        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center" }}>
-          <Link href="/contact" className="button button-light" style={{ fontWeight: 800 }}>
-            Request a Service Proposal
-            <ArrowRight size={17} />
-          </Link>
-          <Link
-            href="/portfolio"
-            className="button button-dark"
-            style={{
-              background: "rgba(255,255,255,0.15)",
-              border: "1px solid rgba(255,255,255,0.3)",
-              fontWeight: 800,
-            }}
-          >
-            Explore Our Portfolio
-            <ArrowRight size={17} />
-          </Link>
-        </div>
-      </section>
+
 
       <Footer />
     </main>

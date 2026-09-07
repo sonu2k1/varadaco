@@ -18,7 +18,7 @@ export default function Footer() {
           {/* Column 1: Brand & Credentials */}
           <div className="footer-brand-col">
             <div style={{ marginBottom: "14px" }}>
-              <Logo variant="dark" size="md" />
+              <Logo variant="white" size="md" />
             </div>
             <p className="footer-tagline">
               Pharmaceutical-grade nutraceutical contract manufacturing, advanced clinical R&D, and global regulatory compliance.
@@ -31,7 +31,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <span style={{ display: "block", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#94a3b8", marginBottom: "8px" }}>
+              <span style={{ display: "block", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#ffffff", marginBottom: "8px" }}>
                 Follow Us
               </span>
               <SocialIcons size="md" />
@@ -95,9 +95,7 @@ export default function Footer() {
         <div className="footer-bottom-bar">
           <span>© 2026 Varadaco Industries. All rights reserved.</span>
           <div className="footer-legal-links">
-            <Link href="/about">About</Link>
-            <Link href="/services">Services</Link>
-            <Link href="/contact">Compliance</Link>
+            <Link href="/privacy-policy">Privacy Policy</Link>
           </div>
           <button onClick={scrollToTop} className="footer-back-top" aria-label="Scroll to top">
             <span>Back to top</span>

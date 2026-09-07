@@ -721,7 +721,7 @@ export default function ProductsPage() {
         {/* ======================================================== */}
         {/* HERO BANNER - Sleek Bluish Clinical Science Theme        */}
         {/* ======================================================== */}
-        <section style={{ maxWidth: "1240px", margin: "20px auto 0", padding: "0 4.5vw" }}>
+        <section style={{ maxWidth: "1680px", margin: "20px auto 0", padding: "0 clamp(16px, 2.5vw, 40px)" }}>
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -959,7 +959,7 @@ export default function ProductsPage() {
         {/* ======================================================== */}
         {/* CIRCULAR CATEGORIES ROW - Real Photos in Bluish Rings    */}
         {/* ======================================================== */}
-        <section style={{ maxWidth: "1240px", margin: "40px auto 0", padding: "0 4.5vw" }}>
+        <section style={{ maxWidth: "1680px", margin: "40px auto 0", padding: "0 clamp(16px, 2.5vw, 40px)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
             <span style={{ fontSize: "12px", fontWeight: 800, color: "#15803D", textTransform: "uppercase", letterSpacing: "0.08em" }}>
               Quick Formula Select
@@ -1044,7 +1044,7 @@ export default function ProductsPage() {
         {/* ======================================================== */}
         {/* TRUST STRIP                                              */}
         {/* ======================================================== */}
-        <section style={{ maxWidth: "1240px", margin: "30px auto 0", padding: "0 4.5vw" }}>
+        <section style={{ maxWidth: "1680px", margin: "30px auto 0", padding: "0 clamp(16px, 2.5vw, 40px)" }}>
           <div
             style={{
               background: "#ffffff",
@@ -1118,7 +1118,7 @@ export default function ProductsPage() {
         {/* "OUR PRODUCTS" 8-CARD MEDICINE CATALOG                   */}
         {/* Real Commercial Photography + Bluish UI & Animations     */}
         {/* ======================================================== */}
-        <section ref={productsGridRef} style={{ maxWidth: "1240px", margin: "65px auto 90px", padding: "0 4.5vw" }}>
+        <section ref={productsGridRef} style={{ maxWidth: "1680px", margin: "65px auto 90px", padding: "0 clamp(16px, 2.5vw, 40px)" }}>
           <div style={{ textAlign: "center", marginBottom: "40px" }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "#D5E0D5", color: "#7CA832", padding: "4px 14px", borderRadius: "100px", fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "10px" }}>
               <Sparkles size={13} />
@@ -1144,8 +1144,8 @@ export default function ProductsPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))",
-              gap: "26px",
+              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+              gap: "24px",
             }}
           >
             {Object.values(products).map((prod, index) => (
@@ -1275,6 +1275,10 @@ export default function ProductsPage() {
                     color: "#1E251F",
                     marginBottom: "6px",
                     lineHeight: 1.25,
+                    textDecoration: "underline",
+                    textDecorationColor: "#15803D",
+                    textUnderlineOffset: "5px",
+                    textDecorationThickness: "2px",
                   }}
                 >
                   {prod.name}
@@ -1306,7 +1310,7 @@ export default function ProductsPage() {
                   </span>
                 </div>
 
-                {/* Bluish Gradient "View Details" Button */}
+                {/* High-Converting Interactive Product Modal CTA */}
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.96 }}
@@ -1316,22 +1320,24 @@ export default function ProductsPage() {
                   }}
                   style={{
                     width: "100%",
-                    padding: "12px 20px",
-                    background: "linear-gradient(135deg, #15803D 0%, #2D5A27 100%)",
+                    padding: "12px 14px",
+                    background: "linear-gradient(135deg, #15803D 0%, #166534 100%)",
                     color: "#ffffff",
-                    borderRadius: "12px",
+                    borderRadius: "14px",
                     border: "none",
-                    fontSize: "14px",
+                    fontSize: "13.5px",
                     fontWeight: 800,
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "8px",
-                    boxShadow: "0 6px 18px rgba(21, 128, 61, 0.25)",
+                    boxShadow: "0 6px 20px rgba(21, 128, 61, 0.28)",
+                    letterSpacing: "0.01em",
                   }}
                 >
-                  <span>View Details & Journey</span>
+                  <Sparkles size={15} color="#86EFAC" />
+                  <span>Customize & Explore Formula</span>
                   <ArrowRight size={15} />
                 </motion.button>
               </motion.div>

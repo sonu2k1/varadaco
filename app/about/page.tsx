@@ -33,64 +33,6 @@ const awards = [
     badge: "Global Honor",
     color: "#7CA832",
   },
-  {
-    year: "2023",
-    title: "National WHO-GMP Quality Benchmark",
-    issuer: "Pharmaceutical Standards Confederation",
-    desc: "Certified for maintaining strict adherence to Class 100,000 cleanroom environments, ICH stability assays, and ISO 22000 hygiene standards.",
-    badge: "Excellence Mark",
-    color: "#2D5A27",
-  },
-];
-
-const globalRegions = [
-  {
-    region: "North America",
-    countries: "United States, Canada",
-    focus: "Dietary Supplements, Sports Performance, Active Peptides",
-    stat: "12+ Partner Brands",
-  },
-  {
-    region: "Europe & UK",
-    countries: "Switzerland, Germany, United Kingdom, Netherlands",
-    focus: "Clinical Microbiome Blends, Botanical Extracts, Clean-label Gummies",
-    stat: "18+ Partner Brands",
-  },
-  {
-    region: "Asia Pacific",
-    countries: "India, Japan, Singapore, Australia, Vietnam",
-    focus: "Ayurvedic Nutrition, Women's Health, Effervescent Electrolytes",
-    stat: "40+ Partner Brands",
-  },
-  {
-    region: "Middle East & Africa",
-    countries: "UAE, Saudi Arabia, South Africa, Egypt",
-    focus: "Immunity Boosters, Halal Certified Nutrition, Micronutrient Drops",
-    stat: "15+ Partner Brands",
-  },
-];
-
-const values = [
-  {
-    icon: Microscope,
-    title: "Evidence-Led Formulation",
-    desc: "Every single formulation, active concentration, and mineral chelate is guided by peer-reviewed clinical studies and pharmacokinetic validation.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Zero-Compromise Purity",
-    desc: "Comprehensive UHPLC-MS/MS chromatography assays for heavy metal clearance, botanical active assay standardization, and microbial sterility.",
-  },
-  {
-    icon: Globe2,
-    title: "Global Regulatory Integrity",
-    desc: "Formulations engineered from ground zero to meet stringent FDA, EFSA, FSSAI, AYUSH, and international health authority guidelines.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Collaborative Partnership",
-    desc: "We act as an agile, dedicated extension of your brand’s science, R&D, and supply chain teams from early bench concepts to commercial scale.",
-  },
 ];
 
 export default function AboutPage() {
@@ -99,35 +41,39 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Subpage Hero with Full Background Image */}
-      <section className="subpage-hero">
+      <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
-            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=85"
-            alt="WHO-GMP Cleanroom pharmaceutical facility"
+            src="/images/pharma-cleanroom-bg.jpg"
+            alt="WHO-GMP pharmaceutical cleanroom and automated medicine manufacturing laboratory"
+            style={{ objectPosition: "center 40%" }}
           />
         </div>
 
-        <div className="subpage-hero-inner">
-          <div className="breadcrumbs">
+        <div className="subpage-hero-inner" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div className="breadcrumbs" style={{ justifyContent: "center" }}>
             <Link href="/">Home</Link>
             <ChevronRight size={14} />
             <span>About Us</span>
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="hero-tag-pill" style={{ backgroundColor: "rgba(124, 168, 50, 0.15)", borderColor: "rgba(124, 168, 50, 0.35)", color: "#7CA832" }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5 }}
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
+          >
+            <div className="hero-tag-pill" style={{ backgroundColor: "rgba(124, 168, 50, 0.15)", borderColor: "rgba(124, 168, 50, 0.35)", color: "#7CA832", margin: "0 auto 14px" }}>
               <Users size={14} />
               <span>About Varadaco Industries</span>
-              <span className="pill-dot" style={{ backgroundColor: "#7CA832" }} />
-              <span>Since 2004</span>
             </div>
 
-            <h1 style={{ maxWidth: "880px" }}>
+            <h1 style={{ maxWidth: "880px", textAlign: "center", margin: "0 auto" }}>
               Pioneering science-led<br />
               <em style={{ color: "#7CA832" }}>health & nutraceuticals.</em>
             </h1>
 
-            <p className="hero-text" style={{ maxWidth: "620px", fontSize: "16px", color: "#d1e8b0", margin: "14px 0 0" }}>
+            <p className="hero-text" style={{ maxWidth: "660px", fontSize: "16px", color: "#d1e8b0", margin: "16px auto 0", textAlign: "center" }}>
               Two decades of excellence in evidence-based formulations, molecular bioavailability, and global WHO-GMP manufacturing.
             </p>
           </motion.div>
@@ -167,17 +113,12 @@ export default function AboutPage() {
                 <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 600 }}>Global Brand Clients</span>
               </div>
             </div>
-
-            <Link href="/services" className="button button-dark">
-              Explore Our Capabilities
-              <ArrowRight size={16} />
-            </Link>
           </div>
 
           <div style={{ position: "relative", borderRadius: "24px", overflow: "hidden", boxShadow: "0 16px 40px rgba(6, 36, 25, 0.12)" }}>
             <img
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85"
-              alt="High-tech life sciences manufacturing facility"
+              src="/images/arranging_capsules.jpg"
+              alt="Automated rotary die encapsulation and pharmaceutical capsule manufacturing"
               style={{ width: "100%", height: "500px", objectFit: "cover" }}
             />
             <div style={{ position: "absolute", bottom: "24px", left: "24px", right: "24px", background: "rgba(6, 36, 25, 0.92)", color: "white", padding: "20px 24px", borderRadius: "16px", backdropFilter: "blur(10px)" }}>
@@ -296,173 +237,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. OUR GLOBAL PRESENCE */}
-      <section className="page-wrapper" id="global-presence" style={{ paddingTop: "80px", paddingBottom: "80px" }}>
-        <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 50px" }}>
-          <p className="eyebrow" style={{ justifyContent: "center" }}>6. Worldwide Reach</p>
-          <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
-            OUR GLOBAL <em>PRESENCE</em>
-          </h2>
-          <div className="trust-underline" />
-          <p style={{ color: "#546863", fontSize: "15px", marginTop: "16px" }}>
-            Exporting pharmaceutical and nutraceutical formulations to leading healthcare brand partners across over 30 countries.
-          </p>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px", marginBottom: "40px" }}>
-          {globalRegions.map((reg, idx) => (
-            <motion.div
-              key={reg.region}
-              className="card-panel"
-              style={{ padding: "30px 26px" }}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              variants={fade}
-              whileHover={{ y: -6 }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
-                <MapPin size={20} color="#15803D" />
-                <h3 style={{ fontSize: "19px", fontWeight: 700, color: "var(--ink)" }}>{reg.region}</h3>
-              </div>
-              <div style={{ fontSize: "13px", fontWeight: 700, color: "#15803D", marginBottom: "8px" }}>
-                {reg.countries}
-              </div>
-              <p style={{ fontSize: "13px", color: "#475569", lineHeight: "1.6", marginBottom: "14px" }}>
-                <strong>Key Focus:</strong> {reg.focus}
-              </p>
-              <div style={{ background: "#EBF3E6", padding: "6px 12px", borderRadius: "8px", fontSize: "12px", fontWeight: 700, color: "#15803D", width: "fit-content", border: "1px solid #D5E0D5" }}>
-                {reg.stat}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{ background: "linear-gradient(135deg, #0D2619 0%, #143B28 100%)", border: "1px solid rgba(124, 168, 50, 0.25)", borderRadius: "20px", padding: "40px 6vw", color: "white", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "24px", boxShadow: "0 16px 40px rgba(13, 38, 25, 0.15)" }}
-        >
-          <div>
-            <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "8px" }}>
-              Expanding into New International Territories?
-            </h3>
-            <p style={{ color: "#d1e8b0", fontSize: "14px", maxWidth: "600px" }}>
-              Our dedicated export and regulatory compliance department prepares full country dossiers (CoA, FSC, GMP Certificates) for seamless local health ministry approval.
-            </p>
-          </div>
-          <Link href="/contact?inquiry=export" className="button button-light" style={{ background: "white", color: "#15803D" }}>
-            Inquire About Export
-            <ArrowRight size={16} />
-          </Link>
-        </motion.div>
-      </section>
-
-      {/* 7. MISSION */}
-      <section style={{ background: "#FAF8F5", padding: "85px 4.5vw", borderBottom: "1px solid var(--line)" }} id="mission">
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 40px" }}>
-            <p className="eyebrow" style={{ justifyContent: "center" }}>7. Operational Commitment</p>
-            <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
-              OUR <em>MISSION</em>
-            </h2>
-            <div className="trust-underline" />
-          </div>
-
-          <motion.div
-            className="card-panel"
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ background: "linear-gradient(135deg, #ffffff 0%, #F5F8F3 100%)", border: "2px solid #15803D", padding: "48px 42px", boxShadow: "0 16px 40px rgba(21, 128, 61, 0.12)" }}
-          >
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "40px", alignItems: "center" }}>
-              <div>
-                <div className="icon-box" style={{ background: "#15803D", color: "white", width: "60px", height: "60px", marginBottom: "18px" }}>
-                  <Target size={30} />
-                </div>
-                <h3 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "14px", color: "var(--ink)" }}>
-                  Translating Scientific Rigor Into Safe Products
-                </h3>
-                <p style={{ color: "#475569", lineHeight: "1.75", fontSize: "16px" }}>
-                  To transform validated biomedical insights and pure botanical extracts into commercially scalable, stable, and highly bioavailable formulations through zero-compromise manufacturing rigor and absolute regulatory adherence.
-                </p>
-              </div>
-
-              <div style={{ background: "#ffffff", padding: "30px", borderRadius: "16px", border: "1px solid #E2E8DF" }}>
-                <h4 style={{ fontSize: "15px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", color: "#15803D", marginBottom: "16px" }}>
-                  Core Operational Commitments:
-                </h4>
-                <div style={{ display: "flex", flexDirection: "column", gap: "12px", fontSize: "14px", color: "#334155" }}>
-                  <span style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                    <CheckCircle2 size={18} color="#15803D" style={{ flexShrink: 0, marginTop: "2px" }} />
-                    100% computerized batch traceability and active standardization.
-                  </span>
-                  <span style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                    <CheckCircle2 size={18} color="#15803D" style={{ flexShrink: 0, marginTop: "2px" }} />
-                    Comprehensive end-to-end partnership from molecule to finished shelf.
-                  </span>
-                  <span style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                    <CheckCircle2 size={18} color="#15803D" style={{ flexShrink: 0, marginTop: "2px" }} />
-                    Rigorous third-party lab validation for safety, dissolution & stability.
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 8. VALUES */}
-      <section className="page-wrapper" id="values" style={{ paddingTop: "80px", paddingBottom: "80px" }}>
-        <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 50px" }}>
-          <p className="eyebrow" style={{ justifyContent: "center" }}>8. Operating Philosophy</p>
-          <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
-            OUR CORE <em>VALUES</em>
-          </h2>
-          <div className="trust-underline" />
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "24px" }}>
-          {values.map((v, i) => {
-            const Icon = v.icon;
-            return (
-              <motion.div
-                key={v.title}
-                className="card-panel"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                variants={fade}
-                whileHover={{ y: -6 }}
-              >
-                <div className="icon-box" style={{ background: "rgba(21, 128, 61, 0.1)", color: "#15803D" }}>
-                  <Icon size={24} />
-                </div>
-                <h4 style={{ fontSize: "18px", fontWeight: 700, color: "var(--ink)", marginBottom: "10px" }}>
-                  {v.title}
-                </h4>
-                <p style={{ fontSize: "14px", lineHeight: "1.65", color: "#475569" }}>
-                  {v.desc}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
       {/* CTA Box */}
-      <section className="contact">
-        <div className="contact-mark">N</div>
-        <p className="eyebrow light">Collaborate with us</p>
-        <h2>Ready to build something <em>extraordinary?</em></h2>
-        <p>Let’s discuss your formula concept, scaling requirements, or regulatory roadmap.</p>
-        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+      <section className="contact" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div className="contact-mark" style={{ left: "50%", transform: "translateX(-50%)", right: "auto" }}>N</div>
+        <p className="eyebrow light" style={{ justifyContent: "center" }}>Collaborate with us</p>
+        <h2 style={{ textAlign: "center", maxWidth: "800px", margin: "12px auto 16px" }}>
+          Ready to build something <em>extraordinary?</em>
+        </h2>
+        <p style={{ textAlign: "center", margin: "0 auto", maxWidth: "600px" }}>
+          Let’s discuss your formula concept, scaling requirements, or regulatory roadmap.
+        </p>
+        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center", marginTop: "28px" }}>
           <Link href="/contact" className="button button-light">
             Contact Our Science Team
             <ArrowRight size={17} />

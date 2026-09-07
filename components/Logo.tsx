@@ -5,7 +5,7 @@ import Link from "next/link";
 
 interface LogoProps {
   size?: "sm" | "md" | "lg";
-  variant?: "light" | "dark" | "auto";
+  variant?: "light" | "dark" | "auto" | "white";
   showSubtitle?: boolean;
   clickable?: boolean;
   className?: string;
@@ -117,9 +117,9 @@ export default function Logo({
     lg: "12px",
   };
 
-  const isDark = variant === "dark";
+  const isDark = variant === "dark" || variant === "white";
   const primaryTextColor = isDark ? "#ffffff" : "var(--ink, #1E251F)";
-  const subtitleColor = isDark ? "#7CA832" : "#15803D";
+  const subtitleColor = variant === "white" ? "#ffffff" : isDark ? "#7CA832" : "#15803D";
 
   const content = (
     <div

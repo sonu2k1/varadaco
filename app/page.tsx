@@ -1,5 +1,5 @@
 "use client";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownRight, ArrowRight, Atom, Award, Beaker, Check, ChevronRight, CircleGauge, FlaskConical, Globe2, HeartPulse, Leaf, Microscope, PackageCheck, Pill, ShieldCheck, Sparkles, TestTube2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -10,111 +10,15 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 
 const fade = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
-const heroSlides = [
-  {
-    id: "rnd",
-    theme: "emerald",
-    accentColor: "#7CA832",
-    glowColor: "#15803D",
-    tag: "Clinical R&D",
-    titlePrefix: "Science-driven nutrition.",
-    titleAccent: "Built for better health.",
-    description: "Evidence-led molecular formulation and clinical validation.",
-    primaryBtn: "Explore Clinical R&D",
-    primaryHref: "/rnd",
-    secondaryBtn: "Our Services",
-    secondaryHref: "/services",
-    badgeTitle: "Evidence-led R&D",
-    badgeSub: "Clinical trials & molecular validation",
-    image: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=1920&q=85",
-    alt: "Modern biotechnology and life sciences laboratory",
-    Icon: Atom,
-  },
-  {
-    id: "botanicals",
-    theme: "botanical",
-    accentColor: "#E8A324",
-    glowColor: "#3B592D",
-    tag: "Botanical Science",
-    titlePrefix: "Nature's purest actives.",
-    titleAccent: "Validated by science.",
-    description: "Standardized herbal extraction and active phytonutrient preservation.",
-    primaryBtn: "Explore Botanicals",
-    primaryHref: "/portfolio",
-    secondaryBtn: "Our Portfolio",
-    secondaryHref: "/portfolio",
-    badgeTitle: "Botanical Actives",
-    badgeSub: "Standardized herbal & plant extraction",
-    image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=1920&q=85",
-    alt: "Botanical science and natural active formulation",
-    Icon: Leaf,
-  },
-  {
-    id: "bioavailability",
-    theme: "mint",
-    accentColor: "#0D9488",
-    glowColor: "#15803D",
-    tag: "Bioavailability",
-    titlePrefix: "Maximum absorption.",
-    titleAccent: "Targeted delivery.",
-    description: "Pharma-grade softgels and enteric micro-capsules for cellular uptake.",
-    primaryBtn: "Bioactive Formats",
-    primaryHref: "/products",
-    secondaryBtn: "Absorption Science",
-    secondaryHref: "/rnd",
-    badgeTitle: "Targeted Delivery",
-    badgeSub: "Pharma-grade softgels & capsules",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1920&q=85",
-    alt: "Golden nutraceutical softgels and bioavailable capsule delivery formats",
-    Icon: Pill,
-  },
-  {
-    id: "formulations",
-    theme: "forest",
-    accentColor: "#7CA832",
-    glowColor: "#2D5A27",
-    tag: "Custom Blends",
-    titlePrefix: "Your unique formula.",
-    titleAccent: "Scaled to perfection.",
-    description: "Turn custom concepts into commercially scalable formulations.",
-    primaryBtn: "Custom Formulation",
-    primaryHref: "/services",
-    secondaryBtn: "Formulation Lab",
-    secondaryHref: "/rnd",
-    badgeTitle: "500+ Formulations",
-    badgeSub: "Micro-encapsulation & efficacy testing",
-    image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1920&q=85",
-    alt: "Pharmaceutical research scientist formulation testing",
-    Icon: FlaskConical,
-  },
-  {
-    id: "manufacturing",
-    theme: "jade",
-    accentColor: "#E8A324",
-    glowColor: "#1B3626",
-    tag: "GMP Scale",
-    titlePrefix: "Global manufacturing.",
-    titleAccent: "Zero compromise.",
-    description: "State-of-the-art cleanroom manufacturing exporting to 30+ countries.",
-    primaryBtn: "Partner With Us",
-    primaryHref: "/contact",
-    secondaryBtn: "About Our Plants",
-    secondaryHref: "/about",
-    badgeTitle: "Global Scale",
-    badgeSub: "WHO-GMP & ISO 22000 certified facilities",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=85",
-    alt: "High-tech automated manufacturing facility",
-    Icon: ShieldCheck,
-  },
-];
-
 const solutions = [
-  ["KSM-66 Ashwagandha", "Standardized full-spectrum root extract for stress resilience, cortisol balance, and peak vitality.", "/products/ashwagandha_ksm66.jpg", Leaf],
-  ["Himalayan Shilajit", "Gold-grade natural mineral resin rich in fulvic acid and 84+ ionic trace minerals for cellular energy.", "/products/himalayan_shilajit.jpg", Sparkles],
-  ["Gym & Sports Supplements", "High-performance whey protein isolates, creatine matrix, and rapid-recovery BCAA amino blends.", "/products/gym_supplements.jpg", CircleGauge],
-  ["Medical & Clinical Nutrition", "Evidence-led bioactive formulas engineered for targeted metabolic and therapeutic wellness.", "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80", Microscope],
-  ["Women’s Vitality & Health", "Purposeful bioavailable nutrition across every stage, supporting hormonal balance and longevity.", "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=900&q=80", HeartPulse],
-  ["Gut & Microbiome Health", "DRCaps® delayed-release multi-strain probiotics and prebiotic synbiotics for digestive vitality.", "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=80", Pill],
+  ["Ashwagandha", "Natural Stress Relief & Strength Booster with standardized 5% Withanolides root extract.", "/products/ashwagandha.jpg", Leaf],
+  ["Shilajit", "Pure Himalayan Resin with >75% Fulvic Acid + 84 Ionic Trace Minerals for cellular energy.", "/products/shilajit.jpg", Sparkles],
+  ["Mulethi", "Pure Licorice Root rich in Glycyrrhizin and Glabridin for respiratory & digestive vitality.", "/products/mulethi.jpg", HeartPulse],
+  ["Supplements", "Complete Daily Multivitamin with Zinc, B-Complex & Vitamin D3/K2 for energy.", "/products/supplements.jpg", CircleGauge],
+  ["Triphala", "Three Sacred Ayurvedic Fruits (Amalaki, Bibhitaki & Haritaki) for digestive harmony.", "/products/triphala.jpg", Pill],
+  ["Brahmi", "Standardized Bacopa Monnieri with 20% Bacosides for memory, focus & mental clarity.", "/products/brahmi.jpg", Microscope],
+  ["Karela Jamun", "Bitter Gourd & Indian Blackberry extract with active Charantin for glucose care.", "/products/karela.jpg", Leaf],
+  ["Curcumin", "95% Standardized Curcuminoids with Piperine bio-enhancer for joint & cellular health.", "/products/curcumin.jpg", Sparkles],
 ];
 
 const timelineSteps = [
@@ -222,7 +126,7 @@ const services = [
   {
     title: "PRIVATE LABELLING",
     desc: "Varadaco is a leading full-service private label manufacturer. Whether you are a startup or an established enterprise, we scale custom formulations for your brand.",
-    href: "/products",
+    href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 6L38 22L24 36L8 20L22 6Z" />
@@ -235,7 +139,7 @@ const services = [
   {
     title: "REGULATORY COMPLIANCES",
     desc: "Ensure all necessary global licensing and compliance, working closely with regulatory authorities like US FDA, FSSAI, AYUSH, and EFSA.",
-    href: "/about",
+    href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M27 8L36 17L32 21L23 12L27 8Z" />
@@ -249,7 +153,7 @@ const services = [
   {
     title: "CRAMS",
     desc: "Varadaco is a trusted contract research & manufacturing partner, specializing in pharmaceutical-grade cleanroom scaling and active bioactives.",
-    href: "/rnd",
+    href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20 6H28V12H20V6Z" />
@@ -266,7 +170,7 @@ const services = [
   {
     title: "PACKAGING",
     desc: "High-barrier Alu-Alu blister packaging, automated softgel bottling, and nitrogen-flushed single-serve stick pack delivery formats.",
-    href: "/products",
+    href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M10 16L24 8L38 16L24 24L10 16Z" />
@@ -279,17 +183,24 @@ const services = [
   },
 ];
 
-function Counter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const ref = useRef(null);
-  const visible = useInView(ref, { once: true });
-  const [count] = useState(value);
-  return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 12 }} animate={visible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}>
-      <strong>{count}{suffix}</strong>
-      <span>{label}</span>
-    </motion.div>
-  );
-}
+
+const heroBackgrounds = [
+  {
+    src: "/images/pharma-ashwagandha-roots-composite.jpg",
+    alt: "Authentic dried Ashwagandha roots and active pharmaceutical extraction in laboratory",
+    badge: "100% PURE ASHWAGANDHA ROOT ACTIVES",
+  },
+  {
+    src: "/images/pharma-ashwagandha-bg.jpg",
+    alt: "Living Ashwagandha botanical plants, roots, and active extraction science",
+    badge: "ASHWAGANDHA BOTANICALS & PHARMA EXTRACTION",
+  },
+  {
+    src: "/images/pharma-cleanroom-bg.jpg",
+    alt: "WHO-GMP Certified cleanroom manufacturing facility and automated packaging lines",
+    badge: "WHO-GMP CERTIFIED PHARMA CLEANROOM SCALE",
+  },
+];
 
 function Button({ children, dark = true }: { children: React.ReactNode; dark?: boolean }) {
   return (
@@ -301,14 +212,14 @@ function Button({ children, dark = true }: { children: React.ReactNode; dark?: b
 }
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentHeroBg, setCurrentHeroBg] = useState(0);
   const [activeTimelineStep, setActiveTimelineStep] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 4000);
-    return () => clearInterval(timer);
+    const bgTimer = setInterval(() => {
+      setCurrentHeroBg((prev) => (prev + 1) % heroBackgrounds.length);
+    }, 4500);
+    return () => clearInterval(bgTimer);
   }, []);
 
   useEffect(() => {
@@ -318,118 +229,71 @@ export default function Home() {
     return () => clearInterval(stepTimer);
   }, []);
 
-  const activeSlide = heroSlides[currentSlide];
-  const ActiveIcon = activeSlide.Icon;
-
   return (
     <main>
       <Navbar />
 
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <AnimatePresence mode="wait">
+      <section className="pharma-hero" id="top">
+        {/* Animated Background Slider */}
+        <div className="pharma-hero-bg-slider">
+          <AnimatePresence initial={false}>
             <motion.div
-              key={activeSlide.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="hero-copy-inner"
-            >
-
-              <h1>
-                {activeSlide.titlePrefix}<br />
-                <em style={{ color: activeSlide.accentColor }}>{activeSlide.titleAccent}</em>
-              </h1>
-
-              <p className="hero-text">
-                {activeSlide.description}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Interactive Colored Carousel Category Switcher */}
-          <div className="hero-carousel-pills">
-            {heroSlides.map((slide, idx) => {
-              const Icon = slide.Icon;
-              const isActive = currentSlide === idx;
-              return (
-                <button
-                  key={slide.id}
-                  className={`carousel-tab ${isActive ? "active" : ""}`}
-                  onClick={() => setCurrentSlide(idx)}
-                  style={{
-                    borderColor: isActive ? slide.accentColor : "rgba(255, 255, 255, 0.15)",
-                    backgroundColor: isActive ? `${slide.accentColor}30` : "rgba(10, 28, 32, 0.65)",
-                    color: isActive ? "#ffffff" : "#b6cbc6",
-                  }}
-                >
-                  <span
-                    className="tab-indicator"
-                    style={{
-                      backgroundColor: slide.accentColor,
-                      boxShadow: isActive ? `0 0 10px ${slide.accentColor}` : "none",
-                    }}
-                  />
-                  <Icon size={13} />
-                  <span>{slide.tag}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="hero-image">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={activeSlide.image}
-              src={activeSlide.image}
-              alt={activeSlide.alt}
-              initial={{ opacity: 0, scale: 1.06 }}
+              key={heroBackgrounds[currentHeroBg].src}
+              className="pharma-hero-bg-slide"
+              style={{ backgroundImage: `url(${heroBackgrounds[currentHeroBg].src})` }}
+              initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: "easeInOut" }}
-              className="hero-carousel-img"
+              transition={{ duration: 1.2, ease: "easeInOut" }}
             />
           </AnimatePresence>
-
-          <div className="hero-dots">
-            {heroSlides.map((slide, idx) => (
-              <button
-                key={slide.id}
-                aria-label={`Go to slide ${idx + 1}`}
-                className={`hero-dot ${currentSlide === idx ? "active" : ""}`}
-                style={{
-                  backgroundColor: currentSlide === idx ? slide.accentColor : "rgba(255, 255, 255, 0.45)",
-                  boxShadow: currentSlide === idx ? `0 0 10px ${slide.accentColor}` : "none",
-                }}
-                onClick={() => setCurrentSlide(idx)}
-              />
-            ))}
-          </div>
         </div>
 
-        <motion.div
-          className="orb orb-one"
-          animate={{
-            backgroundColor: activeSlide.glowColor,
-          }}
-          transition={{ duration: 0.8 }}
-        />
-        <motion.div
-          className="orb orb-two"
-          animate={{
-            backgroundColor: activeSlide.accentColor,
-          }}
-          transition={{ duration: 0.8 }}
-        />
-      </section>
+        <div className="pharma-hero-top-banner">
+          Factory direct sales spot quick delivery
+        </div>
 
-      <section className="stats" aria-label="Company statistics">
-        <Counter value={20} suffix="+" label="Years of innovation" />
-        <Counter value={100} suffix="+" label="Global brands" />
-        <Counter value={500} suffix="+" label="Formulations" />
-        <Counter value={30} suffix="+" label="Countries served" />
+        <div className="pharma-hero-content">
+          <motion.div
+            className="pharma-hero-card"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="pharma-hero-card-accent" />
+
+            <div className="pharma-hero-badge">
+              <Sparkles size={12} className="pharma-hero-badge-icon" />
+              <span>{heroBackgrounds[currentHeroBg].badge}</span>
+            </div>
+
+            <h1 className="pharma-hero-title">
+              From scientific idea to<br />
+              market-ready product.
+            </h1>
+
+            <p className="pharma-hero-desc">
+              Premium medical-grade bottles and packaging solutions for pharmaceuticals, tablets, syrups, and nutraceuticals. Safeguard formula purity with uncompromising quality and certified integrity.
+            </p>
+
+            <Link href="/products" className="pharma-hero-btn">
+              <span>EXPLORE CATALOG</span>
+              <ArrowRight size={15} />
+            </Link>
+
+            {/* Slider Dots */}
+            <div className="pharma-hero-dots">
+              {heroBackgrounds.map((bg, idx) => (
+                <button
+                  key={bg.src}
+                  className={`pharma-hero-dot ${currentHeroBg === idx ? "active" : ""}`}
+                  onClick={() => setCurrentHeroBg(idx)}
+                  aria-label={`Slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       <section className="section partnership" id="about">
@@ -501,7 +365,7 @@ export default function Home() {
       <section className="section process" id="capabilities">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fade}>
           <p className="eyebrow">The Varadaco difference</p>
-          <h2>From scientific idea to<br /><em>market-ready product.</em></h2>
+          <h2>From scientific idea to<br />market-ready product.</h2>
         </motion.div>
         <div className="process-grid">
           {process.map(([num, title, desc, Icon], i) => (
@@ -534,22 +398,19 @@ export default function Home() {
       <section className="services-section" id="services">
         <div className="services-header">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fade}>
-            <h2 className="services-title">Our Services</h2>
-            <div className="services-underline" />
+            <Link href="/services" style={{ textDecoration: "none", color: "inherit", display: "inline-block" }}>
+              <h2 className="services-title">Our Services</h2>
+              <div className="services-underline" />
+            </Link>
           </motion.div>
         </div>
 
         <div className="services-grid">
           {services.map((service, idx) => (
-            <motion.a
+            <Link
               key={service.title}
-              href={service.href}
+              href="/services"
               className="service-card"
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08, duration: 0.45 }}
-              whileHover={{ y: -6 }}
             >
               <div className="service-corner-blob" />
               <div className="service-icon-box">
@@ -561,7 +422,7 @@ export default function Home() {
                 Read More
                 <ChevronRight size={16} />
               </span>
-            </motion.a>
+            </Link>
           ))}
         </div>
       </section>
@@ -639,10 +500,15 @@ export default function Home() {
       </section>
 
       <section className="quality section" id="quality">
-        <motion.div initial={{ opacity: 0, x: -25 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <motion.div
+          className="quality-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <p className="eyebrow">Quality, made visible</p>
           <h2>Confidence at every<br /><em>checkpoint.</em></h2>
-          <p>Certification and compliance status is verified per facility and market across our global pharmaceutical and nutraceutical cleanroom suites.</p>
         </motion.div>
         <div className="certs">
           {[

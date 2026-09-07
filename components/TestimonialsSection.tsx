@@ -246,7 +246,6 @@ export default function TestimonialsSection() {
           onClick={prevCard}
           className="video-nav-arrow"
           aria-label="Previous story"
-          style={{ borderColor: "#15803D", color: "#15803D" }}
         >
           <ChevronLeft size={22} />
         </button>
@@ -324,7 +323,6 @@ export default function TestimonialsSection() {
           onClick={nextCard}
           className="video-nav-arrow"
           aria-label="Next story"
-          style={{ borderColor: "#15803D", color: "#15803D" }}
         >
           <ChevronRight size={22} />
         </button>

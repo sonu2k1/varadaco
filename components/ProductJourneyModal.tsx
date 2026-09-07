@@ -17,6 +17,9 @@ import {
   Leaf,
   Clock,
   Sprout,
+  SlidersHorizontal,
+  Scale,
+  TrendingUp,
 } from "lucide-react";
 
 interface IngredientItem {
@@ -68,9 +71,9 @@ const INITIAL_INGREDIENTS: IngredientItem[] = [
     botanical: "Withania somnifera (KSM-66 / 5% Withanolides)",
     desc: "Helps reduce cortisol, relieve chronic stress, and boost physical stamina.",
     image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80",
-    baseDosage: 100,
+    baseDosage: 300,
     unit: "mg",
-    basePrice: 28.0 / 3, // at 300mg = 28.00
+    basePrice: 28.0,
     dosageStep: 25,
     minDosage: 100,
     maxDosage: 600,
@@ -172,35 +175,35 @@ const BOTTLE_OPTIONS: PackagingOption[] = [
     name: "HDPE White Bottle",
     subtext: "(60 Capsules)",
     price: 8.0,
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/hdpe_white.jpg",
   },
   {
     id: "hdpe_black",
     name: "HDPE Black Bottle",
     subtext: "(60 Capsules)",
     price: 10.0,
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/hdpe_black.jpg",
   },
   {
     id: "pet_transparent",
     name: "PET Transparent Bottle",
     subtext: "(60 Capsules)",
     price: 9.5,
-    image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/pet_clear.jpg",
   },
   {
     id: "amber_glass",
     name: "Amber Glass Bottle",
     subtext: "(60 Capsules)",
     price: 15.0,
-    image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/amber_glass.jpg",
   },
   {
     id: "alu_blister",
     name: "Alu-Alu Blister Pack",
     subtext: "(60 Capsules / 6 Strips)",
     price: 7.5,
-    image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/alu_blister.jpg",
   },
 ];
 
@@ -210,35 +213,35 @@ const OUTER_OPTIONS: OuterOption[] = [
     name: "Shrink Wrap",
     subtext: "(with Heat Seal)",
     price: 2.0,
-    image: "https://images.unsplash.com/photo-1589365278144-c9e705f843ba?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/outer_shrink_wrap.jpg",
   },
   {
     id: "paper_box",
     name: "Paper Box",
     subtext: "(Premium Mono Carton)",
     price: 4.0,
-    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/outer_paper_box.jpg",
   },
   {
     id: "tin_box",
     name: "Tin Box",
     subtext: "(Metal Keepsake Can)",
     price: 12.0,
-    image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/outer_tin_box.jpg",
   },
   {
     id: "pouch_pack",
     name: "Pouch Pack",
     subtext: "(Stand-up Zipper Pouch)",
     price: 3.0,
-    image: "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/outer_pouch_pack.jpg",
   },
   {
     id: "kraft_box",
     name: "Eco Kraft Box",
     subtext: "(Recycled Sustainable)",
     price: 5.0,
-    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=400&q=80",
+    image: "/packaging/outer_kraft_box.jpg",
   },
 ];
 
@@ -319,7 +322,9 @@ export default function ProductJourneyModal({
 
   const calculateIngredientCost = (item: IngredientItem) => {
     if (!item.selected) return 0;
-    return (item.dosage / item.baseDosage) * item.basePrice;
+    // Each '+' click (dosageStep) increases Benchmark Rate by exactly ₹1.00 for all ingredients
+    const steps = Math.round((item.dosage - item.baseDosage) / item.dosageStep);
+    return Math.max(1, item.basePrice + steps * 1.0);
   };
 
   const calculations = useMemo(() => {
@@ -476,49 +481,79 @@ export default function ProductJourneyModal({
             borderRadius: "28px 28px 0 0",
           }}
         >
-          {/* Top Bar: Title & Close Button */}
+          {/* Top Bar: Title & Close Button (Modern Redesign) */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <div
                 style={{
-                  width: "32px",
-                  height: "32px",
-                  borderRadius: "8px",
-                  background: "#15803D",
-                  color: "#ffffff",
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "12px",
+                  background: "linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%)",
+                  border: "1px solid #86EFAC",
+                  color: "#15803D",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "16px",
+                  boxShadow: "0 2px 8px rgba(21, 128, 61, 0.12)",
                 }}
               >
-                🌿
+                <Leaf size={20} color="#15803D" />
               </div>
               <div>
-                <span style={{ fontSize: "17px", fontWeight: 800, color: "#0D2619" }}>
-                  {productName} Formulation & Production Journey
-                </span>
-                <span
-                  style={{
-                    fontSize: "11px",
-                    background: "rgba(21, 128, 61, 0.12)",
-                    color: "#15803D",
-                    padding: "2px 8px",
-                    borderRadius: "100px",
-                    fontWeight: 700,
-                    marginLeft: "8px",
-                  }}
-                >
-                  Step {currentStep} of 7
-                </span>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                  <h3
+                    style={{
+                      margin: 0,
+                      fontSize: "17.5px",
+                      fontWeight: 800,
+                      color: "#0F172A",
+                      letterSpacing: "-0.01em",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    <span>{productName}</span>
+                    <span style={{ color: "#475569", fontWeight: 600 }}>Formulation & Production Journey</span>
+                  </h3>
+                  <span
+                    style={{
+                      fontSize: "11.5px",
+                      background: "#F0FDF4",
+                      color: "#15803D",
+                      border: "1px solid #86EFAC",
+                      padding: "3px 10px",
+                      borderRadius: "100px",
+                      fontWeight: 800,
+                      letterSpacing: "0.02em",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      boxShadow: "0 1px 3px rgba(21, 128, 61, 0.08)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        backgroundColor: "#22C55E",
+                        display: "inline-block",
+                      }}
+                    />
+                    Step {currentStep} of 7
+                  </span>
+                </div>
               </div>
             </div>
 
             <button
               onClick={onClose}
+              aria-label="Close journey modal"
               style={{
-                background: "#F3F4F6",
-                border: "none",
+                background: "#F1F5F9",
+                border: "1px solid #E2E8F0",
                 width: "36px",
                 height: "36px",
                 borderRadius: "50%",
@@ -526,11 +561,19 @@ export default function ProductJourneyModal({
                 alignItems: "center",
                 justifyContent: "center",
                 cursor: "pointer",
-                color: "#4B5563",
-                transition: "background 0.2s ease",
+                color: "#64748B",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#E2E8F0";
+                e.currentTarget.style.color = "#0F172A";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#F1F5F9";
+                e.currentTarget.style.color = "#64748B";
               }}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
@@ -557,17 +600,19 @@ export default function ProductJourneyModal({
                     >
                       <div
                         style={{
-                          width: "26px",
-                          height: "26px",
+                          width: "28px",
+                          height: "28px",
                           borderRadius: "50%",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           fontSize: "12px",
-                          fontWeight: 700,
-                          background: isCurrent ? "#0D2619" : isDone ? "#15803D" : "#E5E7EB",
-                          color: isCurrent || isDone ? "#ffffff" : "#6B7280",
-                          boxShadow: isCurrent ? "0 0 0 3px rgba(21, 128, 61, 0.25)" : "none",
+                          fontWeight: 800,
+                          background: isCurrent ? "#DCFCE7" : isDone ? "#15803D" : "#F1F5F9",
+                          color: isCurrent ? "#15803D" : isDone ? "#ffffff" : "#64748B",
+                          border: isCurrent ? "2px solid #15803D" : isDone ? "2px solid #15803D" : "1.5px solid #E2E8F0",
+                          boxShadow: isCurrent ? "0 0 0 4px rgba(34, 197, 94, 0.22)" : "none",
+                          transition: "all 0.25s ease",
                         }}
                       >
                         {isDone ? <Check size={14} strokeWidth={3} /> : s.id}
@@ -575,8 +620,8 @@ export default function ProductJourneyModal({
                       <span
                         style={{
                           fontSize: "12.5px",
-                          fontWeight: isCurrent ? 700 : 500,
-                          color: isCurrent ? "#0D2619" : isDone ? "#15803D" : "#6B7280",
+                          fontWeight: isCurrent ? 800 : isDone ? 700 : 500,
+                          color: isCurrent ? "#15803D" : isDone ? "#15803D" : "#64748B",
                           whiteSpace: "nowrap",
                         }}
                       >
@@ -747,14 +792,96 @@ export default function ProductJourneyModal({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.25 }}
-                style={{ background: "#FFFFFF", borderRadius: "22px", border: "1px solid #E5E7EB", padding: "32px" }}
+                style={{
+                  background: "#FFFFFF",
+                  borderRadius: "24px",
+                  border: "1px solid #E5E7EB",
+                  padding: "32px",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+                }}
               >
-                <div style={{ borderBottom: "1px solid #F0F4EF", paddingBottom: "16px", marginBottom: "22px" }}>
-                  <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D" }}>STEP 2</span>
-                  <h2 style={{ fontSize: "26px", fontWeight: 800, color: "#0D2619", marginTop: "4px" }}>Choose Raw Ingredients</h2>
-                  <p style={{ color: "#4B5563", fontSize: "14px", marginTop: "4px" }}>Select and customize the active botanical extracts for your custom batch.</p>
+                {/* Modern Step 2 Header with Live Total Pills */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
+                    flexWrap: "wrap",
+                    gap: "16px",
+                    borderBottom: "1px solid #F0F4EF",
+                    paddingBottom: "18px",
+                    marginBottom: "24px",
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        background: "#F0FDF4",
+                        border: "1px solid #BBF7D0",
+                        color: "#15803D",
+                        padding: "4px 12px",
+                        borderRadius: "100px",
+                        fontSize: "11px",
+                        fontWeight: 800,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <Sparkles size={12} />
+                      <span>STEP 2 • ACTIVE FORMULATION</span>
+                    </div>
+                    <h2 style={{ fontSize: "25px", fontWeight: 900, color: "#0F172A", margin: 0, letterSpacing: "-0.02em" }}>
+                      Choose Raw Ingredients & Potency
+                    </h2>
+                    <p style={{ color: "#64748B", fontSize: "14px", margin: "4px 0 0" }}>
+                      Select active botanical extracts and customize the exact dosage per single unit.
+                    </p>
+                  </div>
+
+                  {/* Header Summary Pills */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                    <div
+                      style={{
+                        background: "#F8FAFC",
+                        border: "1px solid #E2E8F0",
+                        borderRadius: "14px",
+                        padding: "8px 16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      <span style={{ fontSize: "11px", color: "#64748B", fontWeight: 700, display: "block", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                        Actives Selected
+                      </span>
+                      <strong style={{ fontSize: "16px", fontWeight: 900, color: "#0F172A" }}>
+                        {calculations.activeCount} <span style={{ fontSize: "12px", color: "#94A3B8", fontWeight: 600 }}>/ {ingredients.length}</span>
+                      </strong>
+                    </div>
+
+                    <div
+                      style={{
+                        background: "linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)",
+                        border: "1px solid #86EFAC",
+                        borderRadius: "14px",
+                        padding: "8px 16px",
+                        textAlign: "right",
+                        boxShadow: "0 2px 8px rgba(21, 128, 61, 0.1)",
+                      }}
+                    >
+                      <span style={{ fontSize: "11px", color: "#166534", fontWeight: 800, display: "block", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                        Active Blend Cost
+                      </span>
+                      <strong style={{ fontSize: "16px", fontWeight: 900, color: "#15803D" }}>
+                        ₹{calculations.totalActiveCost.toFixed(2)}
+                      </strong>
+                    </div>
+                  </div>
                 </div>
 
+                {/* Modern Ingredient Cards List */}
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                   {ingredients.map((item) => (
                     <div
@@ -763,64 +890,286 @@ export default function ProductJourneyModal({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        padding: "16px 20px",
-                        borderRadius: "14px",
-                        border: item.selected ? "1.5px solid #15803D" : "1px solid #E5E7EB",
-                        background: item.selected ? "#F7FAF7" : "#FAFAFA",
+                        padding: "16px 22px",
+                        borderRadius: "18px",
+                        border: item.selected ? "1.5px solid #86EFAC" : "1.5px solid #E2E8F0",
+                        background: item.selected ? "linear-gradient(135deg, #FFFFFF 0%, #F9FDF9 100%)" : "#FAFAFA",
+                        boxShadow: item.selected ? "0 8px 24px -4px rgba(21, 128, 61, 0.08), 0 2px 6px rgba(0,0,0,0.02)" : "none",
+                        position: "relative",
+                        overflow: "hidden",
                         gap: "18px",
                         flexWrap: "wrap",
+                        transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "14px", flex: "1 1 320px" }}>
+                      {/* Left Subtle Accent Line for Active State */}
+                      {item.selected && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            left: 0,
+                            top: 0,
+                            bottom: 0,
+                            width: "4px",
+                            background: "linear-gradient(180deg, #15803D 0%, #22C55E 100%)",
+                          }}
+                        />
+                      )}
+
+                      {/* Left: Checkbox + Photo + Details */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "16px", flex: "1 1 340px" }}>
+                        {/* Modern Checkbox */}
                         <button
                           type="button"
                           onClick={() => toggleIngredient(item.id)}
+                          aria-label={`Toggle ${item.name}`}
                           style={{
-                            width: "22px",
-                            height: "22px",
-                            borderRadius: "6px",
-                            border: item.selected ? "none" : "2px solid #9CA3AF",
-                            background: item.selected ? "#15803D" : "transparent",
+                            width: "24px",
+                            height: "24px",
+                            borderRadius: "8px",
+                            border: item.selected ? "none" : "2px solid #CBD5E1",
+                            background: item.selected ? "linear-gradient(135deg, #15803D 0%, #166534 100%)" : "#ffffff",
                             color: "#ffffff",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             cursor: "pointer",
+                            flexShrink: 0,
+                            boxShadow: item.selected ? "0 2px 8px rgba(21, 128, 61, 0.35)" : "none",
+                            transition: "all 0.2s ease",
                           }}
                         >
-                          {item.selected && <Check size={14} strokeWidth={3} />}
+                          {item.selected && <Check size={14} strokeWidth={3.5} />}
                         </button>
-                        <img src={item.image} alt={item.name} style={{ width: "50px", height: "50px", borderRadius: "8px", objectFit: "cover" }} />
+
+                        {/* Rounded Thumbnail with Soft Shadow */}
+                        <div
+                          style={{
+                            width: "56px",
+                            height: "56px",
+                            borderRadius: "14px",
+                            overflow: "hidden",
+                            flexShrink: 0,
+                            border: "1.5px solid #E2E8F0",
+                            boxShadow: "0 2px 6px rgba(0,0,0,0.04)",
+                            background: "#ffffff",
+                          }}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          />
+                        </div>
+
+                        {/* Title, Botanical, and Description */}
                         <div>
-                          <strong style={{ fontSize: "15px", color: "#111827" }}>{item.name}</strong>
-                          <span style={{ fontSize: "12px", fontStyle: "italic", color: "#6B7280", display: "block" }}>{item.botanical}</span>
-                          <p style={{ fontSize: "12.5px", color: "#4B5563", margin: "2px 0 0" }}>{item.desc}</p>
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                            <strong style={{ fontSize: "16px", fontWeight: 800, color: item.selected ? "#0F172A" : "#64748B" }}>
+                              {item.name}
+                            </strong>
+                            <span
+                              style={{
+                                fontSize: "10.5px",
+                                fontWeight: 800,
+                                textTransform: "uppercase",
+                                letterSpacing: "0.04em",
+                                background: item.impact === "High" ? "#FEF2F2" : "#F0FDF4",
+                                color: item.impact === "High" ? "#DC2626" : "#15803D",
+                                border: item.impact === "High" ? "1px solid #FECACA" : "1px solid #BBF7D0",
+                                padding: "2px 8px",
+                                borderRadius: "100px",
+                              }}
+                            >
+                              {item.impact} Impact
+                            </span>
+                          </div>
+
+                          <span style={{ fontSize: "12px", color: "#15803D", fontWeight: 600, display: "block", marginTop: "2px" }}>
+                            {item.botanical}
+                          </span>
+                          <p style={{ fontSize: "12.5px", color: "#475569", margin: "4px 0 0", lineHeight: "1.45" }}>
+                            {item.desc}
+                          </p>
                         </div>
                       </div>
 
-                      <div style={{ textAlign: "right", minWidth: "110px" }}>
-                        <span style={{ fontSize: "11px", color: "#6B7280", display: "block" }}>Benchmark Rate</span>
-                        <strong style={{ fontSize: "14px", color: "#15803D" }}>₹{(item.basePrice * (item.dosage / item.baseDosage)).toFixed(2)}</strong>
+                      {/* Center/Right: Dedicated Benchmark Rate Badge */}
+                      <div
+                        style={{
+                          background: item.selected ? "linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)" : "#F1F5F9",
+                          border: item.selected ? "1px solid #BBF7D0" : "1px solid #E2E8F0",
+                          borderRadius: "14px",
+                          padding: "8px 16px",
+                          textAlign: "right",
+                          minWidth: "120px",
+                          boxShadow: item.selected ? "0 2px 6px rgba(21, 128, 61, 0.08)" : "none",
+                          transition: "all 0.2s ease",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "10.5px",
+                            fontWeight: 800,
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                            color: item.selected ? "#166534" : "#64748B",
+                            display: "block",
+                          }}
+                        >
+                          Benchmark Rate
+                        </span>
+                        <strong
+                          style={{
+                            fontSize: "16.5px",
+                            fontWeight: 900,
+                            color: item.selected ? "#15803D" : "#94A3B8",
+                            fontFamily: "var(--font-inter), system-ui, sans-serif",
+                            display: "block",
+                            marginTop: "2px",
+                          }}
+                        >
+                          ₹{calculateIngredientCost(item).toFixed(2)}
+                        </strong>
                       </div>
 
-                      <div style={{ display: "inline-flex", alignItems: "center", border: "1px solid #D1D5DB", borderRadius: "8px", overflow: "hidden", background: "#ffffff" }}>
-                        <button onClick={() => updateDosage(item.id, -item.dosageStep)} disabled={!item.selected || item.dosage <= item.minDosage} style={{ padding: "6px 10px", border: "none", background: "none", cursor: "pointer" }}><Minus size={14} /></button>
-                        <span style={{ padding: "6px 12px", fontSize: "13px", fontWeight: 700, minWidth: "70px", textAlign: "center", background: "#F9FAFB", borderLeft: "1px solid #E5E7EB", borderRight: "1px solid #E5E7EB" }}>{item.dosage} {item.unit}</span>
-                        <button onClick={() => updateDosage(item.id, item.dosageStep)} disabled={!item.selected || item.dosage >= item.maxDosage} style={{ padding: "6px 10px", border: "none", background: "none", cursor: "pointer" }}><Plus size={14} /></button>
+                      {/* Right: Modern Pill Dosage Stepper */}
+                      <div
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          background: "#ffffff",
+                          border: "1.5px solid #E2E8F0",
+                          borderRadius: "14px",
+                          padding: "4px",
+                          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                        }}
+                      >
+                        <button
+                          onClick={() => updateDosage(item.id, -item.dosageStep)}
+                          disabled={!item.selected || item.dosage <= item.minDosage}
+                          aria-label="Decrease dosage"
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "10px",
+                            border: "none",
+                            background: item.dosage <= item.minDosage ? "transparent" : "#F1F5F9",
+                            color: item.dosage <= item.minDosage ? "#CBD5E1" : "#1E293B",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: item.dosage <= item.minDosage ? "not-allowed" : "pointer",
+                            transition: "all 0.15s ease",
+                          }}
+                        >
+                          <Minus size={14} strokeWidth={2.5} />
+                        </button>
+
+                        <div
+                          style={{
+                            padding: "0 14px",
+                            textAlign: "center",
+                            minWidth: "82px",
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "14px",
+                              fontWeight: 800,
+                              color: item.selected ? "#0F172A" : "#94A3B8",
+                              display: "block",
+                              lineHeight: 1.2,
+                            }}
+                          >
+                            {item.dosage} <span style={{ fontSize: "12px", fontWeight: 600, color: "#64748B" }}>{item.unit}</span>
+                          </span>
+                        </div>
+
+                        <button
+                          onClick={() => updateDosage(item.id, item.dosageStep)}
+                          disabled={!item.selected || item.dosage >= item.maxDosage}
+                          aria-label="Increase dosage"
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "10px",
+                            border: "none",
+                            background: item.dosage >= item.maxDosage ? "transparent" : "#F1F5F9",
+                            color: item.dosage >= item.maxDosage ? "#CBD5E1" : "#1E293B",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: item.dosage >= item.maxDosage ? "not-allowed" : "pointer",
+                            transition: "all 0.15s ease",
+                          }}
+                        >
+                          <Plus size={14} strokeWidth={2.5} />
+                        </button>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ marginTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <button onClick={() => setCurrentStep(1)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
-                  <button onClick={() => setCurrentStep(3)} style={{ background: "#15803D", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>Next: Formulation & Cost <ArrowRight size={16} /></button>
+                {/* Step 2 Bottom Navigation */}
+                <div
+                  style={{
+                    marginTop: "28px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    borderTop: "1px solid #F0F4EF",
+                    paddingTop: "20px",
+                  }}
+                >
+                  <button
+                    onClick={() => setCurrentStep(1)}
+                    style={{
+                      padding: "12px 22px",
+                      borderRadius: "12px",
+                      border: "1.5px solid #E2E8F0",
+                      background: "#ffffff",
+                      fontWeight: 700,
+                      color: "#475569",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      fontSize: "14px",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <ChevronLeft size={16} />
+                    Back
+                  </button>
+
+                  <button
+                    onClick={() => setCurrentStep(3)}
+                    style={{
+                      background: "linear-gradient(135deg, #15803D 0%, #166534 100%)",
+                      color: "#ffffff",
+                      padding: "13px 28px",
+                      borderRadius: "12px",
+                      fontWeight: 800,
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      fontSize: "14px",
+                      boxShadow: "0 6px 18px rgba(21, 128, 61, 0.25)",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    Next: Formulation & Cost
+                    <ArrowRight size={16} />
+                  </button>
                 </div>
               </motion.div>
             )}
 
             {/* ----------------------------------------------------
-                STEP 3: FORMULATION & COST SIMULATOR (EXACT IMAGE 1)
+                STEP 3: FORMULATION & COST SIMULATOR (MODERN REDESIGN)
                ---------------------------------------------------- */}
             {currentStep === 3 && (
               <motion.div
@@ -829,48 +1178,237 @@ export default function ProductJourneyModal({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.25 }}
-                style={{ background: "#FFFFFF", borderRadius: "22px", border: "1px solid #E5E7EB", padding: "32px" }}
+                style={{
+                  background: "#FFFFFF",
+                  borderRadius: "24px",
+                  border: "1px solid #E5E7EB",
+                  padding: "32px",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+                }}
               >
-                <div style={{ borderBottom: "1px solid #F0F4EF", paddingBottom: "16px", marginBottom: "22px" }}>
-                  <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D" }}>STEP 3</span>
-                  <h2 style={{ fontSize: "26px", fontWeight: 800, color: "#0D2619", marginTop: "4px" }}>Try Different Formulations & See Your Cost</h2>
+                {/* Modern Step 3 Header */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
+                    flexWrap: "wrap",
+                    gap: "16px",
+                    borderBottom: "1px solid #F0F4EF",
+                    paddingBottom: "18px",
+                    marginBottom: "24px",
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        background: "#F0FDF4",
+                        border: "1px solid #BBF7D0",
+                        color: "#15803D",
+                        padding: "4px 12px",
+                        borderRadius: "100px",
+                        fontSize: "11px",
+                        fontWeight: 800,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <Sparkles size={12} />
+                      <span>STEP 3 • LIVE COST & FORMULATION SIMULATOR</span>
+                    </div>
+                    <h2 style={{ fontSize: "25px", fontWeight: 900, color: "#0F172A", margin: 0, letterSpacing: "-0.02em" }}>
+                      Try Different Formulations & Live Economics
+                    </h2>
+                    <p style={{ color: "#64748B", fontSize: "14px", margin: "4px 0 0" }}>
+                      Slide ingredient concentrations to immediately calibrate unit economics, dosage potency, and profit margins.
+                    </p>
+                  </div>
                 </div>
 
-                {/* Exact Image 1 Side-by-Side Layout */}
+                {/* Side-by-Side Modern Layout */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: "28px", alignItems: "start" }} className="formulation-grid">
                   <div style={{ overflowX: "auto" }}>
-                    <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 8px" }}>
+                    <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 10px" }}>
                       <thead>
-                        <tr style={{ color: "#6B7280", fontSize: "12px", fontWeight: 700, textTransform: "uppercase", textAlign: "left" }}>
-                          <th style={{ padding: "8px 12px" }}>Ingredient</th>
-                          <th style={{ padding: "8px 12px", minWidth: "220px" }}>Your Amount</th>
-                          <th style={{ padding: "8px 12px" }}>Market Range</th>
-                          <th style={{ padding: "8px 12px" }}>Impact</th>
-                          <th style={{ padding: "8px 12px", textAlign: "right" }}>Cost Impact</th>
+                        <tr style={{ color: "#334155", fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", textAlign: "left" }}>
+                          <th style={{
+                            padding: "10px 14px",
+                            background: "#F8FAFC",
+                            borderTop: "1px solid #E2E8F0",
+                            borderBottom: "1px solid #E2E8F0",
+                            borderLeft: "1px solid #E2E8F0",
+                            borderRadius: "10px 0 0 10px",
+                          }}>
+                            <div style={{ display: "inline-flex", alignItems: "center", gap: "7px" }}>
+                              <span style={{ width: "22px", height: "22px", borderRadius: "6px", background: "#DCFCE7", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                                <Leaf size={12} color="#15803D" />
+                              </span>
+                              <span>Ingredient</span>
+                            </div>
+                          </th>
+                          <th style={{
+                            padding: "10px 14px",
+                            minWidth: "240px",
+                            background: "#F8FAFC",
+                            borderTop: "1px solid #E2E8F0",
+                            borderBottom: "1px solid #E2E8F0",
+                          }}>
+                            <div style={{ display: "inline-flex", alignItems: "center", gap: "7px" }}>
+                              <span style={{ width: "22px", height: "22px", borderRadius: "6px", background: "#EFF6FF", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                                <SlidersHorizontal size={12} color="#2563EB" />
+                              </span>
+                              <span>Your Amount</span>
+                            </div>
+                          </th>
+                          <th style={{
+                            padding: "10px 14px",
+                            background: "#F8FAFC",
+                            borderTop: "1px solid #E2E8F0",
+                            borderBottom: "1px solid #E2E8F0",
+                          }}>
+                            <div style={{ display: "inline-flex", alignItems: "center", gap: "7px" }}>
+                              <span style={{ width: "22px", height: "22px", borderRadius: "6px", background: "#F1F5F9", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                                <Scale size={12} color="#475569" />
+                              </span>
+                              <span>Market Range</span>
+                            </div>
+                          </th>
+                          <th style={{
+                            padding: "10px 14px",
+                            background: "#F8FAFC",
+                            borderTop: "1px solid #E2E8F0",
+                            borderBottom: "1px solid #E2E8F0",
+                          }}>
+                            <div style={{ display: "inline-flex", alignItems: "center", gap: "7px" }}>
+                              <span style={{ width: "22px", height: "22px", borderRadius: "6px", background: "#FEF3C7", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                                <Sparkles size={12} color="#D97706" />
+                              </span>
+                              <span>Impact</span>
+                            </div>
+                          </th>
+                          <th style={{
+                            padding: "10px 14px",
+                            textAlign: "right",
+                            background: "#F8FAFC",
+                            borderTop: "1px solid #E2E8F0",
+                            borderBottom: "1px solid #E2E8F0",
+                            borderRight: "1px solid #E2E8F0",
+                            borderRadius: "0 10px 10px 0",
+                          }}>
+                            <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "flex-end", gap: "7px" }}>
+                              <span>Cost Impact</span>
+                              <span style={{ width: "22px", height: "22px", borderRadius: "6px", background: "#F0FDF4", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                                <TrendingUp size={12} color="#15803D" />
+                              </span>
+                            </div>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         {ingredients.filter((i) => i.selected).map((item) => {
                           const cost = calculateIngredientCost(item);
                           return (
-                            <tr key={item.id} style={{ background: "#FAFAF9", borderRadius: "8px" }}>
-                              <td style={{ padding: "12px", fontWeight: 700, color: "#111827", fontSize: "14px" }}>{item.name}</td>
-                              <td style={{ padding: "12px" }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                  <input type="range" min={item.minDosage} max={item.maxDosage} step={item.dosageStep} value={item.dosage} onChange={(e) => setDosageDirect(item.id, Number(e.target.value))} style={{ flex: 1, accentColor: "#15803D", cursor: "pointer", height: "5px" }} />
-                                  <span style={{ minWidth: "65px", textAlign: "right", fontSize: "13px", fontWeight: 700, color: "#0D2619" }}>{item.dosage} {item.unit}</span>
-                                </div>
-                              </td>
-                              <td style={{ padding: "12px", fontSize: "13px", color: "#4B5563" }}>{item.marketRange}</td>
-                              <td style={{ padding: "12px" }}>
-                                <span style={{ display: "inline-flex", alignItems: "center", gap: "3px", fontSize: "12px", fontWeight: 700, color: item.impact === "High" ? "#166534" : item.impact === "Medium" ? "#B45309" : "#15803D" }}>
-                                  {item.impact}
-                                  {item.impact === "High" && <span style={{ fontSize: "10px" }}>▲</span>}
-                                  {item.impact === "Medium" && <span style={{ fontSize: "10px" }}>▲</span>}
-                                  {item.impact === "Low" && <span style={{ fontSize: "10px" }}>●</span>}
+                            <tr
+                              key={item.id}
+                              style={{
+                                background: "#FFFFFF",
+                                borderRadius: "14px",
+                                border: "1.5px solid #E2E8F0",
+                                boxShadow: "0 2px 6px rgba(0,0,0,0.02)",
+                                transition: "all 0.2s ease",
+                              }}
+                            >
+                              <td style={{ padding: "14px", borderRadius: "14px 0 0 14px" }}>
+                                <strong style={{ fontSize: "14.5px", fontWeight: 800, color: "#0F172A", display: "block" }}>
+                                  {item.name}
+                                </strong>
+                                <span style={{ fontSize: "11.5px", color: "#15803D", fontWeight: 600, display: "block", marginTop: "1px" }}>
+                                  {item.botanical}
                                 </span>
                               </td>
-                              <td style={{ padding: "12px", textAlign: "right", fontWeight: 700, fontSize: "14px", color: "#111827" }}>₹{cost.toFixed(2)}</td>
+                              <td style={{ padding: "14px" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                                  {(() => {
+                                    const percent = Math.round(
+                                      ((item.dosage - item.minDosage) / (item.maxDosage - item.minDosage)) * 100
+                                    );
+                                    return (
+                                      <input
+                                        type="range"
+                                        min={item.minDosage}
+                                        max={item.maxDosage}
+                                        step={item.dosageStep}
+                                        value={item.dosage}
+                                        onChange={(e) => setDosageDirect(item.id, Number(e.target.value))}
+                                        className="modern-pharma-slider"
+                                        style={{
+                                          flex: 1,
+                                          background: `linear-gradient(to right, #15803D 0%, #22C55E ${percent}%, #E2E8F0 ${percent}%, #E2E8F0 100%)`,
+                                        }}
+                                      />
+                                    );
+                                  })()}
+                                  <span
+                                    style={{
+                                      minWidth: "75px",
+                                      textAlign: "center",
+                                      fontSize: "13px",
+                                      fontWeight: 800,
+                                      color: "#15803D",
+                                      background: "#F0FDF4",
+                                      border: "1px solid #BBF7D0",
+                                      padding: "4px 10px",
+                                      borderRadius: "100px",
+                                      boxShadow: "0 1px 3px rgba(21, 128, 61, 0.08)",
+                                    }}
+                                  >
+                                    {item.dosage} {item.unit}
+                                  </span>
+                                </div>
+                              </td>
+                              <td style={{ padding: "14px", fontSize: "13px", color: "#64748B", fontWeight: 600 }}>
+                                {item.marketRange}
+                              </td>
+                              <td style={{ padding: "14px" }}>
+                                <span
+                                  style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    fontSize: "11px",
+                                    fontWeight: 800,
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.04em",
+                                    background: item.impact === "High" ? "#FEF2F2" : item.impact === "Medium" ? "#FFFBEB" : "#F0FDF4",
+                                    color: item.impact === "High" ? "#DC2626" : item.impact === "Medium" ? "#D97706" : "#15803D",
+                                    border: item.impact === "High" ? "1px solid #FECACA" : item.impact === "Medium" ? "1px solid #FDE68A" : "1px solid #BBF7D0",
+                                    padding: "3px 9px",
+                                    borderRadius: "100px",
+                                  }}
+                                >
+                                  {item.impact === "High" ? "▲ High" : item.impact === "Medium" ? "▲ Medium" : "● Standard"}
+                                </span>
+                              </td>
+                              <td style={{ padding: "14px", textAlign: "right", borderRadius: "0 14px 14px 0" }}>
+                                <strong
+                                  style={{
+                                    fontSize: "15px",
+                                    fontWeight: 900,
+                                    color: "#0F172A",
+                                    background: "#F8FAFC",
+                                    border: "1px solid #E2E8F0",
+                                    padding: "4px 10px",
+                                    borderRadius: "8px",
+                                    display: "inline-block",
+                                  }}
+                                >
+                                  ₹{cost.toFixed(2)}
+                                </strong>
+                              </td>
                             </tr>
                           );
                         })}
@@ -878,27 +1416,133 @@ export default function ProductJourneyModal({
                     </table>
                   </div>
 
-                  {/* Right: Live Economics Card from Image 1 */}
-                  <div style={{ background: "#FBF9F5", borderRadius: "16px", border: "1px solid #EDE8E1", padding: "22px" }}>
-                    <span style={{ fontSize: "13px", fontWeight: 600, color: "#4B5563", display: "block" }}>Total Cost per Capsule</span>
-                    <div style={{ fontSize: "34px", fontWeight: 800, color: "#15803D", marginTop: "2px" }}>₹{calculations.totalActiveCost.toFixed(2)}</div>
-                    <div style={{ height: "1px", background: "#E5E0D8", margin: "16px 0" }} />
-                    <span style={{ fontSize: "13px", fontWeight: 600, color: "#4B5563", display: "block" }}>Suggested Selling Price</span>
-                    <div style={{ fontSize: "20px", fontWeight: 800, color: "#111827", marginTop: "2px" }}>₹149.00</div>
-                    <div style={{ height: "1px", background: "#E5E0D8", margin: "16px 0" }} />
-                    <span style={{ fontSize: "13px", fontWeight: 600, color: "#4B5563", display: "block" }}>Your Profit per Unit</span>
-                    <div style={{ fontSize: "20px", fontWeight: 800, color: "#15803D", marginTop: "2px" }}>
-                      ₹{(149.0 - calculations.totalActiveCost).toFixed(2)} ({Math.round(((149.0 - calculations.totalActiveCost) / 149.0) * 100)}%)
+                  {/* Right: Modern Live Economics Card */}
+                  <div
+                    style={{
+                      background: "linear-gradient(180deg, #FFFFFF 0%, #F9FDF9 100%)",
+                      borderRadius: "20px",
+                      border: "1.5px solid #86EFAC",
+                      padding: "24px 22px",
+                      boxShadow: "0 8px 30px -4px rgba(21, 128, 61, 0.12), 0 2px 8px rgba(0,0,0,0.04)",
+                    }}
+                  >
+                    {/* Top Price Box */}
+                    <div
+                      style={{
+                        background: "linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)",
+                        border: "1px solid #BBF7D0",
+                        padding: "14px 18px",
+                        borderRadius: "14px",
+                        boxShadow: "0 2px 6px rgba(21, 128, 61, 0.08)",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                        <span style={{ fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em", color: "#166534" }}>
+                          Total Cost / Unit
+                        </span>
+                        <span style={{ fontSize: "10.5px", background: "#ffffff", padding: "2px 8px", borderRadius: "100px", color: "#15803D", fontWeight: 800, border: "1px solid #86EFAC" }}>
+                          LIVE
+                        </span>
+                      </div>
+                      <div style={{ fontSize: "34px", fontWeight: 900, color: "#15803D", marginTop: "4px", letterSpacing: "-0.02em" }}>
+                        ₹{calculations.totalActiveCost.toFixed(2)}
+                      </div>
                     </div>
-                    <div style={{ marginTop: "20px", background: "#FEF9C3", border: "1px solid #FDE047", borderRadius: "10px", padding: "10px 12px", fontSize: "12.5px", color: "#854D0E" }}>
-                      <strong>🎉 Great Choice!</strong><br />High demand formula!
+
+                    {/* Financial Breakdown */}
+                    <div style={{ marginTop: "16px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 4px", borderBottom: "1px solid #F1F5F0" }}>
+                        <span style={{ fontSize: "13px", color: "#64748B", fontWeight: 600 }}>Suggested MSRP</span>
+                        <strong style={{ fontSize: "17px", color: "#0F172A", fontWeight: 800 }}>₹149.00</strong>
+                      </div>
+
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 4px" }}>
+                        <div>
+                          <span style={{ fontSize: "13px", color: "#64748B", fontWeight: 600, display: "block" }}>Your Profit / Unit</span>
+                          <span style={{ fontSize: "11.5px", color: "#15803D", fontWeight: 800 }}>
+                            {Math.round(((149.0 - calculations.totalActiveCost) / 149.0) * 100)}% Gross Margin
+                          </span>
+                        </div>
+                        <strong style={{ fontSize: "19px", color: "#15803D", fontWeight: 900 }}>
+                          ₹{(149.0 - calculations.totalActiveCost).toFixed(2)}
+                        </strong>
+                      </div>
+                    </div>
+
+                    {/* Premium Callout */}
+                    <div
+                      style={{
+                        marginTop: "18px",
+                        background: "linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%)",
+                        border: "1px solid #86EFAC",
+                        borderRadius: "14px",
+                        padding: "12px 14px",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "#166534", fontWeight: 800, fontSize: "12.5px" }}>
+                        <Sparkles size={15} color="#15803D" />
+                        <span>High-Margin Formula Profile</span>
+                      </div>
+                      <p style={{ margin: "4px 0 0", fontSize: "12px", color: "#15803D", lineHeight: 1.45 }}>
+                        Balanced active clinical dosing with exceptional commercial retail potential.
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <div style={{ marginTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <button onClick={() => setCurrentStep(2)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
-                  <button onClick={() => setCurrentStep(4)} style={{ background: "#15803D", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>Next: Bottle Packaging <ArrowRight size={16} /></button>
+                {/* Step 3 Bottom Navigation */}
+                <div
+                  style={{
+                    marginTop: "28px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    borderTop: "1px solid #F0F4EF",
+                    paddingTop: "20px",
+                  }}
+                >
+                  <button
+                    onClick={() => setCurrentStep(2)}
+                    style={{
+                      padding: "12px 22px",
+                      borderRadius: "12px",
+                      border: "1.5px solid #E2E8F0",
+                      background: "#ffffff",
+                      fontWeight: 700,
+                      color: "#475569",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      fontSize: "14px",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <ChevronLeft size={16} />
+                    Back
+                  </button>
+
+                  <button
+                    onClick={() => setCurrentStep(4)}
+                    style={{
+                      background: "linear-gradient(135deg, #15803D 0%, #166534 100%)",
+                      color: "#ffffff",
+                      padding: "13px 28px",
+                      borderRadius: "12px",
+                      fontWeight: 800,
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      fontSize: "14px",
+                      boxShadow: "0 6px 18px rgba(21, 128, 61, 0.25)",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    Next: Bottle Packaging
+                    <ArrowRight size={16} />
+                  </button>
                 </div>
               </motion.div>
             )}
