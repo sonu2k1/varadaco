@@ -17,8 +17,19 @@ export default function Footer() {
           
           {/* Column 1: Brand & Credentials */}
           <div className="footer-brand-col">
-            <div style={{ marginBottom: "14px" }}>
-              <Logo variant="white" size="md" />
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#ffffff",
+                padding: "10px 20px",
+                borderRadius: "12px",
+                boxShadow: "0 6px 22px rgba(0, 0, 0, 0.22)",
+                marginBottom: "20px",
+              }}
+            >
+              <Logo variant="light" size="lg" />
             </div>
             <p className="footer-tagline">
               Pharmaceutical-grade nutraceutical contract manufacturing, advanced clinical R&D, and global regulatory compliance.

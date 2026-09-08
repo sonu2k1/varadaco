@@ -16,6 +16,7 @@ import {
   Check,
   RefreshCw,
 } from "lucide-react";
+import { LogoIcon } from "./Logo";
 
 export interface RazorpayPaymentDetails {
   paymentId: string;
@@ -249,7 +250,8 @@ export default function RazorpayModal({
             {/* Merchant Details & Payable Amount */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
               <div>
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <LogoIcon size={18} variant="white" />
                   <span style={{ fontSize: "15px", fontWeight: 700, color: "#FFFFFF" }}>Varadaco Industries</span>
                   <div style={{ background: "#22C55E", borderRadius: "50%", width: "13px", height: "13px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Check size={9} color="#FFFFFF" strokeWidth={3} />

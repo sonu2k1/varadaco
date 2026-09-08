@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Download, Printer, ArrowRight, CheckCircle2 } from "lucide-react";
+import Logo from "./Logo";
 
 export interface OrderConfirmationData {
   productTitle: string;
@@ -144,30 +145,9 @@ export default function OrderConfirmationModal({
               borderBottom: "1px solid #EDE7DC",
             }}
           >
-            {/* Center Monogram Logo */}
-            <div
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                background: "#0D2619",
-                margin: "0 auto 14px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 4px 10px rgba(13, 38, 25, 0.2)",
-              }}
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M4 6L12 18L20 6"
-                  stroke="#FFFFFF"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle cx="12" cy="9" r="2.2" fill="#22C55E" />
-              </svg>
+            {/* Center Official Logo */}
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "14px" }}>
+              <Logo size="sm" clickable={false} />
             </div>
 
             {/* ORDER CONFIRMATION with Divider Lines */}
