@@ -88,16 +88,7 @@ export default function ContactPage() {
           overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
-            gap: "48px",
-            alignItems: "center",
-          }}
-        >
+        <div className="contact-hero-grid">
           {/* Left Column: Heading, Subtext, Stats, and CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -347,14 +338,7 @@ export default function ContactPage() {
           padding: "36px 4.5vw 70px",
         }}
       >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
-            gap: "40px",
-            alignItems: "start",
-          }}
-        >
+        <div className="contact-direct-grid">
           {/* LEFT COLUMN: REACH OUT DIRECTLY */}
           <div>
             <span
@@ -805,67 +789,25 @@ export default function ContactPage() {
       </section>
 
       {/* 4. SOURCING & CLEANROOM MANUFACTURING NETWORKS */}
-      <section
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 4.5vw 70px",
-        }}
-      >
-        <div
-          style={{
-            background: "#FFFFFF",
-            border: "1px solid #E5E7EB",
-            borderRadius: "24px",
-            padding: "44px 36px",
-            boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.05)",
-          }}
-        >
-          <div style={{ textAlign: "center", maxWidth: "680px", margin: "0 auto 36px" }}>
-            <span
-              style={{
-                fontSize: "11px",
-                fontWeight: 800,
-                color: "#7CA832",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                display: "block",
-                marginBottom: "6px",
-              }}
-            >
+      <section className="contact-network-section">
+        <div className="contact-network-card">
+          <div className="contact-network-header">
+            <span className="contact-network-eyebrow">
               OUR SOURCING & MANUFACTURING NETWORKS
             </span>
-            <h2
-              style={{
-                fontSize: "30px",
-                fontWeight: 800,
-                color: "#0D2619",
-                marginBottom: "10px",
-              }}
-            >
+            <h2 className="contact-network-title">
               Cleanroom Manufacturing & Global Sourcing
             </h2>
-            <p style={{ fontSize: "13px", color: "#64748B", lineHeight: 1.6, margin: 0 }}>
+            <p className="contact-network-subtitle">
               We source high-purity active botanicals from certified cultivation hubs across India, formulate in WHO-GMP cleanrooms in Uttarakhand & Delhi, and export globally.
             </p>
           </div>
 
           {/* Map Visual & Details Grid */}
-          <div
-            style={{
-              background: "#FAF9F5",
-              border: "1px solid #EDE8E1",
-              borderRadius: "18px",
-              padding: "28px",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: "36px",
-              alignItems: "center",
-            }}
-          >
+          <div className="contact-network-grid">
             {/* Left: Supply Route Schematic Diagram */}
-            <div style={{ position: "relative", minHeight: "220px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="100%" height="220" viewBox="0 0 380 220" fill="none" style={{ maxWidth: "380px" }}>
+            <div className="contact-network-svg-wrap">
+              <svg width="100%" height="220" viewBox="0 0 380 220" fill="none" className="contact-network-svg">
                 {/* Connecting Route Lines */}
                 <line x1="120" y1="60" x2="260" y2="90" stroke="#CBD5E1" strokeWidth="1.5" strokeDasharray="4 4" />
                 <line x1="120" y1="60" x2="190" y2="170" stroke="#A7F3D0" strokeWidth="1.8" />
@@ -910,39 +852,23 @@ export default function ContactPage() {
             </div>
 
             {/* Right: Detailed Facility Specifications */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+            <div className="contact-facilities-list">
               {/* Box 1 */}
-              <div
-                style={{
-                  background: "#FFFFFF",
-                  borderLeft: "4px solid #15803D",
-                  borderRadius: "10px",
-                  padding: "16px 18px",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.03)",
-                }}
-              >
-                <div style={{ fontSize: "11.5px", fontWeight: 800, color: "#111827", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: "4px" }}>
+              <div className="contact-facility-card facility-card-green">
+                <div className="contact-facility-title">
                   UTTARAKHAND CENTRAL WHO-GMP FACILITY
                 </div>
-                <div style={{ fontSize: "12px", color: "#4B5563", lineHeight: 1.55 }}>
+                <div className="contact-facility-desc">
                   Located in Haridwar, our state-of-the-art facility conducts automated capsule filling, tablet compression, nitrogen-flushed bottling, and blister packaging under ISO Class 7 cleanrooms and strict ISO 22000 protocols.
                 </div>
               </div>
 
               {/* Box 2 */}
-              <div
-                style={{
-                  background: "#FFFFFF",
-                  borderLeft: "4px solid #7CA832",
-                  borderRadius: "10px",
-                  padding: "16px 18px",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.03)",
-                }}
-              >
-                <div style={{ fontSize: "11.5px", fontWeight: 800, color: "#111827", letterSpacing: "0.04em", textTransform: "uppercase", marginBottom: "4px" }}>
+              <div className="contact-facility-card facility-card-lime">
+                <div className="contact-facility-title">
                   DELHI R&D & PHARMACEUTICAL TESTING LABS
                 </div>
-                <div style={{ fontSize: "12px", color: "#4B5563", lineHeight: 1.55 }}>
+                <div className="contact-facility-desc">
                   Okhla Phase-III central research hub housing UHPLC-MS/MS, USP automated dissolution testers, particle size analyzers, and climate-controlled stability chambers for complete Certificate of Analysis (CoA) validation.
                 </div>
               </div>
@@ -952,22 +878,8 @@ export default function ContactPage() {
       </section>
 
       {/* 5. FREQUENTLY ASKED QUESTIONS SECTION */}
-      <section
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 4.5vw 70px",
-        }}
-      >
-        <div
-          style={{
-            background: "#FFFFFF",
-            border: "1px solid #E5E7EB",
-            borderRadius: "24px",
-            padding: "44px 36px",
-            boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.05)",
-          }}
-        >
+      <section className="contact-faq-section">
+        <div className="contact-faq-card">
           <div style={{ textAlign: "center", maxWidth: "600px", margin: "0 auto 36px" }}>
             <span
               style={{
@@ -1062,25 +974,8 @@ export default function ContactPage() {
       </section>
 
       {/* 6. BOTTOM FORMULATION SUGGESTION / IDEA BOX */}
-      <section
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 4.5vw 80px",
-        }}
-      >
-        <div
-          style={{
-            background: "#FFFFFF",
-            border: "1px solid #E5E7EB",
-            borderRadius: "20px",
-            padding: "36px 30px",
-            textAlign: "center",
-            maxWidth: "800px",
-            margin: "0 auto",
-            boxShadow: "0 6px 20px rgba(0, 0, 0, 0.04)",
-          }}
-        >
+      <section className="contact-suggest-section">
+        <div className="contact-suggest-card">
           <div style={{ fontSize: "28px", marginBottom: "8px" }}>💡</div>
           <h3
             style={{

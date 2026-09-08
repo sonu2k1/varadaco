@@ -119,36 +119,35 @@ export default function RndPage() {
       </section>
 
       {/* 4-Step R&D Lifecycle */}
-      <section className="page-wrapper" style={{ paddingTop: "60px" }}>
-        <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 50px" }}>
+      <section className="page-wrapper rnd-phases-section">
+        <div className="rnd-section-header">
           <p className="eyebrow" style={{ justifyContent: "center" }}>Formulation Lifecycle</p>
           <h2>Our 4-phase clinical R&D <em>framework.</em></h2>
         </div>
 
-        <div className="rnd-phases-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "20px" }}>
+        <div className="rnd-phases-grid">
           {phases.map((p, idx) => {
             const Icon = p.icon;
             return (
               <motion.div
                 key={p.step}
-                className="card-panel"
-                style={{ position: "relative" }}
+                className="card-panel rnd-phase-card"
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
                 variants={fade}
               >
-                <div style={{ fontSize: "32px", fontWeight: 900, color: "rgba(21, 128, 61, 0.2)", position: "absolute", top: "20px", right: "24px" }}>
+                <div className="rnd-phase-step">
                   {p.step}
                 </div>
                 <div className="icon-box" style={{ background: "rgba(21, 128, 61, 0.1)", color: "#15803D" }}>
                   <Icon size={24} />
                 </div>
-                <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--ink)", marginBottom: "10px" }}>
+                <h3 className="rnd-phase-title">
                   {p.title}
                 </h3>
-                <p style={{ fontSize: "14px", color: "#546863", lineHeight: "1.6" }}>
+                <p className="rnd-phase-desc">
                   {p.desc}
                 </p>
               </motion.div>
@@ -158,8 +157,8 @@ export default function RndPage() {
       </section>
 
       {/* Deep Dive Science Feature */}
-      <section style={{ background: "linear-gradient(135deg, #FAF8F5 0%, #F0F4EF 50%, #F5F2EB 100%)", padding: "90px 4.5vw", borderTop: "1px solid #E2E8DF", borderBottom: "1px solid #E2E8DF" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "50px", alignItems: "center" }}>
+      <section className="rnd-deepdive-section">
+        <div className="rnd-deepdive-grid">
           <div>
             <p className="eyebrow">Bioavailability Engineering</p>
             <h2>Overcoming the gut-blood <em>barrier.</em></h2>
@@ -188,13 +187,13 @@ export default function RndPage() {
             </Link>
           </div>
 
-          <div style={{ position: "relative", borderRadius: "24px", overflow: "hidden", boxShadow: "0 16px 40px rgba(21, 128, 61, 0.15)", border: "2px solid #ffffff" }}>
+          <div className="rnd-deepdive-media">
             <img
               src="https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=1200&q=85"
               alt="High precision laboratory analysis"
-              style={{ width: "100%", height: "480px", objectFit: "cover" }}
+              className="rnd-deepdive-img"
             />
-            <div style={{ position: "absolute", bottom: "24px", left: "24px", right: "24px", background: "linear-gradient(135deg, rgba(13, 38, 25, 0.95) 0%, rgba(20, 59, 40, 0.92) 100%)", border: "1px solid rgba(124, 168, 50, 0.35)", color: "white", padding: "20px", borderRadius: "16px", backdropFilter: "blur(12px)", boxShadow: "0 10px 30px rgba(21, 128, 61, 0.25)" }}>
+            <div className="rnd-deepdive-overlay">
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
                 <Beaker size={18} color="#7CA832" />
                 <strong style={{ fontSize: "15px" }}>Varadaco BioMatrix™ Technology</strong>
@@ -208,8 +207,8 @@ export default function RndPage() {
       </section>
 
       {/* Laboratory Instrumentation */}
-      <section className="page-wrapper" style={{ paddingBottom: "110px" }}>
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 52px" }}>
+      <section className="page-wrapper rnd-equip-section">
+        <div className="rnd-section-header">
           <p className="eyebrow" style={{ justifyContent: "center" }}>Instrumentation & Rigor</p>
           <h2>Analytical testing <em>infrastructure.</em></h2>
         </div>
