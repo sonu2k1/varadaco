@@ -1,93 +1,132 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, ChevronRight, CircleGauge, Droplets, Filter, HeartPulse, Leaf, Microscope, Pill, Sparkles, Zap } from "lucide-react";
+
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CheckCircle2,
+  ChevronRight,
+  CircleGauge,
+  HeartPulse,
+  Leaf,
+  Microscope,
+  Pill,
+  Sparkles,
+  Zap,
+  Package,
+  Clock,
+  Boxes,
+  ShieldCheck
+} from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const fade = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
-const portfolioCategories = [
+const categories = [
   {
-    id: "mens-health",
-    title: "Men’s Health",
-    shortDesc: "We specialize in a wide range of men’s wellness and health products.",
-    desc: "Targeted formulations supporting vitality, testosterone optimization, cardiovascular resilience, and prostate health using clinically validated botanical extracts and bioavailable chelated minerals.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80",
-    formats: ["Softgels", "Tablets", "Effervescent"],
-    keyIngredients: ["KSM-66® Ashwagandha", "Zinc Monomethionine", "Tongkat Ali Extract", "Saw Palmetto 85% Fatty Acids"],
-    icon: Zap,
-  },
-  {
-    id: "womens-health",
-    title: "Women’s Health",
-    shortDesc: "We deliver a range of women’s wellness products that are specifically designed for them.",
-    desc: "Precision nutritional support spanning menstrual cycle balance, prenatal micronutrient methylation, bone density, dermal elasticity, and menopausal comfort.",
-    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=1000&q=80",
-    formats: ["Beadlet-in-Oil Capsules", "Gummies", "Stick Packs"],
-    keyIngredients: ["Quatrefolic® (5-MTHF)", "Marine Collagen Tripeptides", "Evening Primrose Oil", "Myo-Inositol & D-Chiro"],
-    icon: HeartPulse,
-  },
-  {
-    id: "kids-health",
-    title: "Kid’s Health",
-    shortDesc: "We take into account the specific nutrient requirement for kids.",
-    desc: "Delicious, clean-label, low-sugar gummies and micro-encapsulated chewables engineered for optimal pediatric brain development, immune defense, and healthy physical growth.",
-    image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1000&q=80",
-    formats: ["Pectin Gummies", "Chewables", "Liquid Drops"],
-    keyIngredients: ["Algal DHA (Omega-3)", "Vitamin D3 + Elderberry", "Zinc Gluconate", "Prebiotic FOS"],
-    icon: Sparkles,
-  },
-  {
-    id: "sports-nutrition",
-    title: "Sports Nutrition",
-    shortDesc: "Our sports nutrition products are made with quality ingredients.",
-    desc: "High-performance hydration, intra-workout nitric oxide precursors, and rapid muscle recovery peptides formulated for athletes and active lifestyles.",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=80",
-    formats: ["Micro-granulated Powder", "Ready-to-Drink", "Capsules"],
-    keyIngredients: ["L-Citrulline Malate", "Aquamin® Marine Electrolytes", "Creatine Monohydrate (Creapure®)", "Tart Cherry 50:1"],
-    icon: CircleGauge,
-  },
-  {
-    id: "medical-nutrition",
-    title: "Medical Nutrition",
-    shortDesc: "We bring unique, efficacious solutions to answer your nutritional needs.",
-    desc: "Clinically informed clinical nutrition blends for disease-specific dietary management, sarcopenia prevention, glycemic support, and post-operative recovery.",
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1000&q=80",
-    formats: ["Soluble Powder", "Enteric Capsules", "Oral Suspensions"],
-    keyIngredients: ["Hydrolyzed Whey Peptides", "HMB Calcium", "L-Glutamine USP", "Alpha Lipoic Acid"],
-    icon: Microscope,
-  },
-  {
-    id: "phytopharma",
-    title: "Phytopharma",
-    shortDesc: "All products have proven to be effective in improving overall health.",
-    desc: "Standardized herbal actives utilizing green solvent extraction and chromatographic finger-printing for unmatched active phytochemical purity.",
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80",
-    formats: ["Standardized Extracts", "Softgels", "Tinctures"],
-    keyIngredients: ["Curcumin C3 Complex® 95%", "Boswellia Serrata 65%", "Green Tea EGCG 98%", "Milk Thistle Silymarin"],
+    id: "ayurvedic-herbal",
+    title: "Ayurvedic & Herbal Products",
+    shortDesc: "Classical and proprietary herbal wellness formulations and standardized extracts.",
+    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "Ashwagandha, Shilajit, Mulethi, Triphala, Brahmi",
+    packSize: "60 Capsules / 100g / 500g Bulk",
+    shelfLife: "24 - 36 Months",
+    moq: "500 - 5,000 Units",
+    packaging: "HDPE Bottles, Alu-Alu Blisters, Pouches",
     icon: Leaf,
   },
   {
-    id: "probiotics",
-    title: "Probiotics",
-    shortDesc: "All products have proven to be effective in improving overall health.",
-    desc: "Spore-forming and enteric-protected synbiotic formulations designed to survive gastric acid and colonize the human gut microbiome.",
-    image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1000&q=80",
-    formats: ["DRCaps® Acid Resistant", "Sachets", "Beadlets"],
-    keyIngredients: ["Bacillus coagulans (2 Billion CFU)", "Bifidobacterium lactis", "PreticX® XOS", "Zinc Carnosine"],
-    icon: Droplets,
+    id: "nutraceutical-supplements",
+    title: "Nutraceutical Supplements",
+    shortDesc: "High-potency vitamin blends, active minerals, and bioavailable vitality complexes.",
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "Multivitamins, Minerals, Amino Acids, Bioactive Peptides",
+    packSize: "30 / 60 / 90 Count, 250g Powders",
+    shelfLife: "24 Months",
+    moq: "1,000 Units",
+    packaging: "Bottles with Induction Seal, Blisters",
+    icon: Sparkles,
   },
   {
-    id: "ayurvedic",
-    title: "Ayurvedic",
-    shortDesc: "Our array of Ayurvedic nutrition is designed to promote balance, wellness.",
-    desc: "Bridging classical 5,000-year Ayurvedic wisdom with modern clinical validation. Pure botanical rasayanas formulated for dosha equilibrium and holistic vigor.",
-    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1000&q=80",
-    formats: ["Herbal Decoctions", "Vegetarian Vcaps", "Cold-Pressed Oils"],
-    keyIngredients: ["Triphala Standardized Extract", "Shilajit 50% Fulvic Acid", "Brahmi (Bacopa 50% Bacosides)", "Tulsi Bioactive Fraction"],
+    id: "digestive-gut-health",
+    title: "Digestive & Gut Health",
+    shortDesc: "Triphala, prebiotics, digestive enzymes and gastrointestinal vitality.",
+    image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "Triphala, Isabgol, Probiotic Blends, Digestive Enzymes",
+    packSize: "60 Capsules / 120g Powder Jars",
+    shelfLife: "24 Months",
+    moq: "500 Units",
+    packaging: "Moisture-Barrier Jars, Blister Packs",
     icon: Pill,
+  },
+  {
+    id: "womens-wellness",
+    title: "Women's Wellness",
+    shortDesc: "Targeted formulations for hormonal balance, bone density, and vitality.",
+    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "Shatavari, Iron + Folic Acid, Calcium D3, Myo-Inositol",
+    packSize: "60 Count Bottles / Single Stick Packs",
+    shelfLife: "24 Months",
+    moq: "1,000 Units",
+    packaging: "Custom Brand Cartons, Amber Glass, Blisters",
+    icon: HeartPulse,
+  },
+  {
+    id: "mens-wellness",
+    title: "Men's Wellness",
+    shortDesc: "Stamina, vitality, and physical performance adaptogen formulations.",
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "Shilajit, Gokshura, Safed Musli, Zinc Monomethionine",
+    packSize: "60 Capsules / 100g Resin/Powder",
+    shelfLife: "24 - 36 Months",
+    moq: "500 Units",
+    packaging: "Luxury Glass Jars, Alu-Alu Blisters",
+    icon: Zap,
+  },
+  {
+    id: "immunity-antioxidants",
+    title: "Immunity & Antioxidant Support",
+    shortDesc: "Curcumin, Vitamin C, Zinc and cellular defense botanical complexes.",
+    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "95% Standardized Curcuminoids, Piperine, Amla Extract, Zinc",
+    packSize: "60 Count / Effervescent 20 Tubes",
+    shelfLife: "24 Months",
+    moq: "1,000 Units",
+    packaging: "Effervescent Tubes, Blisters, HDPE Bottles",
+    icon: ShieldCheck,
+  },
+  {
+    id: "weight-management",
+    title: "Weight Management",
+    shortDesc: "Metabolism boosters, garcinia extracts and clean nutritional powders.",
+    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "Garcinia Cambogia, Green Tea EGCG, CLA, Plant Proteins",
+    packSize: "60 Capsules / 500g Powders",
+    shelfLife: "24 Months",
+    moq: "500 Units",
+    packaging: "Wide-Mouth Tubs, Zip Pouches",
+    icon: CircleGauge,
+  },
+  {
+    id: "heart-brain-wellness",
+    title: "Heart & Brain Wellness",
+    shortDesc: "Omega complexes, Brahmi, CoQ10 and cognitive clarity formulations.",
+    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1000&q=80",
+    formats: "Capsule / Tablet / Powder",
+    keyIngredients: "Brahmi (Bacopa 20%), Shankhpushpi, CoQ10, Flaxseed Omega",
+    packSize: "60 Softgels / Capsules",
+    shelfLife: "24 Months",
+    moq: "1,000 Units",
+    packaging: "Blister Packs, Amber Glass Bottles",
+    icon: Microscope,
   },
 ];
 
@@ -96,8 +135,8 @@ export default function PortfolioPage() {
     <main>
       <Navbar />
 
-      {/* Subpage Hero with Full Background Image */}
-      <section className="subpage-hero">
+      {/* Hero Section */}
+      <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
             src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=1920&q=85"
@@ -105,119 +144,196 @@ export default function PortfolioPage() {
           />
         </div>
 
-        <div className="subpage-hero-inner">
-          <div className="breadcrumbs">
+        <div className="subpage-hero-inner" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div className="breadcrumbs" style={{ justifyContent: "center" }}>
             <Link href="/">Home</Link>
             <ChevronRight size={14} />
-            <span>Our Portfolio</span>
+            <span>Our Product Portfolio</span>
           </div>
 
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="hero-tag-pill" style={{ backgroundColor: "rgba(124, 168, 50, 0.15)", borderColor: "rgba(124, 168, 50, 0.35)", color: "#7CA832" }}>
+            <div className="hero-tag-pill" style={{ backgroundColor: "rgba(124, 168, 50, 0.15)", borderColor: "rgba(124, 168, 50, 0.35)", color: "#7CA832", margin: "0 auto 14px" }}>
               <Sparkles size={14} />
-              <span>Nutraceutical Portfolio</span>
-              <span className="pill-dot" style={{ backgroundColor: "#7CA832" }} />
-              <span>8 Specialized Categories</span>
+              <span>07. Product Portfolio</span>
             </div>
 
-            <h1 style={{ maxWidth: "880px" }}>
-              Formulations engineered for<br />
-              <em style={{ color: "#7CA832" }}>human vitality & longevity.</em>
+            <h1 style={{ maxWidth: "880px", textAlign: "center", margin: "0 auto" }}>
+              Our Product Portfolio
             </h1>
 
-            <p className="hero-text" style={{ maxWidth: "620px", fontSize: "16px", color: "#d1e8b0", margin: "14px 0 0" }}>
-              Evidence-based nutritional ranges spanning active sports, pediatric growth, microbiome, and standardized phytopharma.
+            <p style={{ fontSize: "clamp(1.1rem, 2vw, 1.35rem)", fontWeight: 600, color: "#7CA832", marginTop: "12px" }}>
+              Quality-Focused Products for Modern Health &amp; Wellness
+            </p>
+
+            <p className="hero-text" style={{ maxWidth: "680px", fontSize: "16px", color: "#d1e8b0", margin: "16px auto 0", textAlign: "center", lineHeight: "1.7" }}>
+              Explore our range of Ayurvedic, nutraceutical and dietary supplement products, developed for modern wellness requirements and supported by professional product and manufacturing capabilities.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section className="page-wrapper" style={{ paddingTop: "60px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))", gap: "30px" }}>
-          {portfolioCategories.map((cat, idx) => {
+      {/* FEATURED PRODUCT — ASHWAGANDHA (Docx Section 07) */}
+      <section style={{ padding: "80px 4.5vw 40px" }}>
+        <div
+          style={{
+            maxWidth: "1240px",
+            margin: "0 auto",
+            background: "linear-gradient(135deg, #0D2619 0%, #153E2A 100%)",
+            borderRadius: "24px",
+            padding: "45px 40px",
+            color: "#FFFFFF",
+            boxShadow: "0 18px 45px rgba(13, 38, 25, 0.18)",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "35px",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                background: "rgba(124, 168, 50, 0.2)",
+                border: "1px solid rgba(124, 168, 50, 0.4)",
+                padding: "5px 14px",
+                borderRadius: "100px",
+                fontSize: "11px",
+                fontWeight: 800,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                color: "#7CA832",
+                marginBottom: "14px",
+              }}
+            >
+              <span>FEATURED PRODUCT • AYURVEDIC / HERBAL WELLNESS</span>
+            </div>
+
+            <h2 style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)", fontWeight: 900, marginBottom: "8px", color: "#FFFFFF" }}>
+              Ashwagandha
+            </h2>
+            <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#7CA832", marginBottom: "14px" }}>
+              Ancient Wisdom. Modern Wellness.
+            </h3>
+
+            <p style={{ color: "#d1e8b0", fontSize: "15px", lineHeight: "1.7", marginBottom: "24px" }}>
+              A premium Ashwagandha product positioned for modern wellness brands and consumers. Use this product section to present the product format, key ingredients, packaging options and enquiry details.
+            </p>
+
+            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+              <Link
+                href="/products#ashwagandha"
+                className="button button-light"
+                style={{ background: "#7CA832", borderColor: "#7CA832", color: "#0D2619", fontWeight: 800 }}
+              >
+                View Ashwagandha →
+              </Link>
+              <Link
+                href="/contact?inquiry=ashwagandha-bulk"
+                className="button button-dark"
+                style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.25)" }}
+              >
+                Enquire for Bulk / Manufacturing →
+              </Link>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="/products/ashwagandha.jpg"
+              alt="Ashwagandha Featured Product"
+              style={{ width: "100%", maxWidth: "380px", borderRadius: "20px", boxShadow: "0 10px 30px rgba(0,0,0,0.4)" }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Grid with All 8 Categories & Product Card Fields */}
+      <section className="page-wrapper" style={{ paddingTop: "50px", paddingBottom: "80px" }}>
+        <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 50px" }}>
+          <p className="eyebrow" style={{ justifyContent: "center" }}>Product Categories</p>
+          <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
+            8 Specialized <em>Categories</em>
+          </h2>
+          <div className="trust-underline" />
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "28px" }}>
+          {categories.map((cat, idx) => {
             const Icon = cat.icon;
             return (
               <motion.div
                 key={cat.id}
                 className="card-panel"
-                style={{ padding: "0", display: "flex", flexDirection: "column", overflow: "hidden" }}
+                style={{ padding: "0", display: "flex", flexDirection: "column", overflow: "hidden", borderRadius: "20px", border: "1.5px solid #E2E8DF" }}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.06 }}
                 variants={fade}
               >
-                <div style={{ position: "relative", height: "220px", overflow: "hidden" }}>
-                  <img
-                    src={cat.image}
-                    alt={cat.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-                  <div style={{ position: "absolute", top: "14px", left: "14px", background: "rgba(13, 38, 25, 0.88)", color: "white", padding: "6px 12px", borderRadius: "100px", fontSize: "11px", fontWeight: 700, display: "flex", alignItems: "center", gap: "6px", backdropFilter: "blur(6px)" }}>
+                <div style={{ height: "200px", position: "relative", overflow: "hidden" }}>
+                  <img src={cat.image} alt={cat.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "14px",
+                      left: "14px",
+                      background: "rgba(13, 38, 25, 0.9)",
+                      color: "#FFFFFF",
+                      padding: "6px 14px",
+                      borderRadius: "100px",
+                      fontSize: "12px",
+                      fontWeight: 700,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      backdropFilter: "blur(6px)",
+                    }}
+                  >
                     <Icon size={14} color="#7CA832" />
                     <span>{cat.title}</span>
                   </div>
                 </div>
 
-                <div style={{ padding: "28px", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <h3 style={{ fontSize: "22px", fontWeight: 700, color: "var(--ink)", marginBottom: "8px" }}>
+                <div style={{ padding: "24px", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <h3 style={{ fontSize: "20px", fontWeight: 800, color: "var(--ink)", marginBottom: "6px" }}>
                     {cat.title}
                   </h3>
-
-                  <p style={{ fontSize: "14px", fontWeight: 600, color: "#15803D", marginBottom: "12px", lineHeight: "1.5" }}>
+                  <p style={{ fontSize: "13.5px", color: "#475569", lineHeight: "1.6", marginBottom: "16px" }}>
                     {cat.shortDesc}
                   </p>
 
-                  <p style={{ fontSize: "13px", color: "#475569", lineHeight: "1.6", marginBottom: "20px" }}>
-                    {cat.desc}
-                  </p>
-
-                  <div style={{ background: "#EBF3E6", padding: "12px 14px", borderRadius: "10px", fontSize: "12px", marginBottom: "20px" }}>
-                    <div style={{ fontWeight: 700, color: "var(--ink)", marginBottom: "4px" }}>Key Actives:</div>
-                    <div style={{ color: "#334155" }}>{cat.keyIngredients.join(", ")}</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", fontSize: "12.5px", color: "#334155", marginBottom: "20px", background: "#F8FAF8", padding: "14px", borderRadius: "12px", border: "1px solid #E5EFE2" }}>
+                    <div><strong>Product Form:</strong> {cat.formats}</div>
+                    <div><strong>Key Ingredients:</strong> {cat.keyIngredients}</div>
+                    <div><strong>Pack Size:</strong> {cat.packSize}</div>
+                    <div><strong>Shelf Life:</strong> {cat.shelfLife}</div>
+                    <div><strong>MOQ:</strong> {cat.moq}</div>
+                    <div><strong>Packaging Options:</strong> {cat.packaging}</div>
                   </div>
 
-                  <div style={{ marginTop: "auto" }}>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "18px" }}>
-                      {cat.formats.map((fmt) => (
-                        <span key={fmt} style={{ background: "rgba(21, 128, 61, 0.1)", color: "#15803D", padding: "3px 8px", borderRadius: "6px", fontSize: "11px", fontWeight: 600 }}>
-                          {fmt}
-                        </span>
-                      ))}
-                    </div>
-
+                  <div style={{ marginTop: "auto", display: "flex", gap: "10px" }}>
                     <Link
-                      href={`/contact?category=${encodeURIComponent(cat.title)}`}
+                      href="/products"
                       className="button button-dark"
-                      style={{ width: "100%", justifyContent: "center", padding: "10px 16px", fontSize: "12px" }}
+                      style={{ flex: 1, justifyContent: "center", fontSize: "13px", padding: "10px 16px", background: "#15803D", borderColor: "#15803D" }}
                     >
-                      Request Category Catalog & Samples
-                      <ArrowRight size={15} />
+                      View Product →
+                    </Link>
+                    <Link
+                      href={`/contact?category=${cat.id}`}
+                      className="button button-light"
+                      style={{ fontSize: "13px", padding: "10px 16px" }}
+                    >
+                      Enquire
                     </Link>
                   </div>
                 </div>
               </motion.div>
             );
           })}
-        </div>
-      </section>
-
-      {/* CTA Box */}
-      <section className="contact">
-        <div className="contact-mark">P</div>
-        <p className="eyebrow light">Expand Your Product Line</p>
-        <h2>Need formulation samples or <em>custom specs?</em></h2>
-        <p>Our team provides laboratory testing batches and Certificates of Analysis for all portfolio categories.</p>
-        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
-          <Link href="/contact" className="button button-light">
-            Contact Product Team
-            <ArrowRight size={17} />
-          </Link>
-          <Link href="/services" className="button button-dark" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
-            Explore Manufacturing Services
-            <ArrowRight size={17} />
-          </Link>
         </div>
       </section>
 

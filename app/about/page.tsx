@@ -1,6 +1,24 @@
 "use client";
+
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Award, CheckCircle2, ChevronRight, Compass, Eye, Globe2, HeartHandshake, Lightbulb, MapPin, Medal, Microscope, PackageCheck, ShieldCheck, Sparkles, Target, Trophy, Users, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  ChevronRight,
+  FileCheck,
+  Globe2,
+  Layers,
+  MapPin,
+  Play,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  Award,
+  BookOpen,
+  Briefcase,
+  X
+} from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,44 +26,57 @@ import { ClientsSection, CertificationsSection } from "@/components/TrustSection
 
 const fade = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
-const awards = [
+const leaders = [
   {
-    year: "2025",
-    title: "Excellence in Contract Manufacturing",
-    issuer: "Global Nutraceutical & Life Sciences Forum",
-    desc: "Awarded for exceptional batch uniformity, automated cleanroom scaling, and zero-defect quality control across 500+ formulations.",
-    badge: "Winner 2025",
-    color: "#3B592D",
+    name: "Mrs. Shaanzee K. Sarna",
+    designation: "Co-Founder",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    bio: "Driving the company's vision with a focus on building quality-oriented health and wellness solutions and creating long-term relationships with customers and business partners.",
   },
   {
-    year: "2024",
-    title: "Best Bioavailability Innovation Award",
-    issuer: "CPhI World Formulation Summit",
-    desc: "Recognized for breakthrough research in self-emulsifying liposomal delivery and targeted enteric acid-resistant capsule technology.",
-    badge: "Gold Trophy",
-    color: "#15803D",
+    name: "Mr. Amit Singh",
+    designation: "Co-Founder",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+    bio: "Supporting the company's business growth, operations and customer relationships while contributing to Varadaco's long-term manufacturing and market development strategy.",
+  },
+];
+
+const qualitySupportPillars = [
+  {
+    title: "Regulatory Documentation Support",
+    desc: "Assistance with product documentation and regulatory requirements.",
+    icon: FileCheck,
   },
   {
-    year: "2024",
-    title: "Top Global Health Science Exporter",
-    issuer: "International Trade & Commerce Council",
-    desc: "Honoring consistent export quality, regulatory dossier approval speed, and supply chain reliability across 30+ international markets.",
-    badge: "Global Honor",
-    color: "#7CA832",
+    title: "GMP / Quality Documentation Support",
+    desc: "Guidance for businesses preparing manufacturing and quality documentation.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Product Documentation",
+    desc: "Support with product specifications, packaging information and related documentation.",
+    icon: BookOpen,
+  },
+  {
+    title: "Export Documentation Support",
+    desc: "Assistance for businesses preparing documentation for domestic and international markets.",
+    icon: Globe2,
   },
 ];
 
 export default function AboutPage() {
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+
   return (
     <main>
       <Navbar />
 
-      {/* Subpage Hero with Full Background Image */}
+      {/* Subpage Hero */}
       <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
             src="/images/pharma-cleanroom-bg.jpg"
-            alt="WHO-GMP pharmaceutical cleanroom and automated medicine manufacturing laboratory"
+            alt="WHO-GMP cleanroom facility and manufacturing laboratory"
             style={{ objectPosition: "center 40%" }}
           />
         </div>
@@ -57,207 +88,439 @@ export default function AboutPage() {
             <span>About Us</span>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }} 
-            animate={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
           >
             <div className="hero-tag-pill" style={{ backgroundColor: "rgba(124, 168, 50, 0.15)", borderColor: "rgba(124, 168, 50, 0.35)", color: "#7CA832", margin: "0 auto 14px" }}>
               <Users size={14} />
-              <span>About Varadaco Industries</span>
+              <span>02. About Varadaco Industries</span>
             </div>
 
             <h1 style={{ maxWidth: "880px", textAlign: "center", margin: "0 auto" }}>
-              Pioneering science-led<br />
-              <em style={{ color: "#7CA832" }}>health & nutraceuticals.</em>
+              About Varadaco Industries
             </h1>
 
-            <p className="hero-text" style={{ maxWidth: "660px", fontSize: "16px", color: "#d1e8b0", margin: "16px auto 0", textAlign: "center" }}>
-              Two decades of excellence in evidence-based formulations, molecular bioavailability, and global WHO-GMP manufacturing.
+            <p className="hero-text" style={{ maxWidth: "680px", fontSize: "16px", color: "#d1e8b0", margin: "16px auto 0", textAlign: "center" }}>
+              Health and wellness manufacturing company focused on developing and supplying Ayurvedic, nutraceutical and dietary supplement products.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 1. WHO ARE WE? */}
-      <section className="page-wrapper" id="who-we-are" style={{ paddingTop: "70px", paddingBottom: "70px" }}>
+      {/* 02. MAIN SECTION: About Varadaco Industries */}
+      <section className="page-wrapper" id="about-main" style={{ paddingTop: "80px", paddingBottom: "70px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "50px", alignItems: "center" }}>
           <div>
-            <p className="eyebrow">1. Introduction</p>
+            <p className="eyebrow">02. Overview</p>
             <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)", marginBottom: "20px" }}>
-              WHO ARE <em>WE?</em>
+              About <em>Varadaco Industries</em>
             </h2>
-            <p style={{ color: "#475569", fontSize: "16px", lineHeight: "1.75", marginBottom: "18px" }}>
-              Varadaco Industries is a full-service pharmaceutical-grade contract manufacturer and formulation innovator. Founded in 2004, we have dedicated over two decades to decoding the relationship between bioavailable phytonutrients, micro-encapsulated actives, and human cellular vitality.
+            <p style={{ color: "#334155", fontSize: "16px", lineHeight: "1.8", marginBottom: "16px" }}>
+              Varadaco Industries is a health and wellness manufacturing company focused on developing and supplying Ayurvedic, nutraceutical and dietary supplement products. Based in Greater Noida, Uttar Pradesh, we work with businesses looking for dependable product development, manufacturing, packaging and product-support solutions.
             </p>
-            <p style={{ color: "#475569", fontSize: "15px", lineHeight: "1.75", marginBottom: "26px" }}>
-              From initial molecular formulation, organoleptic sensory optimization, and clinical assay testing to high-speed WHO-GMP cleanroom packaging, we empower the world’s leading healthcare brands to bring safe, compliant, and efficacious products to market.
+            <p style={{ color: "#334155", fontSize: "15.5px", lineHeight: "1.8", marginBottom: "26px" }}>
+              Our approach brings together product knowledge, manufacturing capabilities and customer-focused support to help brands move from an initial product idea to a finished market-ready product.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "16px", marginBottom: "30px" }}>
-              <div style={{ background: "#FCFBF9", padding: "16px 20px", borderRadius: "12px", border: "1px solid #E2E8DF" }}>
-                <strong style={{ display: "block", fontSize: "28px", color: "var(--ink)", fontWeight: 900 }}>20+</strong>
-                <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 600 }}>Years of Innovation</span>
+            {/* 3 Highlights */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "30px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#F4F8F3", padding: "12px 18px", borderRadius: "12px", border: "1px solid #DDE8DA" }}>
+                <CheckCircle2 size={20} color="#15803D" style={{ flexShrink: 0 }} />
+                <span style={{ fontSize: "14.5px", fontWeight: 700, color: "#1E251F" }}>
+                  Quality-Focused Manufacturing
+                </span>
               </div>
-              <div style={{ background: "#FCFBF9", padding: "16px 20px", borderRadius: "12px", border: "1px solid #E2E8DF" }}>
-                <strong style={{ display: "block", fontSize: "28px", color: "#15803D", fontWeight: 900 }}>500+</strong>
-                <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 600 }}>Proven Formulations</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#F4F8F3", padding: "12px 18px", borderRadius: "12px", border: "1px solid #DDE8DA" }}>
+                <CheckCircle2 size={20} color="#15803D" style={{ flexShrink: 0 }} />
+                <span style={{ fontSize: "14.5px", fontWeight: 700, color: "#1E251F" }}>
+                  Product Development Support
+                </span>
               </div>
-              <div style={{ background: "#FCFBF9", padding: "16px 20px", borderRadius: "12px", border: "1px solid #E2E8DF" }}>
-                <strong style={{ display: "block", fontSize: "28px", color: "#7CA832", fontWeight: 900 }}>30+</strong>
-                <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 600 }}>Countries Exported</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "#F4F8F3", padding: "12px 18px", borderRadius: "12px", border: "1px solid #DDE8DA" }}>
+                <CheckCircle2 size={20} color="#15803D" style={{ flexShrink: 0 }} />
+                <span style={{ fontSize: "14.5px", fontWeight: 700, color: "#1E251F" }}>
+                  Domestic &amp; Export Opportunities
+                </span>
               </div>
-              <div style={{ background: "#FCFBF9", padding: "16px 20px", borderRadius: "12px", border: "1px solid #E2E8DF" }}>
-                <strong style={{ display: "block", fontSize: "28px", color: "var(--ink)", fontWeight: 900 }}>100+</strong>
-                <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 600 }}>Global Brand Clients</span>
-              </div>
+            </div>
+
+            <div>
+              <Link href="/contact" className="button button-dark" style={{ background: "#15803D", borderColor: "#15803D", fontWeight: 700, padding: "13px 26px" }}>
+                Partner With Us
+                <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
 
           <div style={{ position: "relative", borderRadius: "24px", overflow: "hidden", boxShadow: "0 16px 40px rgba(6, 36, 25, 0.12)" }}>
             <img
               src="/images/arranging_capsules.jpg"
-              alt="Automated rotary die encapsulation and pharmaceutical capsule manufacturing"
-              style={{ width: "100%", height: "500px", objectFit: "cover" }}
+              alt="Varadaco Manufacturing and Laboratory Operations"
+              style={{ width: "100%", height: "480px", objectFit: "cover" }}
             />
             <div style={{ position: "absolute", bottom: "24px", left: "24px", right: "24px", background: "rgba(6, 36, 25, 0.92)", color: "white", padding: "20px 24px", borderRadius: "16px", backdropFilter: "blur(10px)" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-                <ShieldCheck size={20} color="#34d399" />
-                <strong style={{ fontSize: "16px" }}>WHO-GMP & ISO 22000 Certified Plant</strong>
+                <MapPin size={18} color="#7CA832" />
+                <strong style={{ fontSize: "15px" }}>Greater Noida, Uttar Pradesh</strong>
               </div>
-              <p style={{ fontSize: "12px", color: "#d1e2f2", margin: 0, lineHeight: "1.5" }}>
-                Operating automated continuous rotary die softgel encapsulation, acid-resistant capsule lines, and computerized batch traceability.
+              <p style={{ fontSize: "12.5px", color: "#d1e2f2", margin: 0, lineHeight: "1.5" }}>
+                Formulation, cleanroom manufacturing, and documentation support for health and wellness brands worldwide.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. OUR VALUABLE CLIENTS */}
-      <ClientsSection />
+      {/* 02. VIDEO SECTION: See How We Work */}
+      <section style={{ background: "#0D2619", color: "#FFFFFF", padding: "85px 4.5vw" }} id="video-section">
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "45px", alignItems: "center" }}>
+            <div>
+              <p className="eyebrow light">02. Video Showcase</p>
+              <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)", color: "#FFFFFF", marginBottom: "8px" }}>
+                See How We Work
+              </h2>
+              <h3 style={{ fontSize: "18px", fontWeight: 700, color: "#7CA832", marginBottom: "16px" }}>
+                From Concept to Finished Product
+              </h3>
+              <p style={{ color: "#d1e8b0", fontSize: "15.5px", lineHeight: "1.75", marginBottom: "28px" }}>
+                Take a closer look at our approach to product development, manufacturing and customer support. Discover how we work with brands to turn health and wellness product ideas into market-ready solutions.
+              </p>
 
-      {/* 3. CERTIFICATIONS */}
-      <CertificationsSection />
+              <button
+                onClick={() => setVideoModalOpen(true)}
+                className="button button-light"
+                style={{
+                  background: "#7CA832",
+                  borderColor: "#7CA832",
+                  color: "#0D2619",
+                  fontWeight: 800,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                <Play size={16} fill="#0D2619" />
+                <span>Watch Our Story →</span>
+              </button>
+            </div>
 
-      {/* 4. AWARDS */}
-      <section className="page-wrapper" id="awards" style={{ paddingTop: "80px", paddingBottom: "80px" }}>
-        <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 50px" }}>
-          <p className="eyebrow" style={{ justifyContent: "center" }}>4. Recognition & Honors</p>
+            {/* Video Placeholder Box */}
+            <div
+              onClick={() => setVideoModalOpen(true)}
+              style={{
+                position: "relative",
+                borderRadius: "20px",
+                overflow: "hidden",
+                cursor: "pointer",
+                aspectRatio: "16 / 9",
+                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.4)",
+                border: "2px solid rgba(124, 168, 50, 0.3)",
+              }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85"
+                alt="Varadaco Manufacturing Process Video Thumbnail"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "rgba(13, 38, 25, 0.45)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "12px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "68px",
+                    height: "68px",
+                    borderRadius: "50%",
+                    background: "#7CA832",
+                    color: "#0D2619",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 0 30px rgba(124, 168, 50, 0.6)",
+                    transition: "transform 0.2s ease",
+                  }}
+                >
+                  <Play size={28} fill="#0D2619" style={{ marginLeft: "4px" }} />
+                </div>
+                <span style={{ fontSize: "13px", fontWeight: 700, color: "#FFFFFF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                  Watch Our Story (YouTube Video)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 03. DIRECTORS / LEADERSHIP SECTION */}
+      <section className="page-wrapper" id="leadership" style={{ paddingTop: "85px", paddingBottom: "80px" }}>
+        <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 55px" }}>
+          <p className="eyebrow" style={{ justifyContent: "center" }}>03. Executive Team</p>
           <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
-            HONORS & <em>AWARDS</em>
+            Meet Our <em>Leadership</em>
           </h2>
           <div className="trust-underline" />
-          <p style={{ color: "#546863", fontSize: "15px", marginTop: "16px", lineHeight: "1.6" }}>
-            Our relentless commitment to clinical quality, advanced bioavailability delivery, and regulatory compliance has been recognized across global industry forums.
+          <p style={{ color: "#475569", fontSize: "16px", marginTop: "16px", lineHeight: "1.6" }}>
+            Our leadership team combines business vision, product understanding and a commitment to building a reliable health and wellness manufacturing business.
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
-          {awards.map((award, idx) => (
+        {/* Two Equal Director Cards Side-by-Side */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "30px",
+            maxWidth: "1000px",
+            margin: "0 auto",
+          }}
+        >
+          {leaders.map((leader, idx) => (
             <motion.div
-              key={award.title}
+              key={leader.name}
               className="card-panel"
-              style={{ display: "flex", flexDirection: "column", position: "relative" }}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
+              transition={{ delay: idx * 0.1 }}
               variants={fade}
+              style={{
+                borderRadius: "20px",
+                padding: "32px",
+                border: "1.5px solid #E2E8DF",
+                background: "#FFFFFF",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+              }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
-                <div style={{ width: "46px", height: "46px", borderRadius: "12px", background: `${award.color}15`, color: award.color, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Trophy size={22} />
-                </div>
-                <span style={{ fontSize: "11px", fontWeight: 800, background: `${award.color}12`, color: award.color, padding: "4px 10px", borderRadius: "100px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
-                  {award.badge}
-                </span>
+              <div
+                style={{
+                  width: "140px",
+                  height: "140px",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  marginBottom: "20px",
+                  border: "4px solid #F0F4EF",
+                  boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
+                }}
+              >
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               </div>
 
-              <div style={{ fontSize: "13px", fontWeight: 800, color: award.color, marginBottom: "4px" }}>
-                {award.year} • {award.issuer}
-              </div>
-              <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--ink)", marginBottom: "10px", lineHeight: "1.3" }}>
-                {award.title}
+              <h3 style={{ fontSize: "21px", fontWeight: 800, color: "var(--ink)", marginBottom: "4px" }}>
+                {leader.name}
               </h3>
-              <p style={{ fontSize: "13px", color: "#546863", lineHeight: "1.6", marginTop: "auto" }}>
-                {award.desc}
+              <span
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 800,
+                  color: "#15803D",
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  marginBottom: "16px",
+                  display: "inline-block",
+                  background: "#F0FDF4",
+                  padding: "4px 14px",
+                  borderRadius: "100px",
+                }}
+              >
+                {leader.designation}
+              </span>
+
+              <p style={{ fontSize: "14.5px", color: "#475569", lineHeight: "1.7", margin: 0 }}>
+                {leader.bio}
               </p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* 5. VISION */}
-      <section style={{ background: "#F0F4EF", padding: "85px 4.5vw", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }} id="vision">
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 40px" }}>
-            <p className="eyebrow" style={{ justifyContent: "center" }}>5. Long-Term Benchmark</p>
+      {/* 04. CERTIFICATIONS / QUALITY & REGULATORY SUPPORT */}
+      <section
+        style={{
+          background: "#FAF8F5",
+          padding: "85px 4.5vw",
+          borderTop: "1px solid var(--line)",
+          borderBottom: "1px solid var(--line)",
+        }}
+        id="regulatory-support"
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 50px" }}>
+            <p className="eyebrow" style={{ justifyContent: "center" }}>04. Compliance &amp; Standards</p>
             <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
-              OUR <em>VISION</em>
+              Quality &amp; Regulatory <em>Support</em>
             </h2>
             <div className="trust-underline" />
+            <p style={{ color: "#475569", fontSize: "16px", marginTop: "16px", lineHeight: "1.7" }}>
+              Building a health product requires more than a good formulation. Documentation, product information, packaging compliance and regulatory requirements all play an important role in bringing a product to market.
+            </p>
           </div>
 
-          <div className="card-panel" style={{ background: "linear-gradient(135deg, #0D2619 0%, #143B28 100%)", color: "white", padding: "48px 42px", boxShadow: "0 16px 40px rgba(13, 38, 25, 0.15)" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "40px", alignItems: "center" }}>
-              <div>
-                <div className="icon-box" style={{ background: "rgba(255,255,255,0.12)", color: "#7CA832", width: "60px", height: "60px", marginBottom: "18px" }}>
-                  <Eye size={30} />
-                </div>
-                <h3 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "14px", color: "#ffffff" }}>
-                  Pioneering Tomorrow’s Bioactive Nutrition
-                </h3>
-                <p style={{ color: "#d1e8b0", lineHeight: "1.75", fontSize: "16px" }}>
-                  To be recognized globally as the gold-standard life science co-creator, establishing new frontiers in cellular absorption, standardized natural bioactives, and clinical nutrition that enhances longevity worldwide.
-                </p>
-              </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "24px",
+              marginBottom: "40px",
+            }}
+          >
+            {qualitySupportPillars.map((pillar, idx) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  className="card-panel"
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.08 }}
+                  variants={fade}
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1.5px solid #E2E8DF",
+                    borderRadius: "16px",
+                    padding: "28px 24px",
+                    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.03)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "12px",
+                      background: "rgba(21, 128, 61, 0.1)",
+                      color: "#15803D",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <Icon size={24} />
+                  </div>
+                  <h4 style={{ fontSize: "17px", fontWeight: 800, color: "var(--ink)", marginBottom: "8px" }}>
+                    {pillar.title}
+                  </h4>
+                  <p style={{ fontSize: "13.5px", color: "#475569", lineHeight: "1.6", margin: 0 }}>
+                    {pillar.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
 
-              <div style={{ background: "rgba(255,255,255,0.06)", padding: "30px", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.12)" }}>
-                <h4 style={{ fontSize: "15px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em", color: "#7CA832", marginBottom: "16px" }}>
-                  Key Strategic Benchmarks:
-                </h4>
-                <div style={{ display: "flex", flexDirection: "column", gap: "12px", fontSize: "14px", color: "#e2e8f0" }}>
-                  <span style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                    <CheckCircle2 size={18} color="#7CA832" style={{ flexShrink: 0, marginTop: "2px" }} />
-                    Pioneer next-generation liposomal, sub-micron, and enteric delivery systems.
-                  </span>
-                  <span style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                    <CheckCircle2 size={18} color="#7CA832" style={{ flexShrink: 0, marginTop: "2px" }} />
-                    Empower 200+ global brands with clinically validated turnkey science.
-                  </span>
-                  <span style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                    <CheckCircle2 size={18} color="#7CA832" style={{ flexShrink: 0, marginTop: "2px" }} />
-                    Promote zero-carbon green manufacturing across all production suites.
-                  </span>
-                </div>
-              </div>
+          <div style={{ textAlign: "center" }}>
+            <Link
+              href="/contact"
+              className="button button-dark"
+              style={{
+                background: "#15803D",
+                borderColor: "#15803D",
+                fontWeight: 700,
+                padding: "14px 30px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              Discuss Your Requirements →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Clients & Certifications Sections */}
+      <ClientsSection />
+      <CertificationsSection />
+
+      {/* Video Modal (Popup) */}
+      {videoModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(0, 0, 0, 0.85)",
+            backdropFilter: "blur(8px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "20px",
+          }}
+          onClick={() => setVideoModalOpen(false)}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              maxWidth: "850px",
+              background: "#000",
+              borderRadius: "16px",
+              overflow: "hidden",
+              boxShadow: "0 25px 60px rgba(0, 0, 0, 0.6)",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setVideoModalOpen(false)}
+              style={{
+                position: "absolute",
+                top: "12px",
+                right: "12px",
+                background: "rgba(255, 255, 255, 0.2)",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: "50%",
+                width: "36px",
+                height: "36px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                zIndex: 10,
+              }}
+            >
+              <X size={20} />
+            </button>
+            <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="Varadaco Manufacturing Story"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: "none",
+                }}
+              />
             </div>
           </div>
         </div>
-      </section>
-
-      {/* CTA Box */}
-      <section className="contact" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div className="contact-mark" style={{ left: "50%", transform: "translateX(-50%)", right: "auto" }}>N</div>
-        <p className="eyebrow light" style={{ justifyContent: "center" }}>Collaborate with us</p>
-        <h2 style={{ textAlign: "center", maxWidth: "800px", margin: "12px auto 16px" }}>
-          Ready to build something <em>extraordinary?</em>
-        </h2>
-        <p style={{ textAlign: "center", margin: "0 auto", maxWidth: "600px" }}>
-          Let’s discuss your formula concept, scaling requirements, or regulatory roadmap.
-        </p>
-        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center", marginTop: "28px" }}>
-          <Link href="/contact" className="button button-light">
-            Contact Our Science Team
-            <ArrowRight size={17} />
-          </Link>
-          <Link href="/products" className="button button-dark" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
-            Browse Product Solutions
-            <ArrowRight size={17} />
-          </Link>
-        </div>
-      </section>
+      )}
 
       <Footer />
     </main>

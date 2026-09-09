@@ -1,6 +1,30 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownRight, ArrowRight, Atom, Award, Beaker, Check, ChevronRight, CircleGauge, FlaskConical, Globe2, HeartPulse, Leaf, Microscope, PackageCheck, Pill, ShieldCheck, Sparkles, TestTube2 } from "lucide-react";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  Atom,
+  Award,
+  Beaker,
+  Check,
+  ChevronRight,
+  CircleGauge,
+  FileCheck,
+  FlaskConical,
+  Globe2,
+  HeartPulse,
+  Leaf,
+  Microscope,
+  Package,
+  PackageCheck,
+  Pill,
+  ShieldCheck,
+  Sparkles,
+  TestTube2,
+  Building2,
+  Layers,
+  FileText
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -10,8 +34,54 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 
 const fade = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
+const whyVaradacoPillars = [
+  {
+    title: "Product Development",
+    desc: "Transform your product idea into a practical, market-ready formulation.",
+    icon: FlaskConical,
+  },
+  {
+    title: "Manufacturing",
+    desc: "Manufacturing support across capsule, tablet and powder product formats.",
+    icon: Building2,
+  },
+  {
+    title: "Packaging & Labelling",
+    desc: "Professional packaging and customized product labelling for your brand.",
+    icon: Package,
+  },
+  {
+    title: "Business Support",
+    desc: "Dedicated support from product development through commercial launch.",
+    icon: ShieldCheck,
+  },
+];
+
+const compliancePillars = [
+  {
+    title: "Documentation Support",
+    desc: "Assistance with product documentation and regulatory compliance files.",
+    icon: FileText,
+  },
+  {
+    title: "Product Compliance Guidance",
+    desc: "Comprehensive review of ingredients, limits, and labeling regulations.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Packaging & Label Review",
+    desc: "Ensuring market-ready pack specifications and regulatory label compliance.",
+    icon: Package,
+  },
+  {
+    title: "Export Documentation",
+    desc: "Guidance for domestic and international market entry and customs dossiers.",
+    icon: Globe2,
+  },
+];
+
 const solutions = [
-  ["Ashwagandha", "Natural Stress Relief & Strength Booster with standardized 5% Withanolides root extract.", "/products/ashwagandha.jpg", Leaf],
+  ["Ashwagandha", "Ancient Wisdom. Modern Wellness. Premium root extract standardized for adaptogenic support.", "/products/ashwagandha.jpg", Leaf],
   ["Shilajit", "Pure Himalayan Resin with >75% Fulvic Acid + 84 Ionic Trace Minerals for cellular energy.", "/products/shilajit.jpg", Sparkles],
   ["Mulethi", "Pure Licorice Root rich in Glycyrrhizin and Glabridin for respiratory & digestive vitality.", "/products/mulethi.jpg", HeartPulse],
   ["Supplements", "Complete Daily Multivitamin with Zinc, B-Complex & Vitamin D3/K2 for energy.", "/products/supplements.jpg", CircleGauge],
@@ -24,136 +94,93 @@ const solutions = [
 const timelineSteps = [
   {
     step: "01",
-    name: "Concept",
-    desc: "Target profile, molecular mapping & active selection",
+    name: "Discover",
+    desc: "Understand product idea, target customer & market requirement",
     image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=85",
-    badge: "Stage 01 • Molecular Discovery & Active Selection",
+    badge: "01 • Discovery & Concept",
     alt: "Concept research and molecular botanical discovery",
   },
   {
     step: "02",
-    name: "Formulation",
-    desc: "Bioavailability optimization, assay testing & clean synthesis",
+    name: "Develop & Sample",
+    desc: "Work on formulation, product format and sample prototypes",
     image: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=1200&q=85",
-    badge: "Stage 02 • Bioavailability & Assay Formulation",
+    badge: "02 • Formulation & Sampling",
     alt: "Formulation laboratory scientist testing bioavailable nutrition",
   },
   {
     step: "03",
-    name: "Manufacturing",
-    desc: "Class 100,000 cleanroom commercial batch scaling",
+    name: "Refine & Manufacture",
+    desc: "Make required improvements & move toward commercial production",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85",
-    badge: "Stage 03 • WHO-GMP Cleanroom Precision Scaling",
+    badge: "03 • Cleanroom Commercial Scaling",
     alt: "Automated high-speed pharmaceutical manufacturing",
   },
   {
     step: "04",
-    name: "Packaging",
-    desc: "High-barrier Alu-Alu blister, bottling & nitrogen flushing",
+    name: "Package & Launch",
+    desc: "Complete the product with suitable packaging and labelling",
     image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=85",
-    badge: "Stage 04 • High-Barrier Automated Blister & Bottling",
+    badge: "04 • Shelf-Ready Packaging",
     alt: "Automated pharmaceutical bottle filling and packaging line",
-  },
-  {
-    step: "05",
-    name: "Delivery",
-    desc: "Global regulatory release, cold-chain freight & worldwide export",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85",
-    badge: "Stage 05 • Global Distribution & Cold-Chain Logistics",
-    alt: "Global freight distribution and worldwide pharmaceutical delivery",
-  },
-];
-
-const process = [
-  {
-    num: "01",
-    phase: "Discovery",
-    title: "Research & Development",
-    desc: "Insights that make an idea worth making.",
-    Icon: Microscope,
-    theme: "emerald",
-  },
-  {
-    num: "02",
-    phase: "Formulation",
-    title: "Formulation",
-    desc: "Ingredients calibrated for efficacy and experience.",
-    Icon: FlaskConical,
-    theme: "blue",
-  },
-  {
-    num: "03",
-    phase: "Quality",
-    title: "Testing & Quality",
-    desc: "Rigorous controls at every decision point.",
-    Icon: ShieldCheck,
-    theme: "amber",
-  },
-  {
-    num: "04",
-    phase: "Delivery",
-    title: "Manufacturing",
-    desc: "Repeatable quality at meaningful scale.",
-    Icon: PackageCheck,
-    theme: "purple",
   },
 ];
 
 const portfolioItems = [
   {
-    title: "Men’s Health",
-    desc: "We specialize in a wide range of men’s wellness and health products.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
+    title: "Ayurvedic & Herbal Products",
+    desc: "Classical and proprietary herbal wellness formulations and standardized extracts.",
+    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
     href: "/products",
   },
   {
-    title: "Women’s Health",
-    desc: "We deliver a range of women’s wellness products that are specifically designed for them.",
-    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=800&q=80",
+    title: "Nutraceutical Supplements",
+    desc: "High-potency vitamin blends, minerals, and bio-available vitality complexes.",
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
     href: "/products",
   },
   {
-    title: "Kid’s Health",
-    desc: "We take into account the specific nutrient requirement for kids.",
-    image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80",
-    href: "/products",
-  },
-  {
-    title: "Sports Nutrition",
-    desc: "Our sports nutrition products are made with quality ingredients.",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80",
-    href: "/products",
-  },
-  {
-    title: "Medical Nutrition",
-    desc: "We bring unique, efficacious solutions to answer your nutritional needs.",
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
-    href: "/products",
-  },
-  {
-    title: "Phytopharma",
-    desc: "All products have proven to be effective in improving overall health.",
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80",
-    href: "/products",
-  },
-  {
-    title: "Probiotics",
-    desc: "All products have proven to be effective in improving overall health.",
+    title: "Digestive & Gut Health",
+    desc: "Triphala, prebiotics, digestive enzymes and gastrointestinal support.",
     image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80",
     href: "/products",
   },
   {
-    title: "Ayurvedic",
-    desc: "Our array of Ayurvedic nutrition is designed to promote balance, wellness.",
-    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
+    title: "Women's Wellness",
+    desc: "Targeted formulations for hormonal balance, bone density, and energy.",
+    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=800&q=80",
+    href: "/products",
+  },
+  {
+    title: "Men's Wellness",
+    desc: "Stamina, vitality, and physical performance adaptogen formulations.",
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
+    href: "/products",
+  },
+  {
+    title: "Immunity & Antioxidant Support",
+    desc: "Curcumin, Vitamin C, Zinc and cellular defense botanical complexes.",
+    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80",
+    href: "/products",
+  },
+  {
+    title: "Weight Management",
+    desc: "Metabolism boosters, garcinia extracts and clean nutritional powders.",
+    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80",
+    href: "/products",
+  },
+  {
+    title: "Heart & Brain Wellness",
+    desc: "Omega complexes, Brahmi, CoQ10 and cognitive clarity formulations.",
+    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
     href: "/products",
   },
 ];
 
 const services = [
   {
-    title: "PRIVATE LABELLING",
-    desc: "Varadaco is a leading full-service private label manufacturer. Whether you are a startup or an established enterprise, we scale custom formulations for your brand.",
+    title: "CONTRACT MANUFACTURING",
+    desc: "Bring your product concept to life with professional manufacturing across capsules, tablets, powders, dietary supplements & Ayurvedic products.",
     href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -165,22 +192,8 @@ const services = [
     ),
   },
   {
-    title: "REGULATORY COMPLIANCES",
-    desc: "Ensure all necessary global licensing and compliance, working closely with regulatory authorities like US FDA, FSSAI, AYUSH, and EFSA.",
-    href: "/services",
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M27 8L36 17L32 21L23 12L27 8Z" />
-        <path d="M19 16L30 27" />
-        <path d="M24 21L10 35L7 32L21 18" />
-        <path d="M12 40H36" />
-        <path d="M16 44H32" />
-      </svg>
-    ),
-  },
-  {
-    title: "CRAMS",
-    desc: "Varadaco is a trusted contract research & manufacturing partner, specializing in pharmaceutical-grade cleanroom scaling and active bioactives.",
+    title: "PRODUCT DEVELOPMENT",
+    desc: "Move from concept to formulation and commercial production with our dedicated product development support.",
     href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -189,15 +202,12 @@ const services = [
         <path d="M12 28H20V40H12V28Z" />
         <path d="M28 28H36V40H28V28Z" />
         <path d="M6 42H42" />
-        <circle cx="10" cy="42" r="2" />
-        <circle cx="24" cy="42" r="2" />
-        <circle cx="38" cy="42" r="2" />
       </svg>
     ),
   },
   {
-    title: "PACKAGING",
-    desc: "High-barrier Alu-Alu blister packaging, automated softgel bottling, and nitrogen-flushed single-serve stick pack delivery formats.",
+    title: "PACKAGING & LABELLING",
+    desc: "Give your product a professional market identity with customized packaging, labeling, and presentation support.",
     href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -205,39 +215,41 @@ const services = [
         <path d="M10 16V34L24 42V24" />
         <path d="M38 16V34L24 42" />
         <path d="M16 12.5L30 20.5" />
-        <path d="M34 14L20 22" />
+      </svg>
+    ),
+  },
+  {
+    title: "EXPORT & GLOBAL SUPPORT",
+    desc: "Coordinated support for international markets including documentation, packaging guidance, and regulatory assistance.",
+    href: "/export",
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="24" cy="24" r="18" />
+        <path d="M6 24H42" />
+        <path d="M24 6C28 12 30 18 30 24C30 30 28 36 24 42" />
+        <path d="M24 6C20 12 18 18 18 24C18 30 20 36 24 42" />
       </svg>
     ),
   },
 ];
 
-
 const heroBackgrounds = [
   {
     src: "/images/pharma-ashwagandha-roots-composite.jpg",
-    alt: "Authentic dried Ashwagandha roots and active pharmaceutical extraction in laboratory",
-    badge: "100% PURE ASHWAGANDHA ROOT ACTIVES",
+    alt: "Pharma, Nutraceutical and Ayurvedic manufacturing environment",
+    badge: "PHARMA • NUTRACEUTICAL • AYURVEDIC MANUFACTURING",
   },
   {
     src: "/images/pharma-ashwagandha-bg.jpg",
-    alt: "Living Ashwagandha botanical plants, roots, and active extraction science",
-    badge: "ASHWAGANDHA BOTANICALS & PHARMA EXTRACTION",
+    alt: "Herbal actives and modern manufacturing processes",
+    badge: "FROM CONCEPT TO MARKET-READY MANUFACTURING",
   },
   {
     src: "/images/pharma-cleanroom-bg.jpg",
-    alt: "WHO-GMP Certified cleanroom manufacturing facility and automated packaging lines",
-    badge: "WHO-GMP CERTIFIED PHARMA CLEANROOM SCALE",
+    alt: "Cleanroom manufacturing and quality documentation",
+    badge: "GREATER NOIDA • GLOBAL REACH",
   },
 ];
-
-function Button({ children, dark = true }: { children: React.ReactNode; dark?: boolean }) {
-  return (
-    <a href="#contact" className={dark ? "button button-dark" : "button button-light"}>
-      {children}
-      <ArrowRight size={17} />
-    </a>
-  );
-}
 
 export default function Home() {
   const [currentHeroBg, setCurrentHeroBg] = useState(0);
@@ -261,8 +273,8 @@ export default function Home() {
     <main>
       <Navbar />
 
+      {/* 01. HERO SECTION */}
       <section className="pharma-hero" id="top">
-        {/* Animated Background Slider */}
         <div className="pharma-hero-bg-slider">
           <AnimatePresence initial={false}>
             <motion.div
@@ -278,7 +290,7 @@ export default function Home() {
         </div>
 
         <div className="pharma-hero-top-banner">
-          Factory direct sales spot quick delivery
+          PHARMA • NUTRACEUTICAL • AYURVEDIC MANUFACTURING
         </div>
 
         <div className="pharma-hero-content">
@@ -292,21 +304,27 @@ export default function Home() {
 
             <div className="pharma-hero-badge">
               <Sparkles size={12} className="pharma-hero-badge-icon" />
-              <span>{heroBackgrounds[currentHeroBg].badge}</span>
+              <span>PHARMA • NUTRACEUTICAL • AYURVEDIC MANUFACTURING</span>
             </div>
 
-            <h1 className="pharma-hero-title">
-              From scientific idea to <br className="pharma-title-br" />market-ready product.
+            <h1 className="pharma-hero-title" style={{ fontSize: "clamp(2.1rem, 3.8vw, 3rem)" }}>
+              From Product Concept to <br className="pharma-title-br" />Market-Ready Manufacturing
             </h1>
 
             <p className="pharma-hero-desc">
-              Premium medical-grade bottles and packaging solutions for pharmaceuticals, tablets, syrups, and nutraceuticals. Safeguard formula purity with uncompromising quality and certified integrity.
+              Varadaco Industries provides manufacturing and product development solutions for pharmaceutical, nutraceutical and Ayurvedic brands. From formulation and product development to manufacturing, packaging and documentation support, we help businesses transform ideas into quality-focused health products.
             </p>
 
-            <Link href="/products" className="pharma-hero-btn">
-              <span>EXPLORE CATALOG</span>
-              <ArrowRight size={15} />
-            </Link>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "18px" }}>
+              <Link href="/products" className="pharma-hero-btn">
+                <span>Explore Our Products</span>
+                <ArrowRight size={15} />
+              </Link>
+              <Link href="/contact" className="pharma-hero-btn" style={{ background: "rgba(255, 255, 255, 0.15)", border: "1px solid rgba(255, 255, 255, 0.3)" }}>
+                <span>Partner With Us</span>
+                <ArrowRight size={15} />
+              </Link>
+            </div>
 
             {/* Slider Dots */}
             <div className="pharma-hero-dots">
@@ -323,6 +341,182 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 01. WHY VARADACO SECTION */}
+      <section className="section page-wrapper" id="why-varadaco" style={{ paddingTop: "75px", paddingBottom: "75px" }}>
+        <div style={{ textAlign: "center", maxWidth: "780px", margin: "0 auto 48px" }}>
+          <p className="eyebrow" style={{ justifyContent: "center" }}>Why Varadaco</p>
+          <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
+            Your Trusted <em>Manufacturing Partner</em>
+          </h2>
+          <div className="trust-underline" />
+          <p style={{ color: "#475569", fontSize: "16px", marginTop: "16px", lineHeight: "1.7" }}>
+            Building a successful health product requires more than a formulation. It requires dependable manufacturing, product expertise, quality-focused processes and professional support at every stage.
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "24px",
+          }}
+        >
+          {whyVaradacoPillars.map((pillar, idx) => {
+            const Icon = pillar.icon;
+            return (
+              <motion.div
+                key={pillar.title}
+                className="card-panel"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                variants={fade}
+                style={{
+                  background: "#FFFFFF",
+                  border: "1.5px solid #E2E8DF",
+                  borderRadius: "20px",
+                  padding: "30px 24px",
+                  boxShadow: "0 6px 20px rgba(0, 0, 0, 0.03)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "14px",
+                    background: "rgba(21, 128, 61, 0.1)",
+                    color: "#15803D",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "18px",
+                  }}
+                >
+                  <Icon size={24} />
+                </div>
+                <h3 style={{ fontSize: "18px", fontWeight: 800, color: "var(--ink)", marginBottom: "8px" }}>
+                  {pillar.title}
+                </h3>
+                <p style={{ fontSize: "14px", color: "#475569", lineHeight: "1.6", margin: 0 }}>
+                  {pillar.desc}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 01. ASHWAGANDHA PROMOTIONAL BANNER */}
+      <section style={{ padding: "0 4.5vw 70px" }}>
+        <div
+          style={{
+            maxWidth: "1240px",
+            margin: "0 auto",
+            background: "linear-gradient(135deg, #0D2619 0%, #173D2A 100%)",
+            borderRadius: "24px",
+            padding: "45px 40px",
+            color: "#FFFFFF",
+            boxShadow: "0 18px 45px rgba(13, 38, 25, 0.18)",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "35px",
+            alignItems: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                background: "rgba(124, 168, 50, 0.2)",
+                border: "1px solid rgba(124, 168, 50, 0.4)",
+                padding: "5px 14px",
+                borderRadius: "100px",
+                fontSize: "11px",
+                fontWeight: 800,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                color: "#7CA832",
+                marginBottom: "16px",
+              }}
+            >
+              <Sparkles size={13} />
+              <span>SPECIAL LAUNCH OFFER</span>
+            </div>
+
+            <h3 style={{ fontSize: "clamp(1.8rem, 3.2vw, 2.6rem)", fontWeight: 900, marginBottom: "12px", color: "#FFFFFF", lineHeight: 1.15 }}>
+              Ashwagandha — Nature Meets Modern Wellness
+            </h3>
+
+            <p style={{ color: "#d1e8b0", fontSize: "15.5px", lineHeight: "1.7", marginBottom: "24px", maxWidth: "560px" }}>
+              Discover carefully developed Ashwagandha products designed for today's wellness market. Choose Varadaco for quality-focused sourcing, formulation and manufacturing support.
+            </p>
+
+            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+              <Link
+                href="/products#ashwagandha"
+                className="button button-light"
+                style={{ background: "#7CA832", borderColor: "#7CA832", color: "#0D2619", fontWeight: 800 }}
+              >
+                Explore Ashwagandha →
+              </Link>
+              <Link
+                href="/contact?inquiry=ashwagandha-bulk"
+                className="button button-dark"
+                style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.25)" }}
+              >
+                Enquire for Bulk / Manufacturing →
+              </Link>
+            </div>
+          </div>
+
+          <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "380px",
+                borderRadius: "20px",
+                overflow: "hidden",
+                boxShadow: "0 12px 35px rgba(0, 0, 0, 0.4)",
+              }}
+            >
+              <img
+                src="/products/ashwagandha.jpg"
+                alt="Varadaco Ashwagandha Extract and Formulation"
+                style={{ width: "100%", height: "260px", objectFit: "cover" }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "12px",
+                  left: "12px",
+                  right: "12px",
+                  background: "rgba(13, 38, 25, 0.9)",
+                  backdropFilter: "blur(6px)",
+                  padding: "10px 14px",
+                  borderRadius: "12px",
+                  fontSize: "12px",
+                  color: "#d1e8b0",
+                  fontWeight: 600,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <span>Ancient Wisdom. Modern Wellness.</span>
+                <ShieldCheck size={16} color="#7CA832" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERSHIP & TIMELINE */}
       <section className="section partnership" id="about">
         <motion.div
           className="partnership-copy"
@@ -332,8 +526,10 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <p className="eyebrow">About Varadaco Industries</p>
-          <h2>Your brand.<br /><em>Our science.</em></h2>
-          <p>Bring the ambition. We bring the insight, formulation expertise, and operational discipline to take it further.</p>
+          <h2>Your brand.<br /><em>Our manufacturing.</em></h2>
+          <p>
+            Varadaco Industries is a health and wellness manufacturing company focused on developing and supplying Ayurvedic, nutraceutical and dietary supplement products based in Greater Noida, Uttar Pradesh.
+          </p>
           <Link href="/contact" className="button button-dark" style={{ background: "#15803D", borderColor: "#15803D", fontWeight: 800, padding: "14px 28px", fontSize: "15px" }}>
             Start a partnership
             <ArrowRight size={17} />
@@ -389,47 +585,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section process" id="capabilities">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fade} className="process-header">
-          <p className="eyebrow">The Varadaco difference</p>
-          <h2>From scientific idea to<br />market-ready product.</h2>
-        </motion.div>
-        <div className="process-grid">
-          {process.map((item, i) => (
-            <motion.article
-              key={item.num}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              variants={fade}
-              className={`process-card process-card-${item.theme}`}
-            >
-              <div className="process-card-accent" />
-              <div className="process-card-top">
-                <span className="process-card-num">{item.num}</span>
-                <span className="process-card-phase">{item.phase}</span>
-              </div>
-              <div className="process-icon-wrapper">
-                <item.Icon size={24} />
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-              <div className="process-card-arrow">
-                <ArrowDownRight size={17} />
-              </div>
-            </motion.article>
-          ))}
-        </div>
-        <div className="process-line">
-          <span>Discovery</span>
-          <i />
-          <span>Development</span>
-          <i />
-          <span>Delivery</span>
-        </div>
-      </section>
-
       {/* OUR SERVICES SECTION */}
       <section className="services-section" id="services">
         <div className="services-header">
@@ -445,7 +600,7 @@ export default function Home() {
           {services.map((service, idx) => (
             <Link
               key={service.title}
-              href="/services"
+              href={service.href}
               className="service-card"
             >
               <div className="service-corner-blob" />
@@ -463,11 +618,98 @@ export default function Home() {
         </div>
       </section>
 
-      {/* OUR PORTFOLIO SECTION */}
+      {/* 09. CERTIFICATION / COMPLIANCE SECTION ON HOME */}
+      <section style={{ background: "#FAF8F5", padding: "85px 4.5vw", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }} id="compliance">
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", maxWidth: "780px", margin: "0 auto 50px" }}>
+            <p className="eyebrow" style={{ justifyContent: "center" }}>09. Compliance &amp; Standards</p>
+            <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
+              Quality. Documentation. <em>Compliance Support.</em>
+            </h2>
+            <div className="trust-underline" />
+            <p style={{ color: "#475569", fontSize: "16px", marginTop: "16px", lineHeight: "1.7" }}>
+              We help businesses navigate the documentation and preparation required for launching health, wellness and nutraceutical products, with support across product information, packaging, labelling and related regulatory requirements.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "24px",
+              marginBottom: "40px",
+            }}
+          >
+            {compliancePillars.map((pillar, idx) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  className="card-panel"
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.08 }}
+                  variants={fade}
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1.5px solid #E2E8DF",
+                    borderRadius: "16px",
+                    padding: "28px 24px",
+                    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.03)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "12px",
+                      background: "rgba(21, 128, 61, 0.1)",
+                      color: "#15803D",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    <Icon size={24} />
+                  </div>
+                  <h3 style={{ fontSize: "17px", fontWeight: 800, color: "var(--ink)", marginBottom: "8px" }}>
+                    {pillar.title}
+                  </h3>
+                  <p style={{ fontSize: "13.5px", color: "#475569", lineHeight: "1.6", margin: 0 }}>
+                    {pillar.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div style={{ textAlign: "center" }}>
+            <Link
+              href="/contact"
+              className="button button-dark"
+              style={{
+                background: "#15803D",
+                borderColor: "#15803D",
+                fontWeight: 700,
+                padding: "14px 30px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              Talk to Our Experts →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 07. OUR PRODUCT PORTFOLIO ON HOME */}
       <section className="portfolio-section" id="portfolio">
         <div className="portfolio-header">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fade}>
-            <h2 className="portfolio-title">OUR PORTFOLIO</h2>
+            <h2 className="portfolio-title">OUR PRODUCT PORTFOLIO</h2>
             <div className="portfolio-underline" />
           </motion.div>
         </div>
@@ -498,11 +740,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FEATURED PRODUCTS */}
       <section className="section solutions" id="products">
         <div className="section-heading">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="eyebrow">Explore Our Products</p>
-            <h2>Nutrition for the<br /><em>way life moves.</em></h2>
+            <h2>Quality-Focused Products for<br /><em>Modern Health &amp; Wellness.</em></h2>
           </motion.div>
           <Link className="text-link" href="/products">
             View all products <ArrowRight size={16} />
@@ -535,158 +778,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="quality section" id="quality">
-        <motion.div
-          className="quality-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="eyebrow">Quality, made visible</p>
-          <h2>Confidence at every<br /><em>checkpoint.</em></h2>
-        </motion.div>
-        <div className="certs">
-          {[
-            { title: "GMP", label: "c-GMP Certified", icon: Award },
-            { title: "ISO", label: "ISO 22000:2018", icon: ShieldCheck },
-            { title: "HACCP", label: "Hazard Analysis", icon: Check },
-            { title: "FSSAI", label: "Central License", icon: Award },
-            { title: "WHO–GMP", label: "Global Standard", icon: Sparkles },
-          ].map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, scale: 0.85, y: 15 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.45 }}
-                whileHover={{ scale: 1.08, y: -8 }}
-              >
-                <div className="cert-icon-wrap">
-                  <Icon size={20} />
-                </div>
-                <b>{item.title}</b>
-                <small>{item.label}</small>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="global" id="global">
-        <div className="global-bg-grid" />
-        <div className="global-glow-orb" />
-
-        <motion.div
-          className="global-copy"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="eyebrow">Global Reach & Export Standards</p>
-          <h2>Nutrition without<br /><em>borders.</em></h2>
-          <p>
-            Trusted by healthcare leaders and innovative nutraceutical brands worldwide. We formulate, manufacture, and clear global regulatory dossiers for seamless delivery to over 30+ international markets.
-          </p>
-
-          <div className="global-features-list">
-            <div className="global-feature-item">
-              <ShieldCheck size={18} color="#a3e635" />
-              <span>Full Regulatory Dossier Support (FDA, EFSA, TGA, AYUSH)</span>
-            </div>
-            <div className="global-feature-item">
-              <Globe2 size={18} color="#a3e635" />
-              <span>Worldwide Cold-Chain Logistics & Maritime Freight</span>
-            </div>
-            <div className="global-feature-item">
-              <Check size={18} color="#a3e635" />
-              <span>100% Batch Traceability with Certified CoA & Lab Reports</span>
-            </div>
-          </div>
-
-          <Link href="/contact" className="button button-dark" style={{ background: "#15803D", borderColor: "#15803D", fontWeight: 800, padding: "14px 28px", fontSize: "15px", marginTop: "24px", display: "inline-flex" }}>
-            Inquire About Global Export
-            <ArrowRight size={17} />
-          </Link>
-        </motion.div>
-
-        <motion.div
-          className="global-visual-container"
-          initial={{ opacity: 0, scale: 0.92 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          {/* 3D Photorealistic Illuminated Globe with Atmosphere */}
-          <div className="globe-sphere-wrapper">
-            <div className="globe-atmosphere-glow" />
-            <img
-              src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=1200&q=85"
-              alt="Global nutraceutical supply network"
-              className="globe-image"
-            />
-            <div className="globe-inner-shadow" />
-
-            {/* Glowing Hub Radar Markers */}
-            <div className="global-hub-pin pin-us" title="North America: US FDA Registered">
-              <span className="radar-pulse" />
-              <span className="hub-dot" />
-              <span className="hub-label">North America</span>
-            </div>
-
-            <div className="global-hub-pin pin-eu" title="Europe: EFSA Standard">
-              <span className="radar-pulse" />
-              <span className="hub-dot" />
-              <span className="hub-label">Europe</span>
-            </div>
-
-            <div className="global-hub-pin pin-me" title="Middle East: GCC & Halal Hub">
-              <span className="radar-pulse" />
-              <span className="hub-dot" />
-              <span className="hub-label">Middle East</span>
-            </div>
-
-            <div className="global-hub-pin pin-asia" title="Asia-Pacific: GMP Manufacturing">
-              <span className="radar-pulse" />
-              <span className="hub-dot" />
-              <span className="hub-label">Asia-Pacific</span>
-            </div>
-
-            <div className="global-hub-pin pin-aus" title="Oceania: TGA Standards">
-              <span className="radar-pulse" />
-              <span className="hub-dot" />
-              <span className="hub-label">Australia</span>
-            </div>
-          </div>
-
-          {/* Floating Metric Badges */}
-          <div className="global-stat-card stat-top-right anim-float">
-            <b>30+</b>
-            <small>Countries Served Worldwide</small>
-          </div>
-
-          <div className="global-stat-card stat-bottom-left anim-float-delay">
-            <div className="stat-pill-row">
-              <ShieldCheck size={16} color="#7CA832" />
-              <span>100% Export Clearance</span>
-            </div>
-            <small>WHO-GMP • CoAs • Halal • Kosher</small>
-          </div>
-        </motion.div>
-      </section>
-
-
-
-      {/* OUR VALUABLE CLIENTS & CERTIFICATIONS SECTIONS */}
+      {/* TRUST & CERTIFICATIONS */}
       <TrustSections />
 
-      {/* TESTIMONIALS SECTION (Dual-Row Marquee + 3D Fanned Deck) */}
+      {/* TESTIMONIALS */}
       <TestimonialsSection />
 
-      {/* COMPACT CTA BANNER */}
+      {/* FINAL CTA BANNER */}
       <section className="cta-banner-section">
         <motion.div
           className="cta-banner-card"
@@ -696,13 +794,13 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <div className="cta-banner-content">
-            <span className="cta-banner-pill">Ready to Collaborate?</span>
-            <h3 className="cta-banner-title">Let’s engineer your next formulation breakthrough.</h3>
-            <p className="cta-banner-desc">From initial molecular discovery to full WHO-GMP commercial scale.</p>
+            <span className="cta-banner-pill">Have a Product in Mind?</span>
+            <h3 className="cta-banner-title">Let's turn your idea into a market-ready product.</h3>
+            <p className="cta-banner-desc">From product formulation and manufacturing to packaging, labelling and documentation support.</p>
           </div>
           <div className="cta-banner-actions">
             <Link href="/contact" className="button button-dark" style={{ background: "#15803D", borderColor: "#15803D" }}>
-              Request Formulation Consultation
+              Partner With Us
               <ArrowRight size={17} />
             </Link>
           </div>

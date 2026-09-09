@@ -32,13 +32,13 @@ export default function Footer() {
               <Logo variant="light" size="lg" />
             </div>
             <p className="footer-tagline">
-              Pharmaceutical-grade nutraceutical contract manufacturing, advanced clinical R&D, and global regulatory compliance.
+              Manufacturing and product-support solutions for Ayurvedic, nutraceutical and health &amp; wellness brands.
             </p>
             
             <div className="footer-badges" style={{ marginBottom: "18px" }}>
               <span>WHO-GMP</span>
               <span>ISO 22000</span>
-              <span>US FDA Reg.</span>
+              <span>Quality Assured</span>
             </div>
 
             <div>
@@ -49,34 +49,50 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Navigation */}
+          {/* Column 2: Quick Links */}
           <div className="footer-links-col">
-            <h5 className="footer-heading">Quick Navigation</h5>
+            <h5 className="footer-heading">Quick Links</h5>
             <div className="footer-nav-grid">
-              {navItems.map((item) => (
-                <Link href={item.href} key={item.name} className="footer-link">
-                  {item.name}
-                </Link>
-              ))}
+              <Link href="/about" className="footer-link">About Us</Link>
+              <Link href="/products" className="footer-link">Products</Link>
+              <Link href="/services" className="footer-link">Services</Link>
+              <Link href="/rnd" className="footer-link">R&D</Link>
+              <Link href="/export" className="footer-link">Export &amp; More</Link>
+              <Link href="/contact" className="footer-link">Contact Us</Link>
             </div>
           </div>
 
-          {/* Column 3: Contact & Global Hub */}
+          {/* Column 3: Services */}
+          <div className="footer-links-col">
+            <h5 className="footer-heading">Our Services</h5>
+            <div className="footer-nav-grid" style={{ gridTemplateColumns: "1fr" }}>
+              <Link href="/services#contract-manufacturing" className="footer-link">Contract Manufacturing</Link>
+              <Link href="/services#product-development" className="footer-link">Product Development</Link>
+              <Link href="/services#packaging-labelling" className="footer-link">Packaging &amp; Labelling</Link>
+              <Link href="/about#regulatory-support" className="footer-link">Regulatory Support</Link>
+              <Link href="/export" className="footer-link">Export Support</Link>
+            </div>
+          </div>
+
+          {/* Column 4: Contact & Final CTA */}
           <div className="footer-contact-col">
-            <h5 className="footer-heading">Get in Touch</h5>
-            <div className="footer-contact-list">
+            <h5 className="footer-heading">Have a Product in Mind?</h5>
+            <p style={{ fontSize: "13px", color: "#94a3b8", marginBottom: "14px", lineHeight: "1.5" }}>
+              Let's turn your idea into a market-ready product.
+            </p>
+            <div className="footer-contact-list" style={{ marginBottom: "16px" }}>
               <a href="mailto:hello@varadaco.com" className="footer-contact-item">
                 <Mail size={14} /> hello@varadaco.com
               </a>
-              <a href="tel:+18008459230" className="footer-contact-item">
-                <Phone size={14} /> +1 (800) 845-9230
+              <a href="tel:+919822767273" className="footer-contact-item">
+                <Phone size={14} /> +91 9822767273
               </a>
               <span className="footer-contact-item">
-                <MapPin size={14} /> Global Cleanroom & Innovation Hub
+                <MapPin size={14} /> Greater Noida, Uttar Pradesh
               </span>
             </div>
 
-            <div style={{ marginTop: "16px" }}>
+            <div>
               <Link
                 href="/contact"
                 style={{
@@ -94,7 +110,7 @@ export default function Footer() {
                   transition: "transform 0.2s ease, background 0.2s ease",
                 }}
               >
-                Request a Consultation
+                Partner With Us
                 <ArrowRight size={13} />
               </Link>
             </div>
