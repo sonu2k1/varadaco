@@ -820,6 +820,124 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GLOBAL REACH & EXPORT STANDARDS */}
+      <section className="global" id="global">
+        <div className="global-bg-grid" />
+        <div className="global-glow-orb" />
+
+        <motion.div
+          className="global-copy"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="eyebrow">GLOBAL REACH & EXPORT STANDARDS</p>
+          <h2>Nutrition without<br /><em>borders.</em></h2>
+          <p>
+            Trusted by healthcare leaders and innovative nutraceutical brands
+            worldwide. We formulate, manufacture, and clear global regulatory
+            dossiers for seamless delivery to over 30+ international markets.
+          </p>
+
+          <div className="global-features-list">
+            <div className="global-feature-item">
+              <ShieldCheck size={18} color="#a3e635" />
+              <span>Full Regulatory Dossier Support (FDA, EFSA, TGA, AYUSH)</span>
+            </div>
+            <div className="global-feature-item">
+              <Globe2 size={18} color="#a3e635" />
+              <span>Worldwide Cold-Chain Logistics & Maritime Freight</span>
+            </div>
+            <div className="global-feature-item">
+              <Check size={18} color="#a3e635" />
+              <span>100% Batch Traceability with Certified CoA & Lab Reports</span>
+            </div>
+          </div>
+
+          <Link
+            href="/contact"
+            className="button button-dark"
+            style={{
+              background: "#15803D",
+              borderColor: "#15803D",
+              fontWeight: 800,
+              padding: "14px 28px",
+              fontSize: "15px",
+              marginTop: "24px",
+              display: "inline-flex",
+            }}
+          >
+            Inquire About Global Export
+            <ArrowRight size={17} />
+          </Link>
+        </motion.div>
+
+        <motion.div
+          className="global-visual-container"
+          initial={{ opacity: 0, scale: 0.92 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          {/* 3D Photorealistic Illuminated Globe with Atmosphere */}
+          <div className="globe-sphere-wrapper">
+            <div className="globe-atmosphere-glow" />
+            <img
+              src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=1200&q=85"
+              alt="Global nutraceutical supply network"
+              className="globe-image"
+            />
+            <div className="globe-inner-shadow" />
+
+            {/* Glowing Hub Radar Markers */}
+            <div className="global-hub-pin pin-us" title="North America: US FDA Registered">
+              <span className="radar-pulse" />
+              <span className="hub-dot" />
+              <span className="hub-label">North America</span>
+            </div>
+
+            <div className="global-hub-pin pin-eu" title="Europe: EFSA Standard">
+              <span className="radar-pulse" />
+              <span className="hub-dot" />
+              <span className="hub-label">Europe</span>
+            </div>
+
+            <div className="global-hub-pin pin-me" title="Middle East: GCC & Halal Hub">
+              <span className="radar-pulse" />
+              <span className="hub-dot" />
+              <span className="hub-label">Middle East</span>
+            </div>
+
+            <div className="global-hub-pin pin-asia" title="Asia-Pacific: GMP Manufacturing">
+              <span className="radar-pulse" />
+              <span className="hub-dot" />
+              <span className="hub-label">Asia-Pacific</span>
+            </div>
+
+            <div className="global-hub-pin pin-aus" title="Oceania: TGA Standards">
+              <span className="radar-pulse" />
+              <span className="hub-dot" />
+              <span className="hub-label">Australia</span>
+            </div>
+          </div>
+
+          {/* Floating Metric Badges */}
+          <div className="global-stat-card stat-top-right anim-float">
+            <b>30+</b>
+            <small>Countries Served Worldwide</small>
+          </div>
+
+          <div className="global-stat-card stat-bottom-left anim-float-delay">
+            <div className="stat-pill-row">
+              <ShieldCheck size={16} color="#7CA832" />
+              <span>100% Export Clearance</span>
+            </div>
+            <small>WHO-GMP • CoAs • Halal • Kosher</small>
+          </div>
+        </motion.div>
+      </section>
+
       {/* TRUST & CERTIFICATIONS */}
       <TrustSections />
 
