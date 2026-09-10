@@ -31,6 +31,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TrustSections from "@/components/TrustSections";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import ComprehensiveSupportSection from "@/components/ComprehensiveSupportSection";
 
 const fade = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
@@ -219,9 +220,9 @@ const services = [
     ),
   },
   {
-    title: "EXPORT & GLOBAL SUPPORT",
-    desc: "Coordinated support for international markets including documentation, packaging guidance, and regulatory assistance.",
-    href: "/export",
+    title: "REGULATORY & PHARMA SUPPORT",
+    desc: "End-to-end support for obtaining regulatory certificates, compliance documentation, and verification.",
+    href: "/services",
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#15803D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="24" r="18" />
@@ -413,104 +414,145 @@ export default function Home() {
           style={{
             maxWidth: "1240px",
             margin: "0 auto",
-            background: "linear-gradient(135deg, #0D2619 0%, #173D2A 100%)",
             borderRadius: "24px",
-            padding: "45px 40px",
-            color: "#FFFFFF",
-            boxShadow: "0 18px 45px rgba(13, 38, 25, 0.18)",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "35px",
-            alignItems: "center",
             position: "relative",
             overflow: "hidden",
+            boxShadow: "0 20px 50px rgba(13, 38, 25, 0.16)",
+            border: "1px solid rgba(124, 168, 50, 0.28)",
+            background: "#f7faf6",
+            aspectRatio: "1024 / 506",
+            minHeight: "380px",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <div style={{ position: "relative", zIndex: 1 }}>
+          {/* BACKGROUND IMAGE (IMAGE 1: BOTTLE + MEGA SALE + BOTANICAL BACKGROUND) */}
+          <img
+            src="/images/varadaco-ashwagandha-hero-bg.png"
+            alt="Varadaco Ashwagandha - Nature Meets Modern Wellness"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "center right",
+              zIndex: 0,
+            }}
+          />
+
+          {/* LEFT SUBTLE BACKDROP FOR HIGH TEXT READABILITY */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "linear-gradient(90deg, rgba(247, 250, 246, 0.96) 0%, rgba(247, 250, 246, 0.88) 38%, rgba(247, 250, 246, 0.15) 55%, rgba(247, 250, 246, 0) 70%)",
+              zIndex: 1,
+            }}
+          />
+
+          {/* CONTENT (IMAGE 2 TEXT & BUTTONS) */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              padding: "clamp(20px, 3.5vw, 42px) clamp(20px, 3.8vw, 44px)",
+              maxWidth: "48%",
+            }}
+          >
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "8px",
-                background: "rgba(124, 168, 50, 0.2)",
-                border: "1px solid rgba(124, 168, 50, 0.4)",
-                padding: "5px 14px",
+                gap: "7px",
+                background: "rgba(21, 128, 61, 0.12)",
+                border: "1px solid rgba(21, 128, 61, 0.35)",
+                padding: "5px 12px",
                 borderRadius: "100px",
-                fontSize: "11px",
+                fontSize: "clamp(9.5px, 0.8vw, 11px)",
                 fontWeight: 800,
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",
-                color: "#7CA832",
-                marginBottom: "16px",
+                color: "#15803D",
+                marginBottom: "12px",
               }}
             >
-              <Sparkles size={13} />
+              <Sparkles size={12} />
               <span>SPECIAL LAUNCH OFFER</span>
             </div>
 
-            <h3 style={{ fontSize: "clamp(1.8rem, 3.2vw, 2.6rem)", fontWeight: 900, marginBottom: "12px", color: "#FFFFFF", lineHeight: 1.15 }}>
+            <h3
+              style={{
+                fontSize: "clamp(1.4rem, 2.5vw, 2.3rem)",
+                fontWeight: 900,
+                marginBottom: "10px",
+                color: "#0D2619",
+                lineHeight: 1.15,
+                fontFamily: "var(--font-serif), serif",
+              }}
+            >
               Ashwagandha — Nature Meets Modern Wellness
             </h3>
 
-            <p style={{ color: "#d1e8b0", fontSize: "15.5px", lineHeight: "1.7", marginBottom: "24px", maxWidth: "560px" }}>
+            <p
+              style={{
+                color: "#2D4A38",
+                fontSize: "clamp(12.5px, 1.1vw, 14.5px)",
+                lineHeight: "1.6",
+                marginBottom: "20px",
+                maxWidth: "440px",
+                fontWeight: 500,
+              }}
+            >
               Discover carefully developed Ashwagandha products designed for today's wellness market. Choose Varadaco for quality-focused sourcing, formulation and manufacturing support.
             </p>
 
-            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
               <Link
                 href="/products#ashwagandha"
-                className="button button-light"
-                style={{ background: "#7CA832", borderColor: "#7CA832", color: "#0D2619", fontWeight: 800 }}
+                className="button button-dark"
+                style={{
+                  background: "#15803D",
+                  borderColor: "#15803D",
+                  color: "#FFFFFF",
+                  fontWeight: 800,
+                  fontSize: "clamp(11.5px, 0.95vw, 13.5px)",
+                  padding: "9px 18px",
+                  borderRadius: "100px",
+                  boxShadow: "0 6px 18px rgba(21, 128, 61, 0.35)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  textDecoration: "none",
+                }}
               >
                 Explore Ashwagandha →
               </Link>
               <Link
                 href="/contact?inquiry=ashwagandha-bulk"
-                className="button button-dark"
-                style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.25)" }}
+                className="button"
+                style={{
+                  background: "rgba(255, 255, 255, 0.95)",
+                  backdropFilter: "blur(6px)",
+                  border: "1.5px solid rgba(21, 128, 61, 0.4)",
+                  color: "#0D2619",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  padding: "12px 22px",
+                  borderRadius: "100px",
+                  boxShadow: "0 4px 14px rgba(0, 0, 0, 0.08)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  textDecoration: "none",
+                }}
               >
                 Enquire for Bulk / Manufacturing →
               </Link>
-            </div>
-          </div>
-
-          <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                maxWidth: "380px",
-                borderRadius: "20px",
-                overflow: "hidden",
-                boxShadow: "0 12px 35px rgba(0, 0, 0, 0.4)",
-              }}
-            >
-              <img
-                src="/products/ashwagandha.jpg"
-                alt="Varadaco Ashwagandha Extract and Formulation"
-                style={{ width: "100%", height: "260px", objectFit: "cover" }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "12px",
-                  left: "12px",
-                  right: "12px",
-                  background: "rgba(13, 38, 25, 0.9)",
-                  backdropFilter: "blur(6px)",
-                  padding: "10px 14px",
-                  borderRadius: "12px",
-                  fontSize: "12px",
-                  color: "#d1e8b0",
-                  fontWeight: 600,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <span>Ancient Wisdom. Modern Wellness.</span>
-                <ShieldCheck size={16} color="#7CA832" />
-              </div>
             </div>
           </div>
         </div>
@@ -780,6 +822,9 @@ export default function Home() {
 
       {/* TRUST & CERTIFICATIONS */}
       <TrustSections />
+
+      {/* COMPREHENSIVE SUPPORT / OUR SERVICES */}
+      <ComprehensiveSupportSection />
 
       {/* TESTIMONIALS */}
       <TestimonialsSection />

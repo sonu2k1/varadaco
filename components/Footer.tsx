@@ -21,15 +21,10 @@ export default function Footer() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                justifyContent: "center",
-                background: "#ffffff",
-                padding: "10px 20px",
-                borderRadius: "12px",
-                boxShadow: "0 6px 22px rgba(0, 0, 0, 0.22)",
-                marginBottom: "20px",
+                marginBottom: "18px",
               }}
             >
-              <Logo variant="light" size="lg" />
+              <Logo variant="white" size="sm" />
             </div>
             <p className="footer-tagline">
               Manufacturing and product-support solutions for Ayurvedic, nutraceutical and health &amp; wellness brands.
@@ -52,12 +47,11 @@ export default function Footer() {
           {/* Column 2: Quick Links */}
           <div className="footer-links-col">
             <h5 className="footer-heading">Quick Links</h5>
-            <div className="footer-nav-grid">
+            <div className="footer-nav-grid" style={{ gridTemplateColumns: "1fr" }}>
               <Link href="/about" className="footer-link">About Us</Link>
               <Link href="/products" className="footer-link">Products</Link>
               <Link href="/services" className="footer-link">Services</Link>
               <Link href="/rnd" className="footer-link">R&D</Link>
-              <Link href="/export" className="footer-link">Export &amp; More</Link>
               <Link href="/contact" className="footer-link">Contact Us</Link>
             </div>
           </div>
@@ -69,8 +63,7 @@ export default function Footer() {
               <Link href="/services#contract-manufacturing" className="footer-link">Contract Manufacturing</Link>
               <Link href="/services#product-development" className="footer-link">Product Development</Link>
               <Link href="/services#packaging-labelling" className="footer-link">Packaging &amp; Labelling</Link>
-              <Link href="/about#regulatory-support" className="footer-link">Regulatory Support</Link>
-              <Link href="/export" className="footer-link">Export Support</Link>
+              <Link href="/services#regulatory-certificates" className="footer-link">Regulatory Certificates</Link>
             </div>
           </div>
 

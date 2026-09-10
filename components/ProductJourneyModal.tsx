@@ -285,14 +285,542 @@ const LABEL_OPTIONS: LabelOption[] = [
   },
 ];
 
+interface FoilOption {
+  id: string;
+  name: string;
+  price: number;
+  colorHex: string;
+  gradient?: string;
+}
+
+const FOIL_OPTIONS: FoilOption[] = [
+  { id: "none", name: "None", price: 0, colorHex: "#16A34A" },
+  { id: "gold", name: "Gold", price: 2.0, colorHex: "#D97706", gradient: "linear-gradient(135deg, #FDE68A 0%, #D97706 100%)" },
+  { id: "silver", name: "Silver", price: 2.0, colorHex: "#94A3B8", gradient: "linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%)" },
+  { id: "red", name: "Red", price: 2.5, colorHex: "#DC2626", gradient: "linear-gradient(135deg, #F87171 0%, #DC2626 100%)" },
+];
+
+function LabelGraphic({ labelId, width = 64, height = 64 }: { labelId: string; width?: number; height?: number }) {
+  if (labelId === "basic_label") {
+    return (
+      <svg width={width} height={height} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="22" y="16" width="36" height="52" rx="6" fill="#F8FAFC" stroke="#CBD5E1" strokeWidth="1.5" />
+        <rect x="28" y="10" width="24" height="8" rx="2" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="24" y="24" width="32" height="36" rx="3" fill="#15803D" />
+        <rect x="28" y="28" width="24" height="28" rx="2" fill="#166534" />
+        <circle cx="40" cy="38" r="6" fill="#86EFAC" opacity="0.8" />
+        <rect x="32" y="48" width="16" height="2" rx="1" fill="#FFFFFF" opacity="0.9" />
+      </svg>
+    );
+  }
+  if (labelId === "premium_label") {
+    return (
+      <svg width={width} height={height} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="prem-bottle" x1="20" y1="10" x2="60" y2="70" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#2563EB" />
+            <stop offset="50%" stopColor="#1D4ED8" />
+            <stop offset="100%" stopColor="#1E3A8A" />
+          </linearGradient>
+          <linearGradient id="prem-foil" x1="30" y1="30" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FDE68A" />
+            <stop offset="100%" stopColor="#D97706" />
+          </linearGradient>
+        </defs>
+        <rect x="22" y="16" width="36" height="52" rx="6" fill="url(#prem-bottle)" stroke="#60A5FA" strokeWidth="1.5" />
+        <rect x="28" y="10" width="24" height="8" rx="2" fill="#E2E8F0" stroke="#CBD5E1" strokeWidth="1" />
+        <path d="M 24,18 L 32,18 L 26,66 L 24,66 Z" fill="#FFFFFF" opacity="0.25" />
+        <rect x="26" y="26" width="28" height="32" rx="3" fill="#0F172A" stroke="url(#prem-foil)" strokeWidth="1" />
+        <circle cx="40" cy="38" r="6" fill="url(#prem-foil)" />
+        <rect x="31" y="48" width="18" height="2" rx="1" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+  if (labelId === "matte_label") {
+    return (
+      <svg width={width} height={height} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="matte-body" x1="20" y1="20" x2="60" y2="70" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#F8FAFC" />
+            <stop offset="100%" stopColor="#E2E8F0" />
+          </linearGradient>
+        </defs>
+        <rect x="20" y="20" width="40" height="46" rx="6" fill="url(#matte-body)" stroke="#CBD5E1" strokeWidth="1.5" />
+        <rect x="26" y="14" width="28" height="8" rx="3" fill="#F1F5F9" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="25" y="28" width="30" height="28" rx="2" fill="#FFFFFF" stroke="#E2E8F0" strokeWidth="1" />
+        <rect x="29" y="34" width="22" height="3" rx="1" fill="#475569" />
+        <rect x="32" y="40" width="16" height="2" rx="1" fill="#94A3B8" />
+        <rect x="34" y="45" width="12" height="2" rx="1" fill="#CBD5E1" />
+      </svg>
+    );
+  }
+  if (labelId === "embossed_label") {
+    return (
+      <svg width={width} height={height} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="emboss-foil" x1="30" y1="30" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FEF3C7" />
+            <stop offset="50%" stopColor="#F59E0B" />
+            <stop offset="100%" stopColor="#B45309" />
+          </linearGradient>
+        </defs>
+        <path d="M 22,18 L 58,18 L 56,66 C 56,68 24,68 24,66 Z" fill="#111827" stroke="#374151" strokeWidth="1.5" />
+        <path d="M 20,18 L 60,18" stroke="#4B5563" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="40" cy="38" r="8" fill="none" stroke="url(#emboss-foil)" strokeWidth="1.5" />
+        <path d="M 40,33 L 44,41 L 36,41 Z" fill="url(#emboss-foil)" />
+        <rect x="30" y="50" width="20" height="2.5" rx="1" fill="url(#emboss-foil)" />
+      </svg>
+    );
+  }
+  return (
+    <svg width={width} height={height} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="22" y="16" width="36" height="52" rx="8" fill="#FFFFFF" stroke="#E2E8F0" strokeWidth="1.5" />
+      <rect x="28" y="10" width="24" height="8" rx="2" fill="#F8FAFC" stroke="#CBD5E1" strokeWidth="1" />
+      <circle cx="40" cy="38" r="10" fill="#F0FDF4" stroke="#16A34A" strokeWidth="1" strokeDasharray="2 2" />
+      <path d="M 36,38 L 39,41 L 45,34" stroke="#16A34A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="30" y="52" width="20" height="2" rx="1" fill="#64748B" />
+    </svg>
+  );
+}
+
+function LabelLivePreview({
+  productName,
+  selectedLabel,
+  selectedFoil,
+}: {
+  productName: string;
+  selectedLabel: LabelOption;
+  selectedFoil: FoilOption;
+}) {
+  const isFoil = selectedFoil.id !== "none";
+  const foilGradient = selectedFoil.gradient || "none";
+  const foilColor = selectedFoil.colorHex;
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        maxWidth: "400px",
+        minHeight: "150px",
+        borderRadius: "14px",
+        background: "#FFFFFF",
+        border: isFoil ? `2px solid ${foilColor}` : "1.5px solid #E2E8F0",
+        boxShadow: isFoil ? `0 8px 20px ${foilColor}25` : "0 4px 16px rgba(0, 0, 0, 0.04)",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: "14px 18px",
+        transition: "all 0.25s ease",
+      }}
+    >
+      {/* Botanical Leaves Background Artwork */}
+      <div
+        style={{
+          position: "absolute",
+          left: "-12px",
+          bottom: "-12px",
+          width: "90px",
+          height: "90px",
+          opacity: 0.2,
+          pointerEvents: "none",
+        }}
+      >
+        <Leaf size={90} color="#16A34A" />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          right: "-10px",
+          bottom: "-10px",
+          width: "95px",
+          height: "95px",
+          opacity: 0.25,
+          pointerEvents: "none",
+        }}
+      >
+        <Sprout size={95} color="#15803D" />
+      </div>
+
+      {/* Top Header Row */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span style={{ fontSize: "13px" }}>🌿</span>
+          <span
+            style={{
+              fontSize: "11px",
+              fontWeight: 800,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              background: isFoil ? foilGradient : undefined,
+              color: isFoil ? "transparent" : "#0F172A",
+              WebkitBackgroundClip: isFoil ? "text" : undefined,
+            }}
+          >
+            VARADACO
+          </span>
+        </div>
+
+        {isFoil && (
+          <span
+            style={{
+              fontSize: "9.5px",
+              fontWeight: 800,
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
+              padding: "2px 8px",
+              borderRadius: "9999px",
+              background: foilGradient,
+              color: "#FFFFFF",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.15)",
+            }}
+          >
+            {selectedFoil.name} Foil
+          </span>
+        )}
+      </div>
+
+      {/* Center Product Title & Strength */}
+      <div style={{ textAlign: "center", zIndex: 1, margin: "4px 0" }}>
+        <h3
+          style={{
+            fontSize: "20px",
+            fontWeight: 800,
+            margin: 0,
+            letterSpacing: "-0.02em",
+            background: isFoil && selectedLabel.id === "embossed_label" ? foilGradient : undefined,
+            color: isFoil && selectedLabel.id === "embossed_label" ? "transparent" : "#0F172A",
+            WebkitBackgroundClip: isFoil && selectedLabel.id === "embossed_label" ? "text" : undefined,
+          }}
+        >
+          {productName || "Ashwagandha"}
+        </h3>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: "#16A34A", marginTop: "2px" }}>
+          500mg
+        </div>
+        <div style={{ fontSize: "11px", color: "#64748B", fontWeight: 600, marginTop: "1px" }}>
+          Stress Support
+        </div>
+      </div>
+
+      {/* Bottom Footer Details */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          fontSize: "10px",
+          color: "#94A3B8",
+          fontWeight: 600,
+          borderTop: "1px solid #F1F5F9",
+          paddingTop: "6px",
+          zIndex: 1,
+        }}
+      >
+        <span>60 Veg Capsules</span>
+        <span>{selectedLabel.name}</span>
+        <span>GMP Certified</span>
+      </div>
+    </div>
+  );
+}
+
+interface CapOption {
+  id: string;
+  name: string;
+  price: number;
+  colorHex: string;
+  subtext?: string;
+  image?: string;
+}
+
+const CAP_TYPES = [
+  "Standard Cap",
+  "Child-Resistant",
+  "Flip-Top",
+  "Tamper-Evident",
+  "Premium",
+];
+
+const CAP_OPTIONS: CapOption[] = [
+  { id: "white", name: "White", price: 1.50, colorHex: "#FFFFFF", subtext: "Push & Turn Cap", image: "/caps/cap_white.png" },
+  { id: "black", name: "Black", price: 2.00, colorHex: "#111827", subtext: "Matte Black Cap", image: "/caps/cap_black.png" },
+  { id: "red", name: "Red", price: 2.25, colorHex: "#DC2626", subtext: "Tamper-Evident Red", image: "/caps/cap_red.png" },
+  { id: "blue", name: "Blue", price: 2.25, colorHex: "#2563EB", subtext: "Flip-Off Blue Cap", image: "/caps/cap_blue.png" },
+  { id: "green", name: "Green", price: 2.25, colorHex: "#16A34A", subtext: "Emerald Green Cap", image: "/caps/cap_green.png" },
+  { id: "gold", name: "Gold", price: 4.00, colorHex: "#D97706", subtext: "Threaded Gold Cap", image: "/caps/cap_gold.png" },
+  { id: "silver", name: "Silver", price: 4.00, colorHex: "#94A3B8", subtext: "Aluminum Silver Cap", image: "/caps/cap_silver.png" },
+];
+
+function Cap3DGraphic({ capId, width = 72, height = 52 }: { capId: string; width?: number; height?: number }) {
+  const capConfigs: Record<string, {
+    primaryGrad: [string, string, string];
+    topGrad: [string, string];
+    ribHighlight: string;
+    ribShadow: string;
+    border: string;
+    glow: string;
+  }> = {
+    white: {
+      primaryGrad: ["#FFFFFF", "#F3F4F6", "#D1D5DB"],
+      topGrad: ["#FFFFFF", "#E5E7EB"],
+      ribHighlight: "rgba(255,255,255,0.9)",
+      ribShadow: "rgba(156,163,175,0.4)",
+      border: "#D1D5DB",
+      glow: "rgba(0,0,0,0.06)",
+    },
+    black: {
+      primaryGrad: ["#374151", "#1F2937", "#0F172A"],
+      topGrad: ["#475569", "#1E293B"],
+      ribHighlight: "rgba(148,163,184,0.35)",
+      ribShadow: "rgba(0,0,0,0.75)",
+      border: "#1E293B",
+      glow: "rgba(0,0,0,0.3)",
+    },
+    red: {
+      primaryGrad: ["#EF4444", "#DC2626", "#991B1B"],
+      topGrad: ["#F87171", "#DC2626"],
+      ribHighlight: "rgba(254,202,202,0.55)",
+      ribShadow: "rgba(127,29,29,0.75)",
+      border: "#B91C1C",
+      glow: "rgba(220,38,38,0.25)",
+    },
+    blue: {
+      primaryGrad: ["#3B82F6", "#2563EB", "#1D4ED8"],
+      topGrad: ["#60A5FA", "#2563EB"],
+      ribHighlight: "rgba(191,219,254,0.55)",
+      ribShadow: "rgba(30,58,138,0.75)",
+      border: "#1D4ED8",
+      glow: "rgba(37,99,235,0.25)",
+    },
+    green: {
+      primaryGrad: ["#22C55E", "#16A34A", "#15803D"],
+      topGrad: ["#4ADE80", "#16A34A"],
+      ribHighlight: "rgba(187,247,208,0.55)",
+      ribShadow: "rgba(20,83,45,0.75)",
+      border: "#15803D",
+      glow: "rgba(22,163,74,0.25)",
+    },
+    gold: {
+      primaryGrad: ["#FDE68A", "#D97706", "#78350F"],
+      topGrad: ["#FEF3C7", "#D97706"],
+      ribHighlight: "rgba(254,240,138,0.75)",
+      ribShadow: "rgba(120,53,15,0.65)",
+      border: "#B45309",
+      glow: "rgba(217,119,6,0.25)",
+    },
+    silver: {
+      primaryGrad: ["#F8FAFC", "#CBD5E1", "#64748B"],
+      topGrad: ["#FFFFFF", "#94A3B8"],
+      ribHighlight: "rgba(255,255,255,0.95)",
+      ribShadow: "rgba(71,85,105,0.55)",
+      border: "#94A3B8",
+      glow: "rgba(148,163,184,0.2)",
+    },
+  };
+
+  const cfg = capConfigs[capId] || capConfigs.black;
+  const gradId = `cap-body-${capId}`;
+  const topGradId = `cap-top-${capId}`;
+
+  return (
+    <svg width={width} height={height} viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: `drop-shadow(0 4px 6px ${cfg.glow})` }}>
+      <defs>
+        <linearGradient id={gradId} x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor={cfg.primaryGrad[0]} />
+          <stop offset="45%" stopColor={cfg.primaryGrad[1]} />
+          <stop offset="100%" stopColor={cfg.primaryGrad[2]} />
+        </linearGradient>
+        <linearGradient id={topGradId} x1="50" y1="10" x2="50" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor={cfg.topGrad[0]} />
+          <stop offset="100%" stopColor={cfg.topGrad[1]} />
+        </linearGradient>
+      </defs>
+
+      {/* Cap Cylindrical Body */}
+      <path
+        d="M 14,20 C 14,20 14,50 14,52 C 14,62 86,62 86,52 C 86,50 86,20 86,20 Z"
+        fill={`url(#${gradId})`}
+        stroke={cfg.border}
+        strokeWidth="1"
+      />
+
+      {/* Vertical Knurling / Ribs */}
+      {[20, 26, 32, 38, 44, 50, 56, 62, 68, 74, 80].map((x) => (
+        <g key={x}>
+          <line x1={x} y1="22" x2={x} y2="52" stroke={cfg.ribShadow} strokeWidth="1.3" strokeLinecap="round" />
+          <line x1={x + 1} y1="22" x2={x + 1} y2="52" stroke={cfg.ribHighlight} strokeWidth="0.8" strokeLinecap="round" />
+        </g>
+      ))}
+
+      {/* Cap Top Lid Ellipse */}
+      <ellipse cx="50" cy="20" rx="36" ry="11" fill={`url(#${topGradId})`} stroke={cfg.border} strokeWidth="1" />
+      <ellipse cx="50" cy="19.5" rx="32" ry="9" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="0.8" />
+    </svg>
+  );
+}
+
+function BottleWithCapPreview({ selectedCap }: { selectedCap: CapOption }) {
+  const capConfigs: Record<string, {
+    primaryGrad: [string, string, string];
+    topGrad: [string, string];
+    ribHighlight: string;
+    ribShadow: string;
+    border: string;
+  }> = {
+    white: {
+      primaryGrad: ["#FFFFFF", "#F3F4F6", "#D1D5DB"],
+      topGrad: ["#FFFFFF", "#E5E7EB"],
+      ribHighlight: "rgba(255,255,255,0.9)",
+      ribShadow: "rgba(156,163,175,0.4)",
+      border: "#D1D5DB",
+    },
+    black: {
+      primaryGrad: ["#374151", "#1F2937", "#0F172A"],
+      topGrad: ["#475569", "#1E293B"],
+      ribHighlight: "rgba(148,163,184,0.35)",
+      ribShadow: "rgba(0,0,0,0.75)",
+      border: "#1E293B",
+    },
+    red: {
+      primaryGrad: ["#EF4444", "#DC2626", "#991B1B"],
+      topGrad: ["#F87171", "#DC2626"],
+      ribHighlight: "rgba(254,202,202,0.55)",
+      ribShadow: "rgba(127,29,29,0.75)",
+      border: "#B91C1C",
+    },
+    blue: {
+      primaryGrad: ["#3B82F6", "#2563EB", "#1D4ED8"],
+      topGrad: ["#60A5FA", "#2563EB"],
+      ribHighlight: "rgba(191,219,254,0.55)",
+      ribShadow: "rgba(30,58,138,0.75)",
+      border: "#1D4ED8",
+    },
+    green: {
+      primaryGrad: ["#22C55E", "#16A34A", "#15803D"],
+      topGrad: ["#4ADE80", "#16A34A"],
+      ribHighlight: "rgba(187,247,208,0.55)",
+      ribShadow: "rgba(20,83,45,0.75)",
+      border: "#15803D",
+    },
+    gold: {
+      primaryGrad: ["#FDE68A", "#D97706", "#78350F"],
+      topGrad: ["#FEF3C7", "#D97706"],
+      ribHighlight: "rgba(254,240,138,0.75)",
+      ribShadow: "rgba(120,53,15,0.65)",
+      border: "#B45309",
+    },
+    silver: {
+      primaryGrad: ["#F8FAFC", "#CBD5E1", "#64748B"],
+      topGrad: ["#FFFFFF", "#94A3B8"],
+      ribHighlight: "rgba(255,255,255,0.95)",
+      ribShadow: "rgba(71,85,105,0.55)",
+      border: "#94A3B8",
+    },
+  };
+
+  const cfg = capConfigs[selectedCap.id] || capConfigs.black;
+
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <svg width="130" height="180" viewBox="0 0 140 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          {/* Ambient Ground Shadow */}
+          <radialGradient id="preview-bottle-shadow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(15, 23, 42, 0.28)" />
+            <stop offset="60%" stopColor="rgba(15, 23, 42, 0.08)" />
+            <stop offset="100%" stopColor="rgba(15, 23, 42, 0)" />
+          </radialGradient>
+
+          {/* Bottle Body Gradient */}
+          <linearGradient id="preview-bottle-body" x1="25" y1="0" x2="115" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#E2E8F0" />
+            <stop offset="18%" stopColor="#FFFFFF" />
+            <stop offset="65%" stopColor="#F8FAFC" />
+            <stop offset="88%" stopColor="#E2E8F0" />
+            <stop offset="100%" stopColor="#CBD5E1" />
+          </linearGradient>
+
+          {/* Bottle Specular Reflection */}
+          <linearGradient id="preview-bottle-shine" x1="42" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.9)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </linearGradient>
+
+          {/* Mounted Cap Gradients */}
+          <linearGradient id={`preview-cap-body-${selectedCap.id}`} x1="40" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor={cfg.primaryGrad[0]} />
+            <stop offset="45%" stopColor={cfg.primaryGrad[1]} />
+            <stop offset="100%" stopColor={cfg.primaryGrad[2]} />
+          </linearGradient>
+          <linearGradient id={`preview-cap-top-${selectedCap.id}`} x1="70" y1="14" x2="70" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor={cfg.topGrad[0]} />
+            <stop offset="100%" stopColor={cfg.topGrad[1]} />
+          </linearGradient>
+        </defs>
+
+        {/* Floor Shadow */}
+        <ellipse cx="70" cy="178" rx="48" ry="8" fill="url(#preview-bottle-shadow)" />
+
+        {/* Bottle Body Container */}
+        <path
+          d="M 38,62 
+             C 38,54 46,50 54,48 
+             L 54,40 
+             L 86,40 
+             L 86,48 
+             C 94,50 102,54 102,62 
+             L 102,154 
+             C 102,170 38,170 38,154 
+             Z"
+          fill="url(#preview-bottle-body)"
+          stroke="#CBD5E1"
+          strokeWidth="1.2"
+        />
+
+        {/* Bottle Specular Highlight */}
+        <path
+          d="M 46,62 L 46,154 C 46,160 50,163 54,164 L 54,60 C 50,60 46,61 46,62 Z"
+          fill="url(#preview-bottle-shine)"
+        />
+
+        {/* Mounted Cap */}
+        {/* Cap Body */}
+        <path
+          d="M 44,22 C 44,22 44,46 44,48 C 44,54 96,54 96,48 C 96,46 96,22 96,22 Z"
+          fill={`url(#preview-cap-body-${selectedCap.id})`}
+          stroke={cfg.border}
+          strokeWidth="0.8"
+        />
+
+        {/* Cap Ribbing on Bottle */}
+        {[48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92].map((x) => (
+          <g key={x}>
+            <line x1={x} y1="24" x2={x} y2="48" stroke={cfg.ribShadow} strokeWidth="1" />
+            <line x1={x + 0.8} y1="24" x2={x + 0.8} y2="48" stroke={cfg.ribHighlight} strokeWidth="0.6" />
+          </g>
+        ))}
+
+        {/* Cap Top Lid */}
+        <ellipse cx="70" cy="22" rx="26" ry="8" fill={`url(#preview-cap-top-${selectedCap.id})`} stroke={cfg.border} strokeWidth="0.8" />
+        <ellipse cx="70" cy="21.5" rx="23" ry="6.5" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.6" />
+      </svg>
+    </div>
+  );
+}
+
 const STEPS = [
   { id: 1, name: "Why & Benefits" },
   { id: 2, name: "Ingredients" },
   { id: 3, name: "Formulation & ROI" },
   { id: 4, name: "Bottle" },
-  { id: 5, name: "Packaging" },
-  { id: 6, name: "Label" },
-  { id: 7, name: "MOQ & Sample" },
+  { id: 5, name: "Cap" },
+  { id: 6, name: "Packaging" },
+  { id: 7, name: "Label" },
+  { id: 8, name: "MOQ & Sample" },
 ];
 
 interface ProductJourneyModalProps {
@@ -309,9 +837,13 @@ export default function ProductJourneyModal({
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [ingredients, setIngredients] = useState<IngredientItem[]>(INITIAL_INGREDIENTS);
   const [selectedBottle, setSelectedBottle] = useState<PackagingOption>(BOTTLE_OPTIONS[0]);
+  const [selectedCapType, setSelectedCapType] = useState<string>("Standard Cap");
+  const [selectedCap, setSelectedCap] = useState<CapOption>(CAP_OPTIONS[1]);
   const [selectedOuter, setSelectedOuter] = useState<OuterOption>(OUTER_OPTIONS[0]);
   const [selectedLabel, setSelectedLabel] = useState<LabelOption>(LABEL_OPTIONS[1]);
+  const [selectedFoil, setSelectedFoil] = useState<FoilOption>(FOIL_OPTIONS[0]);
   const [selectedMoq, setSelectedMoq] = useState<number>(500);
+  const [maxStepReached, setMaxStepReached] = useState<number>(1);
 
   const [sampleOrdered, setSampleOrdered] = useState(false);
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
@@ -336,10 +868,11 @@ export default function ProductJourneyModal({
     const active = ingredients.filter((i) => i.selected);
     const totalActiveCost = active.reduce((acc, curr) => acc + calculateIngredientCost(curr), 0);
     const bottleCost = selectedBottle.price;
+    const capCost = selectedCap.price;
     const outerCost = selectedOuter.price;
-    const labelCost = selectedLabel.price;
+    const labelCost = selectedLabel.price + selectedFoil.price;
 
-    const baseUnitCost = Math.round(totalActiveCost + bottleCost + outerCost + labelCost);
+    const baseUnitCost = Math.round(totalActiveCost + bottleCost + capCost + outerCost + labelCost);
     const suggestedSellingPrice = 179.0;
     const profitPerUnit = suggestedSellingPrice - baseUnitCost;
     const profitMarginPercent = Math.round((profitPerUnit / suggestedSellingPrice) * 100);
@@ -386,6 +919,7 @@ export default function ProductJourneyModal({
       activeCount: active.length,
       totalActiveCost: Math.round(totalActiveCost * 100) / 100,
       bottleCost,
+      capCost,
       outerCost,
       labelCost,
       baseUnitCost,
@@ -396,7 +930,7 @@ export default function ProductJourneyModal({
       currentTier,
       totalInvestment,
     };
-  }, [ingredients, selectedBottle, selectedOuter, selectedLabel, selectedMoq]);
+  }, [ingredients, selectedBottle, selectedCap, selectedOuter, selectedLabel, selectedFoil, selectedMoq]);
 
   const toggleIngredient = (id: string) => {
     setIngredients((prev) =>
@@ -420,6 +954,17 @@ export default function ProductJourneyModal({
     setIngredients((prev) =>
       prev.map((item) => (item.id === id ? { ...item, dosage: val } : item))
     );
+  };
+
+  const goToStep = (stepNumber: number) => {
+    if (stepNumber > currentStep) {
+      if (currentStep === 2 && !ingredients.some((i) => i.selected)) {
+        alert("Please select at least one active ingredient to proceed.");
+        return;
+      }
+    }
+    setCurrentStep(stepNumber);
+    setMaxStepReached((prev) => Math.max(prev, stepNumber));
   };
 
   if (!isOpen) return null;
@@ -547,7 +1092,7 @@ export default function ProductJourneyModal({
                         display: "inline-block",
                       }}
                     />
-                    Step {currentStep} of 7
+                    Step {currentStep} of {STEPS.length}
                   </span>
                 </div>
               </div>
@@ -588,20 +1133,26 @@ export default function ProductJourneyModal({
               {STEPS.map((s, idx) => {
                 const isCurrent = currentStep === s.id;
                 const isDone = currentStep > s.id;
+                const isUnlocked = s.id <= maxStepReached;
+
                 return (
                   <div key={s.id} style={{ display: "flex", alignItems: "center", flex: idx === STEPS.length - 1 ? "none" : 1 }}>
                     <button
-                      onClick={() => setCurrentStep(s.id)}
+                      disabled={!isUnlocked}
+                      onClick={() => isUnlocked && goToStep(s.id)}
                       style={{
                         background: "none",
                         border: "none",
-                        cursor: "pointer",
+                        cursor: isUnlocked ? "pointer" : "not-allowed",
                         display: "flex",
                         alignItems: "center",
                         gap: "8px",
                         padding: "4px 8px",
                         borderRadius: "20px",
+                        opacity: isUnlocked ? 1 : 0.45,
+                        transition: "all 0.2s ease",
                       }}
+                      title={isUnlocked ? `Go to Step ${s.id}: ${s.name}` : `Complete previous steps to unlock ${s.name}`}
                     >
                       <div
                         style={{
@@ -613,8 +1164,8 @@ export default function ProductJourneyModal({
                           justifyContent: "center",
                           fontSize: "12px",
                           fontWeight: 800,
-                          background: isCurrent ? "#DCFCE7" : isDone ? "#15803D" : "#F1F5F9",
-                          color: isCurrent ? "#15803D" : isDone ? "#ffffff" : "#64748B",
+                          background: isCurrent ? "#DCFCE7" : isDone ? "#15803D" : isUnlocked ? "#E2E8F0" : "#F1F5F9",
+                          color: isCurrent ? "#15803D" : isDone ? "#ffffff" : isUnlocked ? "#334155" : "#94A3B8",
                           border: isCurrent ? "2px solid #15803D" : isDone ? "2px solid #15803D" : "1.5px solid #E2E8F0",
                           boxShadow: isCurrent ? "0 0 0 4px rgba(34, 197, 94, 0.22)" : "none",
                           transition: "all 0.25s ease",
@@ -626,7 +1177,7 @@ export default function ProductJourneyModal({
                         style={{
                           fontSize: "12.5px",
                           fontWeight: isCurrent ? 800 : isDone ? 700 : 500,
-                          color: isCurrent ? "#15803D" : isDone ? "#15803D" : "#64748B",
+                          color: isCurrent ? "#15803D" : isDone ? "#15803D" : isUnlocked ? "#334155" : "#94A3B8",
                           whiteSpace: "nowrap",
                         }}
                       >
@@ -640,7 +1191,7 @@ export default function ProductJourneyModal({
                           height: "2px",
                           flex: 1,
                           margin: "0 8px",
-                          background: isDone ? "#15803D" : "#E5E7EB",
+                          background: isDone ? "#15803D" : s.id < maxStepReached ? "#86EFAC" : "#E5E7EB",
                         }}
                       />
                     )}
@@ -730,7 +1281,7 @@ export default function ProductJourneyModal({
 
                     <div style={{ marginTop: "28px", display: "flex", justifyContent: "flex-end" }}>
                       <button
-                        onClick={() => setCurrentStep(2)}
+                        onClick={() => goToStep(2)}
                         style={{
                           background: "#15803D",
                           color: "#ffffff",
@@ -1128,7 +1679,7 @@ export default function ProductJourneyModal({
                   }}
                 >
                   <button
-                    onClick={() => setCurrentStep(1)}
+                    onClick={() => goToStep(1)}
                     style={{
                       padding: "12px 22px",
                       borderRadius: "12px",
@@ -1149,7 +1700,7 @@ export default function ProductJourneyModal({
                   </button>
 
                   <button
-                    onClick={() => setCurrentStep(3)}
+                    onClick={() => goToStep(3)}
                     style={{
                       background: "linear-gradient(135deg, #15803D 0%, #166534 100%)",
                       color: "#ffffff",
@@ -1507,7 +2058,7 @@ export default function ProductJourneyModal({
                   }}
                 >
                   <button
-                    onClick={() => setCurrentStep(2)}
+                    onClick={() => goToStep(2)}
                     style={{
                       padding: "12px 22px",
                       borderRadius: "12px",
@@ -1528,7 +2079,7 @@ export default function ProductJourneyModal({
                   </button>
 
                   <button
-                    onClick={() => setCurrentStep(4)}
+                    onClick={() => goToStep(4)}
                     style={{
                       background: "linear-gradient(135deg, #15803D 0%, #166534 100%)",
                       color: "#ffffff",
@@ -1602,14 +2153,14 @@ export default function ProductJourneyModal({
                 </div>
 
                 <div style={{ marginTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <button onClick={() => setCurrentStep(3)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
-                  <button onClick={() => setCurrentStep(5)} style={{ background: "#15803D", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>Next: Outer Packaging <ArrowRight size={16} /></button>
+                  <button onClick={() => goToStep(3)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
+                  <button onClick={() => goToStep(5)} style={{ background: "#15803D", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>Next: Cap &amp; Closure <ArrowRight size={16} /></button>
                 </div>
               </motion.div>
             )}
 
             {/* ----------------------------------------------------
-                STEP 5: OUTER PACKAGING
+                STEP 5: CAP & CLOSURE (EXACT DESIGN)
                ---------------------------------------------------- */}
             {currentStep === 5 && (
               <motion.div
@@ -1620,8 +2171,259 @@ export default function ProductJourneyModal({
                 transition={{ duration: 0.25 }}
                 style={{ background: "#FFFFFF", borderRadius: "22px", border: "1px solid #E5E7EB", padding: "32px" }}
               >
+                {/* Header */}
+                <div style={{ marginBottom: "20px" }}>
+                  <h2 style={{ fontSize: "24px", fontWeight: 800, color: "#0F172A", margin: 0, letterSpacing: "-0.02em" }}>
+                    Choose Cap Type &amp; Colour
+                  </h2>
+                  <p style={{ color: "#64748B", fontSize: "14px", marginTop: "4px", marginBottom: 0 }}>
+                    Different caps for different needs.
+                  </p>
+                </div>
+
+                {/* Cap Type Filter Pills */}
+                <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "24px" }}>
+                  {CAP_TYPES.map((type) => {
+                    const isActive = selectedCapType === type;
+                    return (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => setSelectedCapType(type)}
+                        style={{
+                          background: isActive ? "#064E3B" : "#F8FAFC",
+                          color: isActive ? "#FFFFFF" : "#475569",
+                          border: isActive ? "1px solid #064E3B" : "1px solid #E2E8F0",
+                          borderRadius: "9999px",
+                          padding: "8px 18px",
+                          fontSize: "13px",
+                          fontWeight: isActive ? 700 : 600,
+                          cursor: "pointer",
+                          transition: "all 0.15s ease",
+                          boxShadow: isActive ? "0 2px 6px rgba(6, 78, 59, 0.2)" : "none",
+                        }}
+                      >
+                        {type}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* 2-Column Section */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px", alignItems: "stretch" }}>
+                  {/* Left Column: Cap Color Choices Grid */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                    {/* Top Row: White, Black, Red, Blue, Green */}
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px" }}>
+                      {CAP_OPTIONS.slice(0, 5).map((c) => {
+                        const isSelected = selectedCap.id === c.id;
+                        return (
+                          <div
+                            key={c.id}
+                            onClick={() => setSelectedCap(c)}
+                            style={{
+                              position: "relative",
+                              border: isSelected ? "2px solid #22C55E" : "1.5px solid #E2E8F0",
+                              borderRadius: "14px",
+                              padding: "10px 4px 12px",
+                              textAlign: "center",
+                              cursor: "pointer",
+                              background: isSelected ? "#F0FDF4" : "#FFFFFF",
+                              transition: "all 0.15s ease",
+                              boxShadow: isSelected ? "0 4px 12px rgba(34, 197, 94, 0.15)" : "0 1px 2px rgba(0,0,0,0.03)",
+                            }}
+                          >
+                            {isSelected && (
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: "-5px",
+                                  right: "-5px",
+                                  width: "20px",
+                                  height: "20px",
+                                  borderRadius: "50%",
+                                  background: "#16A34A",
+                                  color: "#FFFFFF",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  boxShadow: "0 2px 4px rgba(0,0,0,0.15)",
+                                }}
+                              >
+                                <Check size={12} strokeWidth={3.5} />
+                              </div>
+                            )}
+                            <div style={{ height: "54px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              <img src={c.image} alt={c.name} style={{ maxWidth: "52px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain", borderRadius: "4px" }} />
+                            </div>
+                            <div style={{ fontSize: "13px", fontWeight: 700, color: "#1F2937", marginTop: "4px" }}>{c.name}</div>
+                            <div style={{ fontSize: "13px", fontWeight: 800, color: isSelected ? "#15803D" : "#1F2937", marginTop: "2px" }}>
+                              ₹{c.price.toFixed(2)}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Bottom Row: Gold, Silver */}
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px" }}>
+                      {CAP_OPTIONS.slice(5, 7).map((c) => {
+                        const isSelected = selectedCap.id === c.id;
+                        return (
+                          <div
+                            key={c.id}
+                            onClick={() => setSelectedCap(c)}
+                            style={{
+                              position: "relative",
+                              border: isSelected ? "2px solid #22C55E" : "1.5px solid #E2E8F0",
+                              borderRadius: "14px",
+                              padding: "10px 4px 12px",
+                              textAlign: "center",
+                              cursor: "pointer",
+                              background: isSelected ? "#F0FDF4" : "#FFFFFF",
+                              transition: "all 0.15s ease",
+                              boxShadow: isSelected ? "0 4px 12px rgba(34, 197, 94, 0.15)" : "0 1px 2px rgba(0,0,0,0.03)",
+                            }}
+                          >
+                            {isSelected && (
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: "-5px",
+                                  right: "-5px",
+                                  width: "20px",
+                                  height: "20px",
+                                  borderRadius: "50%",
+                                  background: "#16A34A",
+                                  color: "#FFFFFF",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  boxShadow: "0 2px 4px rgba(0,0,0,0.15)",
+                                }}
+                              >
+                                <Check size={12} strokeWidth={3.5} />
+                              </div>
+                            )}
+                            <div style={{ height: "54px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              <img src={c.image} alt={c.name} style={{ maxWidth: "52px", maxHeight: "50px", width: "auto", height: "auto", objectFit: "contain", borderRadius: "4px" }} />
+                            </div>
+                            <div style={{ fontSize: "13px", fontWeight: 700, color: "#1F2937", marginTop: "4px" }}>{c.name}</div>
+                            <div style={{ fontSize: "13px", fontWeight: 800, color: isSelected ? "#15803D" : "#1F2937", marginTop: "2px" }}>
+                              ₹{c.price.toFixed(2)}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Right Column: Bottle Preview & Feature Checklist Card */}
+                  <div
+                    style={{
+                      border: "1.5px solid #E2E8F0",
+                      borderRadius: "18px",
+                      padding: "20px 24px",
+                      background: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "24px",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
+                    }}
+                  >
+                    <BottleWithCapPreview selectedCap={selectedCap} />
+
+                    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                      {[
+                        "Secure fit",
+                        "Leak resistant",
+                        "Multiple colours",
+                        "Custom branding",
+                      ].map((feature) => (
+                        <div key={feature} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                          <div
+                            style={{
+                              width: "22px",
+                              height: "22px",
+                              borderRadius: "6px",
+                              border: "2px solid #16A34A",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#16A34A",
+                              background: "#F0FDF4",
+                              flexShrink: 0,
+                            }}
+                          >
+                            <Check size={13} strokeWidth={3} />
+                          </div>
+                          <span style={{ fontSize: "13.5px", fontWeight: 600, color: "#334155" }}>
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer Navigation */}
+                <div style={{ marginTop: "32px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <button
+                    onClick={() => goToStep(4)}
+                    style={{
+                      padding: "12px 24px",
+                      borderRadius: "10px",
+                      border: "1.5px solid #D1D5DB",
+                      background: "#FFFFFF",
+                      color: "#1E293B",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    <ChevronLeft size={16} /> Back
+                  </button>
+                  <button
+                    onClick={() => goToStep(6)}
+                    style={{
+                      background: "linear-gradient(135deg, #0D5C3A 0%, #064E3B 100%)",
+                      color: "#FFFFFF",
+                      padding: "12px 28px",
+                      borderRadius: "10px",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      boxShadow: "0 4px 12px rgba(6, 78, 59, 0.25)",
+                    }}
+                  >
+                    Next: Outer Packaging <ArrowRight size={16} />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ----------------------------------------------------
+                STEP 6: OUTER PACKAGING
+               ---------------------------------------------------- */}
+            {currentStep === 6 && (
+              <motion.div
+                key="modal-step6"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+                style={{ background: "#FFFFFF", borderRadius: "22px", border: "1px solid #E5E7EB", padding: "32px" }}
+              >
                 <div style={{ borderBottom: "1px solid #F0F4EF", paddingBottom: "16px", marginBottom: "22px" }}>
-                  <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D" }}>STEP 5</span>
+                  <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D" }}>STEP 6</span>
                   <h2 style={{ fontSize: "26px", fontWeight: 800, color: "#0D2619", marginTop: "4px" }}>Choose Outer Packaging</h2>
                   <p style={{ color: "#4B5563", fontSize: "14px", marginTop: "4px" }}>Select secondary outer protective packaging and retail box finish.</p>
                 </div>
@@ -1658,70 +2460,14 @@ export default function ProductJourneyModal({
                 </div>
 
                 <div style={{ marginTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <button onClick={() => setCurrentStep(4)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
-                  <button onClick={() => setCurrentStep(6)} style={{ background: "#15803D", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>Next: Label Design <ArrowRight size={16} /></button>
+                  <button onClick={() => goToStep(5)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
+                  <button onClick={() => goToStep(7)} style={{ background: "#15803D", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>Next: Label Design <ArrowRight size={16} /></button>
                 </div>
               </motion.div>
             )}
 
             {/* ----------------------------------------------------
-                STEP 6: LABEL DESIGN
-               ---------------------------------------------------- */}
-            {currentStep === 6 && (
-              <motion.div
-                key="modal-step6"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.25 }}
-                style={{ background: "#FFFFFF", borderRadius: "22px", border: "1px solid #E5E7EB", padding: "32px" }}
-              >
-                <div style={{ borderBottom: "1px solid #F0F4EF", paddingBottom: "16px", marginBottom: "22px" }}>
-                  <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D" }}>STEP 6</span>
-                  <h2 style={{ fontSize: "26px", fontWeight: 800, color: "#0D2619", marginTop: "4px" }}>Choose Label Design</h2>
-                  <p style={{ color: "#4B5563", fontSize: "14px", marginTop: "4px" }}>Select front label aesthetic, finish, and printing quality.</p>
-                </div>
-
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "16px" }}>
-                  {LABEL_OPTIONS.map((l) => {
-                    const isSelected = selectedLabel.id === l.id;
-                    return (
-                      <div
-                        key={l.id}
-                        onClick={() => setSelectedLabel(l)}
-                        style={{
-                          position: "relative",
-                          border: isSelected ? "2px solid #15803D" : "1px solid #E5E7EB",
-                          borderRadius: "14px",
-                          padding: "16px",
-                          textAlign: "center",
-                          cursor: "pointer",
-                          background: isSelected ? "#F0FDF4" : "#ffffff",
-                        }}
-                      >
-                        {isSelected && (
-                          <div style={{ position: "absolute", top: "10px", right: "10px", width: "20px", height: "20px", borderRadius: "50%", background: "#15803D", color: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <Check size={12} strokeWidth={3} />
-                          </div>
-                        )}
-                        <img src={l.image} alt={l.name} style={{ height: "110px", width: "100%", objectFit: "contain", marginBottom: "10px" }} />
-                        <h4 style={{ fontSize: "13.5px", fontWeight: 700, margin: "4px 0" }}>{l.name}</h4>
-                        <span style={{ fontSize: "11.5px", color: "#6B7280" }}>{l.subtext}</span>
-                        <div style={{ marginTop: "6px", fontSize: "14px", fontWeight: 700, color: "#15803D" }}>₹{l.price.toFixed(2)} / Unit</div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div style={{ marginTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <button onClick={() => setCurrentStep(5)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
-                  <button onClick={() => setCurrentStep(7)} style={{ background: "#15803D", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>Next: MOQ & Pricing <ArrowRight size={16} /></button>
-                </div>
-              </motion.div>
-            )}
-
-            {/* ----------------------------------------------------
-                STEP 7: MOQ & SAMPLE (EXACT IMAGE 2)
+                STEP 7: LABEL DESIGN (EXACT DESIGN)
                ---------------------------------------------------- */}
             {currentStep === 7 && (
               <motion.div
@@ -1732,9 +2478,246 @@ export default function ProductJourneyModal({
                 transition={{ duration: 0.25 }}
                 style={{ background: "#FFFFFF", borderRadius: "22px", border: "1px solid #E5E7EB", padding: "32px" }}
               >
+                {/* Header */}
+                <div style={{ marginBottom: "22px" }}>
+                  <h2 style={{ fontSize: "24px", fontWeight: 800, color: "#0F172A", margin: 0, letterSpacing: "-0.02em" }}>
+                    Choose Label Design
+                  </h2>
+                  <p style={{ color: "#64748B", fontSize: "14px", marginTop: "4px", marginBottom: 0 }}>
+                    Select finish, material and printing quality.
+                  </p>
+                </div>
+
+                {/* 5 Label Cards in a Row */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "12px", marginBottom: "26px" }}>
+                  {LABEL_OPTIONS.map((l) => {
+                    const isSelected = selectedLabel.id === l.id;
+                    return (
+                      <div
+                        key={l.id}
+                        onClick={() => setSelectedLabel(l)}
+                        style={{
+                          position: "relative",
+                          border: isSelected ? "2px solid #22C55E" : "1.5px solid #E2E8F0",
+                          borderRadius: "14px",
+                          padding: "12px 6px 14px",
+                          textAlign: "center",
+                          cursor: "pointer",
+                          background: isSelected ? "#F0FDF4" : "#FFFFFF",
+                          transition: "all 0.15s ease",
+                          boxShadow: isSelected ? "0 4px 12px rgba(34, 197, 94, 0.15)" : "0 1px 2px rgba(0,0,0,0.03)",
+                        }}
+                      >
+                        {isSelected && (
+                          <div
+                            style={{
+                              position: "absolute",
+                              top: "-5px",
+                              right: "-5px",
+                              width: "20px",
+                              height: "20px",
+                              borderRadius: "50%",
+                              background: "#16A34A",
+                              color: "#FFFFFF",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              boxShadow: "0 2px 4px rgba(0,0,0,0.15)",
+                            }}
+                          >
+                            <Check size={12} strokeWidth={3.5} />
+                          </div>
+                        )}
+                        <div style={{ height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <LabelGraphic labelId={l.id} width={62} height={60} />
+                        </div>
+                        <div style={{ fontSize: "13px", fontWeight: 700, color: "#1F2937", marginTop: "6px" }}>{l.name}</div>
+                        <div style={{ fontSize: "13px", fontWeight: 800, color: "#15803D", marginTop: "2px" }}>
+                          ₹{l.price.toFixed(2)}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Foil Colour (Optional) */}
+                <div style={{ marginBottom: "26px", background: "#F8FAFC", padding: "16px 20px", borderRadius: "14px", border: "1px solid #E2E8F0" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "12px" }}>
+                    <span style={{ fontSize: "14px", fontWeight: 800, color: "#0F172A" }}>Foil Colour</span>
+                    <span style={{ fontSize: "13px", fontWeight: 600, color: "#16A34A" }}>(Optional)</span>
+                  </div>
+
+                  <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "center" }}>
+                    {FOIL_OPTIONS.map((f) => {
+                      const isFoilSelected = selectedFoil.id === f.id;
+                      return (
+                        <div
+                          key={f.id}
+                          onClick={() => setSelectedFoil(f)}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                            cursor: "pointer",
+                            padding: "6px 12px",
+                            borderRadius: "9999px",
+                            background: isFoilSelected ? "#FFFFFF" : "transparent",
+                            border: isFoilSelected ? "1.5px solid #22C55E" : "1.5px solid transparent",
+                            boxShadow: isFoilSelected ? "0 2px 6px rgba(34, 197, 94, 0.15)" : "none",
+                            transition: "all 0.15s ease",
+                          }}
+                        >
+                          {f.id === "none" ? (
+                            <div
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                                borderRadius: "50%",
+                                background: isFoilSelected ? "#16A34A" : "#E2E8F0",
+                                color: "#FFFFFF",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {isFoilSelected && <Check size={12} strokeWidth={3.5} />}
+                            </div>
+                          ) : (
+                            <div
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                                borderRadius: "50%",
+                                background: f.gradient || f.colorHex,
+                                border: isFoilSelected ? "2px solid #0F172A" : "1px solid rgba(0,0,0,0.1)",
+                                boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
+                              }}
+                            />
+                          )}
+                          <span style={{ fontSize: "13.5px", fontWeight: isFoilSelected ? 700 : 500, color: isFoilSelected ? "#0F172A" : "#475569" }}>
+                            {f.name} {f.price > 0 ? `(+₹${f.price.toFixed(f.price % 1 === 0 ? 0 : 2)})` : "(₹0)"}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Label Preview */}
+                <div style={{ marginBottom: "26px" }}>
+                  <div style={{ fontSize: "15px", fontWeight: 800, color: "#0F172A", marginBottom: "12px" }}>
+                    Label Preview
+                  </div>
+
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                      gap: "24px",
+                      alignItems: "center",
+                      background: "#FFFFFF",
+                      padding: "16px 20px",
+                      borderRadius: "18px",
+                      border: "1.5px solid #E2E8F0",
+                    }}
+                  >
+                    {/* Left: Label Mockup Card */}
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <LabelLivePreview productName={productName} selectedLabel={selectedLabel} selectedFoil={selectedFoil} />
+                    </div>
+
+                    {/* Right: Feature Checklist */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                      {[
+                        "High-quality printing",
+                        "Custom design support",
+                        "Regulatory-compliant layout",
+                        "Your brand, our expertise",
+                      ].map((feature) => (
+                        <div key={feature} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                          <div
+                            style={{
+                              width: "22px",
+                              height: "22px",
+                              borderRadius: "6px",
+                              border: "2px solid #16A34A",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#16A34A",
+                              background: "#F0FDF4",
+                              flexShrink: 0,
+                            }}
+                          >
+                            <Check size={13} strokeWidth={3} />
+                          </div>
+                          <span style={{ fontSize: "13.5px", fontWeight: 600, color: "#334155" }}>
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer Navigation */}
+                <div style={{ marginTop: "32px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <button
+                    onClick={() => goToStep(6)}
+                    style={{
+                      padding: "12px 24px",
+                      borderRadius: "10px",
+                      border: "1.5px solid #D1D5DB",
+                      background: "#FFFFFF",
+                      color: "#1E293B",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    <ChevronLeft size={16} /> Back
+                  </button>
+                  <button
+                    onClick={() => goToStep(8)}
+                    style={{
+                      background: "linear-gradient(135deg, #0D5C3A 0%, #064E3B 100%)",
+                      color: "#FFFFFF",
+                      padding: "12px 28px",
+                      borderRadius: "10px",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      boxShadow: "0 4px 12px rgba(6, 78, 59, 0.25)",
+                    }}
+                  >
+                    Next: MOQ &amp; Pricing <ArrowRight size={16} />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ----------------------------------------------------
+                STEP 8: MOQ & SAMPLE (EXACT IMAGE 2)
+               ---------------------------------------------------- */}
+            {currentStep === 8 && (
+              <motion.div
+                key="modal-step8"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+                style={{ background: "#FFFFFF", borderRadius: "22px", border: "1px solid #E5E7EB", padding: "32px" }}
+              >
                 <div style={{ borderBottom: "1px solid #F0F4EF", paddingBottom: "16px", marginBottom: "22px" }}>
-                  <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D" }}>STEP 7</span>
-                  <h2 style={{ fontSize: "26px", fontWeight: 800, color: "#0D2619", marginTop: "4px" }}>MOQ, Pricing & Final Summary</h2>
+                  <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D" }}>STEP 8</span>
+                  <h2 style={{ fontSize: "26px", fontWeight: 800, color: "#0D2619", marginTop: "4px" }}>MOQ, Pricing &amp; Final Summary</h2>
                   <p style={{ color: "#4B5563", fontSize: "14px", marginTop: "4px" }}>Choose batch volume to calculate exact unit economics and dispatch lab sample.</p>
                 </div>
 
@@ -1800,7 +2783,7 @@ export default function ProductJourneyModal({
                   }}
                   className="summary-launch-grid"
                 >
-                  {/* Left Pill: Step 7 Summary - Clickable to open Order Confirmation Popup */}
+                  {/* Left Pill: Step 8 Summary - Clickable to open Order Confirmation Popup */}
                   <div
                     onClick={() => setShowOrderConfirmation(true)}
                     role="button"
@@ -1834,7 +2817,7 @@ export default function ProductJourneyModal({
                     <div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                         <span style={{ display: "inline-block", background: "#15803D", color: "#FFFFFF", fontSize: "11px", fontWeight: 700, padding: "2px 7px", borderRadius: "5px", textTransform: "uppercase", marginBottom: "6px" }}>
-                          STEP 7
+                          STEP 8
                         </span>
                         <span style={{ fontSize: "10.5px", color: "#86EFAC", fontWeight: 600, display: "flex", alignItems: "center", gap: "2px" }}>
                           View Invoice ↗
@@ -1858,44 +2841,48 @@ export default function ProductJourneyModal({
                   <div style={{ background: "#FAF8F5", borderRadius: "16px", border: "1px solid #E8E3DA", padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                     <div>
                       <h4 style={{ fontSize: "16px", fontWeight: 700, color: "#111827", marginBottom: "14px" }}>Your Product Summary</h4>
-                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "12px", alignItems: "center" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))", gap: "10px", alignItems: "center" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                           <span style={{ fontSize: "16px" }}>🌿</span>
                           <div>
                             <span style={{ fontSize: "10.5px", color: "#6B7280", display: "block" }}>Product</span>
-                            <strong style={{ fontSize: "12.5px", color: "#111827" }}>{productName} Capsules</strong>
+                            <strong style={{ fontSize: "12px", color: "#111827" }}>{productName}</strong>
                           </div>
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                          <span style={{ fontSize: "16px" }}>⏱️</span>
-                          <div>
-                            <span style={{ fontSize: "10.5px", color: "#6B7280", display: "block" }}>Formulation Cost</span>
-                            <strong style={{ fontSize: "12.5px", color: "#15803D" }}>₹{calculations.totalActiveCost.toFixed(2)} / Cap</strong>
-                          </div>
-                        </div>
-
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                          <img src={selectedBottle.image} alt={selectedBottle.name} style={{ width: "28px", height: "34px", objectFit: "contain" }} />
+                          <img src={selectedBottle.image} alt={selectedBottle.name} style={{ width: "26px", height: "32px", objectFit: "contain" }} />
                           <div>
                             <span style={{ fontSize: "10.5px", color: "#6B7280", display: "block" }}>Bottle</span>
-                            <strong style={{ fontSize: "12.5px", color: "#111827" }}>{selectedBottle.name}</strong>
+                            <strong style={{ fontSize: "12px", color: "#111827" }}>{selectedBottle.name}</strong>
                           </div>
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                          <img src={selectedOuter.image} alt={selectedOuter.name} style={{ width: "28px", height: "34px", objectFit: "contain" }} />
+                          <img src={selectedCap.image} alt={selectedCap.name} style={{ width: "26px", height: "30px", objectFit: "contain", borderRadius: "4px" }} />
+                          <div>
+                            <span style={{ fontSize: "10.5px", color: "#6B7280", display: "block" }}>Cap</span>
+                            <strong style={{ fontSize: "12px", color: "#111827" }}>{selectedCap.name} ({selectedCapType})</strong>
+                          </div>
+                        </div>
+
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                          <img src={selectedOuter.image} alt={selectedOuter.name} style={{ width: "26px", height: "32px", objectFit: "contain" }} />
                           <div>
                             <span style={{ fontSize: "10.5px", color: "#6B7280", display: "block" }}>Packaging</span>
-                            <strong style={{ fontSize: "12.5px", color: "#111827" }}>{selectedOuter.name}</strong>
+                            <strong style={{ fontSize: "12px", color: "#111827" }}>{selectedOuter.name}</strong>
                           </div>
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                          <img src={selectedLabel.image} alt={selectedLabel.name} style={{ width: "28px", height: "34px", objectFit: "contain" }} />
+                          <div style={{ width: "26px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <LabelGraphic labelId={selectedLabel.id} width={26} height={26} />
+                          </div>
                           <div>
                             <span style={{ fontSize: "10.5px", color: "#6B7280", display: "block" }}>Label</span>
-                            <strong style={{ fontSize: "12.5px", color: "#111827" }}>{selectedLabel.name}</strong>
+                            <strong style={{ fontSize: "12px", color: "#111827" }}>
+                              {selectedLabel.name} {selectedFoil.id !== "none" ? `+ ${selectedFoil.name} Foil` : ""}
+                            </strong>
                           </div>
                         </div>
                       </div>
@@ -1919,14 +2906,16 @@ export default function ProductJourneyModal({
                       <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <div>
                           <h4 style={{ fontSize: "16px", fontWeight: 700, color: "#111827", margin: 0 }}>Ready to Launch?</h4>
-                          <p style={{ fontSize: "11.5px", color: "#4B5563", marginTop: "3px" }}>Get your free sample & start your brand</p>
+                          <p style={{ fontSize: "11.5px", color: "#4B5563", marginTop: "3px" }}>Get your free sample &amp; start your brand</p>
                         </div>
                         <span style={{ fontSize: "28px" }}>🚀</span>
                       </div>
                     </div>
 
                     <button
-                      onClick={() => setShowRazorpay(true)}
+                      onClick={() => {
+                        window.open("https://razorpay.com", "_blank");
+                      }}
                       style={{
                         marginTop: "12px",
                         background: "#15803D",
@@ -1987,8 +2976,8 @@ export default function ProductJourneyModal({
                 )}
 
                 <div style={{ marginTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <button onClick={() => setCurrentStep(6)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
-                  <button onClick={onClose} style={{ background: "#0D2619", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer" }}>Finish & Close</button>
+                  <button onClick={() => goToStep(7)} style={{ padding: "12px 24px", borderRadius: "10px", border: "1px solid #D1D5DB", background: "#ffffff", fontWeight: 600, cursor: "pointer" }}>Back</button>
+                  <button onClick={onClose} style={{ background: "#0D2619", color: "#ffffff", padding: "12px 28px", borderRadius: "10px", fontWeight: 700, border: "none", cursor: "pointer" }}>Finish &amp; Close</button>
                 </div>
               </motion.div>
             )}

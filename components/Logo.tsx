@@ -49,6 +49,7 @@ export function LogoIcon({
         height={size}
         style={{ objectFit: "contain", height: `${size}px`, width: "auto" }}
         priority
+        unoptimized
       />
     </span>
   );
@@ -105,10 +106,11 @@ export default function Logo({
       ) : (
         <Image
           src={logoSrc}
-          alt="Varadaco - Herbs Supporting Humans"
+          alt="Varadaco"
           width={currentWidth}
           height={currentHeight}
           priority={priority}
+          unoptimized
           style={{ height: `${currentHeight}px`, width: "auto", objectFit: "contain", display: "block" }}
         />
       )}

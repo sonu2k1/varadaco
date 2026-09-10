@@ -10,7 +10,6 @@ export const navItems = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "Export & More", href: "/export" },
   { name: "Products", href: "/products" },
   { name: "R&D", href: "/rnd" },
   { name: "Contact Us", href: "/contact" },
@@ -36,7 +35,7 @@ export default function Navbar() {
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        <Logo size="md" />
+        <Logo size="md" variant="light" />
       </div>
 
       <div className="navlinks">

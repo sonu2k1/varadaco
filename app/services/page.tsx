@@ -23,6 +23,7 @@ import {
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PharmaRegulatoryCertificatesSection from "@/components/PharmaRegulatoryCertificatesSection";
 
 const fade = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
@@ -83,39 +84,6 @@ const serviceList = [
     image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80",
     icon: Package,
     badge: "Market-Ready Presentation",
-  },
-];
-
-const capabilities = [
-  {
-    title: "Capsule Formulations",
-    desc: "Vegetarian HPMC, acid-resistant DRCaps®, and customized gelatin capsule lines.",
-    icon: Pill,
-  },
-  {
-    title: "Tablet Compression",
-    desc: "Film-coated, chewable, effervescent, and sustained-release direct compression tablets.",
-    icon: Sparkles,
-  },
-  {
-    title: "Nutraceutical Powders",
-    desc: "Homogeneous blending, instantized protein powders, electrolytes, and superfood mixes.",
-    icon: Boxes,
-  },
-  {
-    title: "Ayurvedic Products",
-    desc: "Classical and proprietary herbal decoctions, standardized extracts, and churnas.",
-    icon: Microscope,
-  },
-  {
-    title: "Dietary Supplements",
-    desc: "Vitamins, trace minerals, amino acids, and antioxidant wellness formulations.",
-    icon: Award,
-  },
-  {
-    title: "Global Export Support",
-    desc: "Complete documentation, export packaging, and regulatory coordination for global markets.",
-    icon: Globe2,
   },
 ];
 
@@ -255,87 +223,21 @@ export default function ServicesPage() {
         })}
       </section>
 
-      {/* Formats and Capabilities Grid */}
-      <section style={{ background: "#FAF8F5", padding: "85px 4.5vw", borderTop: "1px solid var(--line)" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 55px" }}>
-            <p className="eyebrow" style={{ justifyContent: "center" }}>
-              Formats &amp; Capabilities
-            </p>
-            <h2 style={{ fontSize: "clamp(2.4rem, 3.8vw, 3.2rem)", fontWeight: 900, color: "#1E251F" }}>
-              Comprehensive delivery <em>formats.</em>
-            </h2>
-            <p style={{ marginTop: "14px", color: "#475569", fontSize: "16px", fontWeight: 500 }}>
-              Capsules | Tablets | Powders | Dietary Supplements | Ayurvedic Products
-            </p>
-          </div>
+      {/* Pharma Regulatory Certificates & Process Section (Image 2) */}
+      <PharmaRegulatoryCertificatesSection />
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: "24px",
-            }}
-          >
-            {capabilities.map((cap, i) => {
-              const CapIcon = cap.icon;
-              return (
-                <motion.div
-                  key={cap.title}
-                  className="card-panel"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.4 }}
-                  whileHover={{ y: -6 }}
-                  style={{
-                    background: "#ffffff",
-                    border: "1.5px solid #E2E8DF",
-                    borderRadius: "20px",
-                    padding: "32px 26px",
-                    boxShadow: "0 10px 25px rgba(13, 38, 25, 0.05)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "14px",
-                      background: "rgba(21, 128, 61, 0.1)",
-                      color: "#15803D",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "18px",
-                    }}
-                  >
-                    <CapIcon size={24} />
-                  </div>
-                  <h4 style={{ fontSize: "19px", fontWeight: 800, color: "#1E251F", marginBottom: "8px" }}>
-                    {cap.title}
-                  </h4>
-                  <p style={{ fontSize: "14px", color: "#475569", lineHeight: "1.6" }}>
-                    {cap.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Export Services Banner */}
+      {/* Contact & Consultation Banner */}
       <section style={{ background: "#0D2619", color: "#FFFFFF", padding: "75px 4.5vw" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", textAlign: "center" }}>
-          <p className="eyebrow light" style={{ justifyContent: "center" }}>06. Global Support</p>
+          <p className="eyebrow light" style={{ justifyContent: "center" }}>06. Get in Touch</p>
           <h2 style={{ color: "#FFFFFF", fontSize: "clamp(2.2rem, 3.8vw, 3rem)", marginBottom: "14px" }}>
-            Looking for Export &amp; Global Market Packages?
+            Ready to Build Your Next Health Product?
           </h2>
           <p style={{ color: "#d1e8b0", fontSize: "16px", maxWidth: "700px", margin: "0 auto 28px", lineHeight: "1.6" }}>
-            Explore our 4 tailored packages: Basic, Standard, Premium, and Enterprise support for domestic and international health product launches.
+            Connect with our formulation and manufacturing specialists to discuss your custom specifications and timeline.
           </p>
-          <Link href="/export" className="button button-light" style={{ background: "#7CA832", color: "#0D2619", fontWeight: 800, borderColor: "#7CA832" }}>
-            View Export Packages →
+          <Link href="/contact" className="button button-light" style={{ background: "#7CA832", color: "#0D2619", fontWeight: 800, borderColor: "#7CA832" }}>
+            Contact Our Specialists →
           </Link>
         </div>
       </section>

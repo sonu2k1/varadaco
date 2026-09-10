@@ -938,7 +938,9 @@ export default function FormulationSimulator() {
 
           <button
             type="button"
-            onClick={() => setShowRazorpay(true)}
+            onClick={() => {
+              window.open("https://razorpay.com", "_blank");
+            }}
             style={{
               marginTop: "16px",
               background: "#15803D",

@@ -30,14 +30,16 @@ const leaders = [
   {
     name: "Mrs. Shaanzee K. Sarna",
     designation: "Co-Founder",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
-    bio: "Driving the company's vision with a focus on building quality-oriented health and wellness solutions and creating long-term relationships with customers and business partners.",
+    image: "/images/avatar-placeholder.png",
+    bio: "With a strong background in pharmaceutical sciences and natural wellness formulations, Mrs. Shaanzee K. Sarna drives our vision of delivering high-quality, science-backed solutions to global markets.",
+    quote: "Science, nature and people united for a healthier world.",
   },
   {
     name: "Mr. Amit Singh",
     designation: "Co-Founder",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
-    bio: "Supporting the company's business growth, operations and customer relationships while contributing to Varadaco's long-term manufacturing and market development strategy.",
+    image: "/images/avatar-placeholder.png",
+    bio: "Supporting the company's business growth, operations, and regulatory strategy, Mr. Amit Singh leads Varadaco's long-term manufacturing excellence and international market development.",
+    quote: "Innovation today for a healthier tomorrow.",
   },
 ];
 
@@ -264,93 +266,241 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 03. DIRECTORS / LEADERSHIP SECTION */}
-      <section className="page-wrapper" id="leadership" style={{ paddingTop: "85px", paddingBottom: "80px" }}>
-        <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 55px" }}>
-          <p className="eyebrow" style={{ justifyContent: "center" }}>03. Executive Team</p>
-          <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)" }}>
-            Meet Our <em>Leadership</em>
-          </h2>
-          <div className="trust-underline" />
-          <p style={{ color: "#475569", fontSize: "16px", marginTop: "16px", lineHeight: "1.6" }}>
-            Our leadership team combines business vision, product understanding and a commitment to building a reliable health and wellness manufacturing business.
-          </p>
-        </div>
-
-        {/* Two Equal Director Cards Side-by-Side */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "30px",
-            maxWidth: "1000px",
-            margin: "0 auto",
-          }}
-        >
-          {leaders.map((leader, idx) => (
-            <motion.div
-              key={leader.name}
-              className="card-panel"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              variants={fade}
-              style={{
-                borderRadius: "20px",
-                padding: "32px",
-                border: "1.5px solid #E2E8DF",
-                background: "#FFFFFF",
-                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <div
+      {/* 03. DIRECTORS / LEADERSHIP SECTION (EXACT IMAGE 2 LAYOUT) */}
+      <section className="page-wrapper" id="leadership" style={{ paddingTop: "90px", paddingBottom: "85px" }}>
+        <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
+          
+          {/* HEADER: 2 Columns (Left: Eyebrow + Title + Subtitle, Right: Intro text) */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+              gap: "35px",
+              alignItems: "flex-end",
+              marginBottom: "50px",
+            }}
+          >
+            <div>
+              <motion.p
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                variants={fade}
                 style={{
-                  width: "140px",
-                  height: "140px",
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                  marginBottom: "20px",
-                  border: "4px solid #F0F4EF",
-                  boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
-                }}
-              >
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-
-              <h3 style={{ fontSize: "21px", fontWeight: 800, color: "var(--ink)", marginBottom: "4px" }}>
-                {leader.name}
-              </h3>
-              <span
-                style={{
-                  fontSize: "13px",
+                  fontSize: "12px",
                   fontWeight: 800,
-                  color: "#15803D",
-                  letterSpacing: "0.06em",
+                  letterSpacing: "0.14em",
                   textTransform: "uppercase",
-                  marginBottom: "16px",
-                  display: "inline-block",
-                  background: "#F0FDF4",
-                  padding: "4px 14px",
-                  borderRadius: "100px",
+                  color: "#b45309",
+                  marginBottom: "10px",
                 }}
               >
-                {leader.designation}
-              </span>
+                OUR LEADERSHIP
+              </motion.p>
+              <motion.h2
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: 0.08 }}
+                variants={fade}
+                style={{
+                  fontSize: "clamp(2.2rem, 3.8vw, 3rem)",
+                  fontWeight: 900,
+                  color: "#0F291E",
+                  lineHeight: 1.15,
+                  marginBottom: "12px",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Meet Our Directors
+              </motion.h2>
+              <motion.p
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: 0.14 }}
+                variants={fade}
+                style={{
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  color: "#15803D",
+                  lineHeight: 1.5,
+                  margin: 0,
+                }}
+              >
+                Guided by vision. Driven by science. Committed to a healthier tomorrow.
+              </motion.p>
+            </div>
 
-              <p style={{ fontSize: "14.5px", color: "#475569", lineHeight: "1.7", margin: 0 }}>
-                {leader.bio}
-              </p>
-            </motion.div>
-          ))}
+            <div>
+              <motion.p
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                variants={fade}
+                style={{
+                  fontSize: "15px",
+                  lineHeight: "1.7",
+                  color: "#475569",
+                  margin: 0,
+                }}
+              >
+                Our leadership team brings together decades of experience in pharmaceuticals, natural wellness and global healthcare, leading Varadaco towards innovation, quality and a better tomorrow for all.
+              </motion.p>
+            </div>
+          </div>
+
+          {/* TWO DIRECTOR CARDS (HORIZONTAL SPLIT LAYOUT AS IN IMAGE 2) */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(460px, 1fr))",
+              gap: "28px",
+            }}
+          >
+            {leaders.map((leader, idx) => (
+              <motion.div
+                key={leader.name}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.12, duration: 0.5 }}
+                variants={fade}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                className="director-card-split"
+                style={{
+                  background: "#FFFFFF",
+                  borderRadius: "22px",
+                  border: "1.5px solid #EAEFE7",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+                  overflow: "hidden",
+                  display: "grid",
+                  gridTemplateColumns: "220px 1fr",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                {/* LEFT: PHOTO PLACEHOLDER */}
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    minHeight: "300px",
+                    background: "#F8FAF8",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRight: "1px solid #EAEFE7",
+                    padding: "24px",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "125px",
+                      height: "125px",
+                      borderRadius: "50%",
+                      background: "#FFFFFF",
+                      boxShadow: "0 6px 18px rgba(0, 0, 0, 0.04)",
+                      border: "2px solid #E2E8DF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: "20px",
+                    }}
+                  >
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        display: "block",
+                        opacity: 0.85,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* RIGHT: DETAILS & QUOTE */}
+                <div
+                  style={{
+                    padding: "28px 26px 26px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: "21px",
+                        fontWeight: 800,
+                        color: "#0F291E",
+                        marginBottom: "4px",
+                        lineHeight: 1.25,
+                      }}
+                    >
+                      {leader.name}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "13.5px",
+                        fontWeight: 600,
+                        color: "#64748B",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {leader.designation}
+                    </p>
+                    <div
+                      style={{
+                        width: "32px",
+                        height: "3px",
+                        background: "#C58B16",
+                        borderRadius: "2px",
+                        marginBottom: "16px",
+                      }}
+                    />
+                    <p
+                      style={{
+                        fontSize: "13.5px",
+                        lineHeight: "1.65",
+                        color: "#475569",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {leader.bio}
+                    </p>
+                  </div>
+
+                  {/* QUOTE PILL */}
+                  <div
+                    style={{
+                      background: "#F4F8F3",
+                      borderLeft: "3px solid #15803D",
+                      padding: "12px 16px",
+                      borderRadius: "0 12px 12px 0",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        fontStyle: "italic",
+                        fontWeight: 600,
+                        color: "#15803D",
+                        margin: 0,
+                        lineHeight: 1.45,
+                      }}
+                    >
+                      “{leader.quote}”
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -18,7 +18,9 @@ import {
   Lock,
   CheckCircle,
   Ban,
-  Activity
+  Activity,
+  Zap,
+  ShoppingCart
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -719,240 +721,252 @@ export default function ProductsPage() {
       <div style={{ paddingTop: "76px" }}>
         
         {/* ======================================================== */}
-        {/* HERO BANNER - Sleek Bluish Clinical Science Theme        */}
+        {/* HERO BANNER - Ashwagandha Nature & Science Showcase       */}
         {/* ======================================================== */}
-        <section style={{ maxWidth: "1680px", margin: "20px auto 0", padding: "0 clamp(16px, 2.5vw, 40px)" }}>
+        <section style={{ maxWidth: "1680px", margin: "16px auto 0", padding: "0 clamp(16px, 2.5vw, 40px)" }}>
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             style={{
               position: "relative",
-              borderRadius: "32px",
+              borderRadius: "28px",
               overflow: "hidden",
-              minHeight: "440px",
+              minHeight: "380px",
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: "36px",
-              padding: "clamp(32px, 5vw, 56px)",
-              background: "linear-gradient(135deg, #0D2619 0%, #143B28 50%, #173F2B 100%)",
-              boxShadow: "0 20px 45px rgba(21, 128, 61, 0.18)",
-              border: "1px solid rgba(124, 168, 50, 0.2)",
+              boxShadow: "0 16px 45px rgba(13, 38, 25, 0.08)",
+              border: "1.5px solid #E2E8F0",
+              background: "#F4F5F2",
             }}
+            className="products-ashwagandha-hero-container"
           >
-            {/* Background Laboratory & Botanical Formulation Image Layer */}
-            <div
+            {/* BACKGROUND IMAGE (BOTTLE + LIVE SALE 30% OFF + ROOTS & CAPSULES + RIGHT PILL CARDS) */}
+            <img
+              src="/images/products-ashwagandha-hero.png"
+              alt="Ashwagandha - Pure, Potent, Natural. For a Stronger, Healthier You"
               style={{
                 position: "absolute",
-                inset: 0,
-                backgroundImage: `linear-gradient(to right, rgba(13, 38, 25, 0.95) 0%, rgba(13, 38, 25, 0.8) 55%, rgba(21, 128, 61, 0.35) 100%), url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1920&q=85')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center right",
-                zIndex: 1,
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center right",
+                zIndex: 0,
               }}
             />
 
-            {/* Ambient Radial Green Glowing Orbs */}
-            <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "350px", height: "350px", borderRadius: "50%", background: "radial-gradient(circle, rgba(124, 168, 50, 0.35) 0%, rgba(21, 128, 61, 0) 70%)", filter: "blur(40px)", pointerEvents: "none", zIndex: 1 }} />
-            <div style={{ position: "absolute", bottom: "-60px", left: "25%", width: "280px", height: "280px", borderRadius: "50%", background: "radial-gradient(circle, rgba(124, 168, 50, 0.3) 0%, rgba(21, 128, 61, 0) 70%)", filter: "blur(40px)", pointerEvents: "none", zIndex: 1 }} />
+            {/* LEFT BACKDROP GRADIENT MASK (SOFT BLEND FOR TEXT CONTRAST) */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                background: "linear-gradient(90deg, rgba(246, 246, 244, 0.5) 0%, rgba(246, 246, 244, 0.2) 35%, rgba(246, 246, 244, 0) 50%)",
+                zIndex: 1,
+                pointerEvents: "none",
+              }}
+              className="products-ashwagandha-backdrop-mask"
+            />
 
-            {/* Left Content Column */}
-            <div style={{ position: "relative", zIndex: 2, maxWidth: "560px", flex: "1 1 320px" }}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.1, duration: 0.4 }}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(124, 168, 50, 0.12)",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(124, 168, 50, 0.35)",
-                  color: "#7CA832",
-                  padding: "6px 16px",
-                  borderRadius: "100px",
-                  fontSize: "12px",
-                  fontWeight: 800,
-                  marginBottom: "18px",
-                  letterSpacing: "0.05em",
-                }}
-              >
-                <Sparkles size={14} color="#7CA832" />
-                <span>CLINICAL AYURVEDA & MOLECULAR SCIENCE</span>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                style={{
-                  color: "#ffffff",
-                  fontSize: "clamp(32px, 4.5vw, 50px)",
-                  fontWeight: 800,
-                  lineHeight: 1.12,
-                  letterSpacing: "-0.03em",
-                  marginBottom: "16px",
-                }}
-              >
-                Nourish.<br />
-                Strengthen.<br />
-                <span style={{ background: "linear-gradient(90deg, #7CA832 0%, #d1e8b0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  Thrive Clinically.
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                style={{
-                  color: "#D5E0D5",
-                  fontSize: "clamp(14px, 1.8vw, 16px)",
-                  lineHeight: 1.6,
-                  marginBottom: "28px",
-                  maxWidth: "480px",
-                }}
-              >
-                Standardized herbal medicines and active bio-extracts validated for cellular absorption, longevity, and clinical efficacy.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center" }}
-              >
-                <button
-                  onClick={() => productsGridRef.current?.scrollIntoView({ behavior: "smooth" })}
-                  style={{
-                    padding: "14px 34px",
-                    background: "linear-gradient(135deg, #7CA832 0%, #15803D 100%)",
-                    color: "#ffffff",
-                    border: "none",
-                    borderRadius: "100px",
-                    fontSize: "15px",
-                    fontWeight: 800,
-                    cursor: "pointer",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    boxShadow: "0 10px 25px rgba(124, 168, 50, 0.35)",
-                    transition: "all 0.25s ease",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px) scale(1.02)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0) scale(1)")}
-                >
-                  <span>Explore Formulations</span>
-                  <ArrowRight size={16} />
-                </button>
-
-                <button
-                  onClick={() => handleOpenProductModal("ashwagandha")}
-                  style={{
-                    padding: "13px 26px",
-                    background: "rgba(255, 255, 255, 0.12)",
-                    backdropFilter: "blur(8px)",
-                    color: "#ffffff",
-                    border: "1px solid rgba(255, 255, 255, 0.25)",
-                    borderRadius: "100px",
-                    fontSize: "14px",
-                    fontWeight: 700,
-                    cursor: "pointer",
-                    transition: "all 0.25s ease",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.12)")}
-                >
-                  Featured: Ashwagandha
-                </button>
-              </motion.div>
-            </div>
-
-            {/* Right Showcase Image Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, x: 25 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+            {/* LIVE CODED LEFT CONTENT */}
+            <div
               style={{
                 position: "relative",
                 zIndex: 2,
-                flex: "1 1 340px",
-                maxWidth: "460px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                padding: "clamp(24px, 3.8vw, 44px) clamp(24px, 4vw, 50px)",
+                maxWidth: "520px",
+                width: "100%",
               }}
+              className="products-ashwagandha-content-left"
             >
-              <div
+              {/* BADGE */}
+              <span
                 style={{
-                  position: "relative",
-                  borderRadius: "26px",
-                  overflow: "hidden",
-                  border: "2px solid rgba(124, 168, 50, 0.4)",
-                  boxShadow: "0 25px 60px rgba(0, 0, 0, 0.4)",
-                  background: "rgba(255, 255, 255, 0.08)",
-                  backdropFilter: "blur(14px)",
-                  width: "100%",
-                  height: "320px",
+                  fontSize: "11.5px",
+                  fontWeight: 800,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "#B45309",
+                  marginBottom: "8px",
+                  display: "inline-block",
                 }}
               >
-                <img
-                  src="/products/ashwagandha.jpg"
-                  alt="Clinical Evidence-Led Medicine Formulation"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
+                PURE. POTENT. NATURAL.
+              </span>
 
-                {/* Floating Glassmorphic Trust Tag */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "16px",
-                    left: "16px",
-                    right: "16px",
-                    background: "rgba(13, 38, 25, 0.9)",
-                    backdropFilter: "blur(12px)",
-                    borderRadius: "16px",
-                    padding: "12px 16px",
-                    border: "1px solid rgba(124, 168, 50, 0.3)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
-                  }}
-                >
+              {/* HEADING */}
+              <h1
+                style={{
+                  fontSize: "clamp(1.75rem, 2.7vw, 2.5rem)",
+                  fontWeight: 900,
+                  color: "#0A1D37",
+                  lineHeight: 1.14,
+                  marginBottom: "8px",
+                  letterSpacing: "-0.02em",
+                  fontFamily: "var(--font-serif), Georgia, serif",
+                }}
+              >
+                Ashwagandha<br />
+                for a Stronger,<br />
+                Healthier You
+              </h1>
+
+              {/* SUBHEADING */}
+              <p
+                style={{
+                  fontSize: "13.5px",
+                  fontWeight: 700,
+                  color: "#0F172A",
+                  marginBottom: "16px",
+                  lineHeight: "1.4",
+                }}
+              >
+                Backed by science. Rooted in nature.
+              </p>
+
+              {/* 4 FEATURE HIGHLIGHTS */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gap: "10px",
+                  marginBottom: "22px",
+                  maxWidth: "460px",
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <div
                     style={{
-                      width: "38px",
-                      height: "38px",
-                      borderRadius: "12px",
-                      background: "rgba(124, 168, 50, 0.2)",
-                      color: "#7CA832",
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      border: "1.5px solid #15803D",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      flexShrink: 0,
+                      color: "#15803D",
+                      marginBottom: "6px",
+                      background: "rgba(21, 128, 61, 0.08)",
                     }}
                   >
-                    <ShieldCheck size={22} />
+                    <Leaf size={15} />
                   </div>
-                  <div>
-                    <div style={{ fontSize: "14px", fontWeight: 800, color: "#ffffff" }}>
-                      WHO-GMP Clinical Grade
-                    </div>
-                    <div style={{ fontSize: "12px", color: "#d1e8b0" }}>
-                      100% Bioavailable Active Extracts
-                    </div>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#1E293B", lineHeight: "1.2" }}>
+                    Boosts Stress Resilience
+                  </span>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                  <div
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      border: "1.5px solid #15803D",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#15803D",
+                      marginBottom: "6px",
+                      background: "rgba(21, 128, 61, 0.08)",
+                    }}
+                  >
+                    <Zap size={15} />
                   </div>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#1E293B", lineHeight: "1.2" }}>
+                    Supports Energy & Vitality
+                  </span>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                  <div
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      border: "1.5px solid #15803D",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#15803D",
+                      marginBottom: "6px",
+                      background: "rgba(21, 128, 61, 0.08)",
+                    }}
+                  >
+                    <ShieldCheck size={15} />
+                  </div>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#1E293B", lineHeight: "1.2" }}>
+                    Enhances Immunity
+                  </span>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                  <div
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      border: "1.5px solid #15803D",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#15803D",
+                      marginBottom: "6px",
+                      background: "rgba(21, 128, 61, 0.08)",
+                    }}
+                  >
+                    <Sparkles size={15} />
+                  </div>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: "#1E293B", lineHeight: "1.2" }}>
+                    Promotes Overall Wellness
+                  </span>
                 </div>
               </div>
-            </motion.div>
+
+              {/* CTA BUTTONS */}
+              <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
+                <button
+                  onClick={() => handleOpenProductModal("ashwagandha")}
+                  style={{
+                    background: "linear-gradient(180deg, #057A55 0%, #03543F 100%)",
+                    color: "#FFFFFF",
+                    fontWeight: 700,
+                    fontSize: "13.5px",
+                    padding: "11px 22px",
+                    borderRadius: "100px",
+                    border: "none",
+                    cursor: "pointer",
+                    boxShadow: "0 6px 18px rgba(4, 120, 87, 0.35)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    transition: "transform 0.18s ease, box-shadow 0.18s ease",
+                  }}
+                  className="hover-lift"
+                >
+                  <span>Shop Ashwagandha</span>
+                  <ArrowRight size={15} />
+                </button>
+
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "7px",
+                    color: "#0F172A",
+                    fontWeight: 700,
+                    fontSize: "13px",
+                  }}
+                >
+                  <ShoppingCart size={17} color="#B45309" />
+                  <span style={{ color: "#334155" }}>Limited Time Offer</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </section>
 
