@@ -2237,15 +2237,185 @@ em {
   transition: transform 0.2s ease;
 }
 
-/* Director Leadership Split Cards */
+/* Director Leadership Cards Grid & Responsive Layout */
+.leadership-header-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 35px;
+  align-items: flex-end;
+  margin-bottom: 50px;
+}
+
+.director-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+  gap: 28px;
+  width: 100%;
+}
+
+.director-card-split {
+  background: #FFFFFF;
+  border-radius: 22px;
+  border: 1.5px solid #EAEFE7;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  transition: all 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .director-card-split:hover {
   border-color: rgba(21, 128, 61, 0.35) !important;
   box-shadow: 0 16px 36px rgba(21, 128, 61, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04) !important;
 }
 
-@media (max-width: 640px) {
+.director-card-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  background: #F8FAF8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #EAEFE7;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.director-avatar-circle {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  border: 2px solid #E2E8DF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.director-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  opacity: 0.85;
+}
+
+.director-card-details {
+  padding: 28px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.director-card-name {
+  font-size: 21px;
+  font-weight: 800;
+  color: #0F291E;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.director-card-designation {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #64748B;
+  margin-bottom: 10px;
+}
+
+.director-card-accent-line {
+  width: 32px;
+  height: 3px;
+  background: #C58B16;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.director-card-bio {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+.director-card-quote {
+  background: #F4F8F3;
+  border-left: 3px solid #15803D;
+  padding: 12px 16px;
+  border-radius: 0 12px 12px 0;
+  box-sizing: border-box;
+}
+
+.director-card-quote p {
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 600;
+  color: #15803D;
+  margin: 0;
+  line-height: 1.45;
+}
+
+@media (max-width: 960px) {
+  .director-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .leadership-header-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
   .director-card-split {
     grid-template-columns: 1fr !important;
+    border-radius: 18px;
+  }
+
+  .director-card-photo {
+    min-height: unset !important;
+    height: auto !important;
+    padding: 30px 20px 24px !important;
+    border-right: none !important;
+    border-bottom: 1px solid #EAEFE7 !important;
+  }
+
+  .director-avatar-circle {
+    width: 105px !important;
+    height: 105px !important;
+    padding: 16px !important;
+  }
+
+  .director-card-details {
+    padding: 22px 18px 24px !important;
+  }
+
+  .director-card-name {
+    font-size: 19px !important;
+  }
+
+  .director-card-bio {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .director-card-quote {
+    padding: 10px 14px !important;
+  }
+
+  .director-card-quote p {
+    font-size: 12.5px !important;
   }
 }
 
@@ -4992,25 +5162,109 @@ em {
   }
 }
 
-@media (max-width: 900px) {
+/* Products Page Ashwagandha Hero Banner Responsive Styles */
+.products-ashwagandha-hero-container {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 16px 45px rgba(13, 38, 25, 0.08);
+  border: 1.5px solid #E2E8F0;
+  background: #F4F5F2;
+}
+
+.products-ashwagandha-desktop-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  z-index: 0;
+  display: block;
+}
+
+.products-ashwagandha-backdrop-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(244, 245, 242, 0.98) 0%, rgba(244, 245, 242, 0.92) 42%, rgba(244, 245, 242, 0.25) 58%, rgba(244, 245, 242, 0) 72%);
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+.products-ashwagandha-mobile-visual {
+  display: none !important;
+}
+
+.products-ashwagandha-content-left {
+  position: relative;
+  z-index: 2;
+  padding: clamp(28px, 3.8vw, 44px) clamp(28px, 4vw, 50px);
+  max-width: 520px;
+  width: 100%;
+}
+
+@media (max-width: 860px) {
   .products-ashwagandha-hero-container {
+    display: flex !important;
+    flex-direction: column !important;
     min-height: auto !important;
+    border-radius: 22px !important;
   }
+
+  .products-ashwagandha-desktop-bg,
   .products-ashwagandha-backdrop-mask {
-    background: linear-gradient(90deg, #F4F5F2 0%, #F4F5F2 52%, rgba(244, 245, 242, 0.95) 60%, rgba(244, 245, 242, 0.5) 75%, rgba(244, 245, 242, 0.2) 100%) !important;
+    display: none !important;
   }
+
+  .products-ashwagandha-mobile-visual {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    height: clamp(250px, 72vw, 360px);
+    background: #eef2ec;
+    overflow: hidden;
+  }
+
+  .products-ashwagandha-mobile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .products-ashwagandha-mobile-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(244, 245, 242, 0) 0%, #F4F5F2 100%);
+    pointer-events: none;
+  }
+
   .products-ashwagandha-content-left {
-    max-width: 60% !important;
+    max-width: 100% !important;
+    padding: 24px 20px 28px 20px !important;
+    box-sizing: border-box;
   }
 }
 
-@media (max-width: 700px) {
-  .products-ashwagandha-backdrop-mask {
-    background: #F4F5F2 !important;
+@media (max-width: 480px) {
+  .products-ashwagandha-mobile-visual {
+    height: clamp(230px, 70vw, 300px);
   }
+
   .products-ashwagandha-content-left {
-    max-width: 100% !important;
-    padding: 28px 20px !important;
+    padding: 20px 16px 24px 16px !important;
   }
 }
 
@@ -5118,5 +5372,246 @@ em {
   }
   .success-doodle-text {
     display: block !important;
+  }
+}
+
+/* Home Page Ashwagandha Promotional Banner Responsive Styles */
+.home-ashwagandha-section {
+  padding: 0 4.5vw 70px;
+}
+
+.home-ashwagandha-card {
+  max-width: 1240px;
+  margin: 0 auto;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(13, 38, 25, 0.14);
+  border: 1px solid rgba(124, 168, 50, 0.28);
+  background: #f7faf6;
+}
+
+.home-ashwagandha-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(21, 128, 61, 0.12);
+  border: 1px solid rgba(21, 128, 61, 0.35);
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: clamp(10px, 0.8vw, 11px);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #15803D;
+  margin-bottom: 12px;
+}
+
+.home-ashwagandha-title {
+  font-weight: 900;
+  color: #0D2619;
+  line-height: 1.18;
+  font-family: var(--font-serif), serif;
+  margin-bottom: 12px;
+}
+
+.home-ashwagandha-desc {
+  color: #2D4A38;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.home-ashwagandha-btn-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.home-ashwagandha-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.home-ashwagandha-btn-primary {
+  background: #15803D;
+  border: 1.5px solid #15803D;
+  color: #FFFFFF !important;
+  padding: 11px 22px;
+  box-shadow: 0 6px 18px rgba(21, 128, 61, 0.32);
+}
+
+.home-ashwagandha-btn-primary:hover {
+  background: #166534;
+  border-color: #166534;
+  transform: translateY(-1px);
+}
+
+.home-ashwagandha-btn-secondary {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(21, 128, 61, 0.38);
+  color: #0D2619 !important;
+  padding: 11px 22px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.home-ashwagandha-btn-secondary:hover {
+  background: #ffffff;
+  border-color: #15803D;
+  color: #15803D !important;
+  transform: translateY(-1px);
+}
+
+/* Desktop Presentation (> 860px) */
+@media (min-width: 861px) {
+  .home-ashwagandha-card {
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+  }
+
+  .home-ashwagandha-mobile-visual {
+    display: none !important;
+  }
+
+  .home-ashwagandha-desktop-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    z-index: 0;
+    display: block;
+  }
+
+  .home-ashwagandha-desktop-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f7faf6 0%, rgba(247, 250, 246, 0.96) 42%, rgba(247, 250, 246, 0.22) 60%, rgba(247, 250, 246, 0) 74%);
+    z-index: 1;
+    pointer-events: none;
+    display: block;
+  }
+
+  .home-ashwagandha-content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(32px, 3.5vw, 46px) clamp(32px, 4vw, 50px);
+    max-width: 520px;
+  }
+
+  .home-ashwagandha-title {
+    font-size: clamp(1.6rem, 2.3vw, 2.3rem);
+  }
+
+  .home-ashwagandha-desc {
+    font-size: clamp(13px, 1.05vw, 14.5px);
+    margin-bottom: 22px;
+    max-width: 440px;
+  }
+}
+
+/* Mobile and Tablet Presentation (<= 860px) */
+@media (max-width: 860px) {
+  .home-ashwagandha-section {
+    padding: 0 4vw 50px;
+  }
+
+  .home-ashwagandha-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .home-ashwagandha-desktop-bg,
+  .home-ashwagandha-desktop-gradient {
+    display: none !important;
+  }
+
+  .home-ashwagandha-mobile-visual {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: clamp(250px, 70vw, 340px);
+    background: #eef3ec;
+    overflow: hidden;
+  }
+
+  .home-ashwagandha-mobile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .home-ashwagandha-mobile-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 55px;
+    background: linear-gradient(to bottom, rgba(247, 250, 246, 0) 0%, #f7faf6 100%);
+    pointer-events: none;
+  }
+
+  .home-ashwagandha-content {
+    position: relative;
+    z-index: 2;
+    padding: 24px 20px 28px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .home-ashwagandha-title {
+    font-size: clamp(1.45rem, 5.2vw, 1.85rem);
+    margin-bottom: 10px;
+  }
+
+  .home-ashwagandha-desc {
+    font-size: 14px;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .home-ashwagandha-btn-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .home-ashwagandha-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 13px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-ashwagandha-section {
+    padding: 0 3.5vw 40px;
+  }
+
+  .home-ashwagandha-mobile-visual {
+    height: clamp(230px, 68vw, 290px);
+  }
+
+  .home-ashwagandha-content {
+    padding: 20px 16px 24px 16px;
   }
 }

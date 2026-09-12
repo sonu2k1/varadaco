@@ -114,7 +114,7 @@ export default function AboutPage() {
 
       {/* 02. MAIN SECTION: About Varadaco Industries */}
       <section className="page-wrapper" id="about-main" style={{ paddingTop: "80px", paddingBottom: "70px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "50px", alignItems: "center" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "40px", alignItems: "center" }}>
           <div>
             <p className="eyebrow">02. Overview</p>
             <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)", marginBottom: "20px" }}>
@@ -179,7 +179,7 @@ export default function AboutPage() {
       {/* 02. VIDEO SECTION: See How We Work */}
       <section style={{ background: "#0D2619", color: "#FFFFFF", padding: "85px 4.5vw" }} id="video-section">
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "45px", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))", gap: "35px", alignItems: "center" }}>
             <div>
               <p className="eyebrow light">02. Video Showcase</p>
               <h2 style={{ fontSize: "clamp(2.2rem, 3.8vw, 3rem)", color: "#FFFFFF", marginBottom: "8px" }}>
@@ -271,15 +271,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
           
           {/* HEADER: 2 Columns (Left: Eyebrow + Title + Subtitle, Right: Intro text) */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: "35px",
-              alignItems: "flex-end",
-              marginBottom: "50px",
-            }}
-          >
+          <div className="leadership-header-grid">
             <div>
               <motion.p
                 initial="hidden"
@@ -351,14 +343,8 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* TWO DIRECTOR CARDS (HORIZONTAL SPLIT LAYOUT AS IN IMAGE 2) */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(460px, 1fr))",
-              gap: "28px",
-            }}
-          >
+          {/* TWO DIRECTOR CARDS (HORIZONTAL SPLIT ON DESKTOP, STACKED ON MOBILE) */}
+          <div className="director-cards-grid">
             {leaders.map((leader, idx) => (
               <motion.div
                 key={leader.name}
@@ -369,131 +355,35 @@ export default function AboutPage() {
                 variants={fade}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="director-card-split"
-                style={{
-                  background: "#FFFFFF",
-                  borderRadius: "22px",
-                  border: "1.5px solid #EAEFE7",
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-                  overflow: "hidden",
-                  display: "grid",
-                  gridTemplateColumns: "220px 1fr",
-                  transition: "all 0.25s ease",
-                }}
               >
-                {/* LEFT: PHOTO PLACEHOLDER */}
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "100%",
-                    minHeight: "300px",
-                    background: "#F8FAF8",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRight: "1px solid #EAEFE7",
-                    padding: "24px",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "125px",
-                      height: "125px",
-                      borderRadius: "50%",
-                      background: "#FFFFFF",
-                      boxShadow: "0 6px 18px rgba(0, 0, 0, 0.04)",
-                      border: "2px solid #E2E8DF",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      padding: "20px",
-                    }}
-                  >
+                {/* LEFT/TOP: PHOTO PLACEHOLDER */}
+                <div className="director-card-photo">
+                  <div className="director-avatar-circle">
                     <img
                       src={leader.image}
                       alt={leader.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
-                        display: "block",
-                        opacity: 0.85,
-                      }}
                     />
                   </div>
                 </div>
 
-                {/* RIGHT: DETAILS & QUOTE */}
-                <div
-                  style={{
-                    padding: "28px 26px 26px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
+                {/* RIGHT/BOTTOM: DETAILS & QUOTE */}
+                <div className="director-card-details">
                   <div>
-                    <h3
-                      style={{
-                        fontSize: "21px",
-                        fontWeight: 800,
-                        color: "#0F291E",
-                        marginBottom: "4px",
-                        lineHeight: 1.25,
-                      }}
-                    >
+                    <h3 className="director-card-name">
                       {leader.name}
                     </h3>
-                    <p
-                      style={{
-                        fontSize: "13.5px",
-                        fontWeight: 600,
-                        color: "#64748B",
-                        marginBottom: "10px",
-                      }}
-                    >
+                    <p className="director-card-designation">
                       {leader.designation}
                     </p>
-                    <div
-                      style={{
-                        width: "32px",
-                        height: "3px",
-                        background: "#C58B16",
-                        borderRadius: "2px",
-                        marginBottom: "16px",
-                      }}
-                    />
-                    <p
-                      style={{
-                        fontSize: "13.5px",
-                        lineHeight: "1.65",
-                        color: "#475569",
-                        marginBottom: "20px",
-                      }}
-                    >
+                    <div className="director-card-accent-line" />
+                    <p className="director-card-bio">
                       {leader.bio}
                     </p>
                   </div>
 
                   {/* QUOTE PILL */}
-                  <div
-                    style={{
-                      background: "#F4F8F3",
-                      borderLeft: "3px solid #15803D",
-                      padding: "12px 16px",
-                      borderRadius: "0 12px 12px 0",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        fontStyle: "italic",
-                        fontWeight: 600,
-                        color: "#15803D",
-                        margin: 0,
-                        lineHeight: 1.45,
-                      }}
-                    >
+                  <div className="director-card-quote">
+                    <p>
                       “{leader.quote}”
                     </p>
                   </div>
@@ -529,7 +419,7 @@ export default function AboutPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
               gap: "24px",
               marginBottom: "40px",
             }}

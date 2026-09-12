@@ -409,147 +409,53 @@ export default function Home() {
       </section>
 
       {/* 01. ASHWAGANDHA PROMOTIONAL BANNER */}
-      <section style={{ padding: "0 4.5vw 70px" }}>
-        <div
-          style={{
-            maxWidth: "1240px",
-            margin: "0 auto",
-            borderRadius: "24px",
-            position: "relative",
-            overflow: "hidden",
-            boxShadow: "0 20px 50px rgba(13, 38, 25, 0.16)",
-            border: "1px solid rgba(124, 168, 50, 0.28)",
-            background: "#f7faf6",
-            aspectRatio: "1024 / 506",
-            minHeight: "380px",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          {/* BACKGROUND IMAGE (IMAGE 1: BOTTLE + MEGA SALE + BOTANICAL BACKGROUND) */}
+      <section className="home-ashwagandha-section">
+        <div className="home-ashwagandha-card">
+          {/* DESKTOP BACKGROUND IMAGE (FULL BANNER WITH BOTTLE, BADGE, HERBAL ELEMENTS) */}
           <img
             src="/images/varadaco-ashwagandha-hero-bg.png"
             alt="Varadaco Ashwagandha - Nature Meets Modern Wellness"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              objectPosition: "center right",
-              zIndex: 0,
-            }}
+            className="home-ashwagandha-desktop-bg"
           />
 
-          {/* LEFT SUBTLE BACKDROP FOR HIGH TEXT READABILITY */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(90deg, rgba(247, 250, 246, 0.96) 0%, rgba(247, 250, 246, 0.88) 38%, rgba(247, 250, 246, 0.15) 55%, rgba(247, 250, 246, 0) 70%)",
-              zIndex: 1,
-            }}
-          />
+          {/* DESKTOP GRADIENT BACKDROP FOR HIGH TEXT READABILITY */}
+          <div className="home-ashwagandha-desktop-gradient" />
 
-          {/* CONTENT (IMAGE 2 TEXT & BUTTONS) */}
-          <div
-            style={{
-              position: "relative",
-              zIndex: 2,
-              padding: "clamp(20px, 3.5vw, 42px) clamp(20px, 3.8vw, 44px)",
-              maxWidth: "48%",
-            }}
-          >
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "7px",
-                background: "rgba(21, 128, 61, 0.12)",
-                border: "1px solid rgba(21, 128, 61, 0.35)",
-                padding: "5px 12px",
-                borderRadius: "100px",
-                fontSize: "clamp(9.5px, 0.8vw, 11px)",
-                fontWeight: 800,
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                color: "#15803D",
-                marginBottom: "12px",
-              }}
-            >
+          {/* MOBILE VISUAL (PRODUCT BOTTLE + MEGA SALE BADGE + ROOTS & CAPSULES) */}
+          <div className="home-ashwagandha-mobile-visual">
+            <img
+              src="/images/varadaco-ashwagandha-hero-mobile.png"
+              alt="Varadaco Ashwagandha - Nature Meets Modern Wellness"
+              className="home-ashwagandha-mobile-img"
+            />
+            <div className="home-ashwagandha-mobile-fade" />
+          </div>
+
+          {/* CONTENT (COPY & ACTION BUTTONS) */}
+          <div className="home-ashwagandha-content">
+            <div className="home-ashwagandha-badge">
               <Sparkles size={12} />
               <span>SPECIAL LAUNCH OFFER</span>
             </div>
 
-            <h3
-              style={{
-                fontSize: "clamp(1.4rem, 2.5vw, 2.3rem)",
-                fontWeight: 900,
-                marginBottom: "10px",
-                color: "#0D2619",
-                lineHeight: 1.15,
-                fontFamily: "var(--font-serif), serif",
-              }}
-            >
+            <h3 className="home-ashwagandha-title">
               Ashwagandha — Nature Meets Modern Wellness
             </h3>
 
-            <p
-              style={{
-                color: "#2D4A38",
-                fontSize: "clamp(12.5px, 1.1vw, 14.5px)",
-                lineHeight: "1.6",
-                marginBottom: "20px",
-                maxWidth: "440px",
-                fontWeight: 500,
-              }}
-            >
+            <p className="home-ashwagandha-desc">
               Discover carefully developed Ashwagandha products designed for today's wellness market. Choose Varadaco for quality-focused sourcing, formulation and manufacturing support.
             </p>
 
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            <div className="home-ashwagandha-btn-group">
               <Link
                 href="/products#ashwagandha"
-                className="button button-dark"
-                style={{
-                  background: "#15803D",
-                  borderColor: "#15803D",
-                  color: "#FFFFFF",
-                  fontWeight: 800,
-                  fontSize: "clamp(11.5px, 0.95vw, 13.5px)",
-                  padding: "9px 18px",
-                  borderRadius: "100px",
-                  boxShadow: "0 6px 18px rgba(21, 128, 61, 0.35)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  textDecoration: "none",
-                }}
+                className="home-ashwagandha-btn home-ashwagandha-btn-primary"
               >
                 Explore Ashwagandha →
               </Link>
               <Link
                 href="/contact?inquiry=ashwagandha-bulk"
-                className="button"
-                style={{
-                  background: "rgba(255, 255, 255, 0.95)",
-                  backdropFilter: "blur(6px)",
-                  border: "1.5px solid rgba(21, 128, 61, 0.4)",
-                  color: "#0D2619",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  padding: "12px 22px",
-                  borderRadius: "100px",
-                  boxShadow: "0 4px 14px rgba(0, 0, 0, 0.08)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  textDecoration: "none",
-                }}
+                className="home-ashwagandha-btn home-ashwagandha-btn-secondary"
               >
                 Enquire for Bulk / Manufacturing →
               </Link>

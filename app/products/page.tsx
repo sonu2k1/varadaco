@@ -519,46 +519,30 @@ export default function ProductsPage() {
             }}
             className="products-ashwagandha-hero-container"
           >
-            {/* BACKGROUND IMAGE (BOTTLE + LIVE SALE 30% OFF + ROOTS & CAPSULES + RIGHT PILL CARDS) */}
+            {/* DESKTOP BACKGROUND IMAGE (BOTTLE + LIVE SALE 30% OFF + ROOTS & CAPSULES + RIGHT PILL CARDS) */}
             <img
               src="/images/products-ashwagandha-hero.png"
               alt="Ashwagandha - Pure, Potent, Natural. For a Stronger, Healthier You"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center right",
-                zIndex: 0,
-              }}
+              className="products-ashwagandha-desktop-bg"
             />
 
-            {/* LEFT BACKDROP GRADIENT MASK (SOFT BLEND FOR TEXT CONTRAST) */}
+            {/* DESKTOP LEFT BACKDROP GRADIENT MASK (SOFT BLEND FOR TEXT CONTRAST) */}
             <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                background: "linear-gradient(90deg, rgba(246, 246, 244, 0.5) 0%, rgba(246, 246, 244, 0.2) 35%, rgba(246, 246, 244, 0) 50%)",
-                zIndex: 1,
-                pointerEvents: "none",
-              }}
               className="products-ashwagandha-backdrop-mask"
             />
 
-            {/* LIVE CODED LEFT CONTENT */}
+            {/* MOBILE HERO VISUAL (BOTTLE + LIVE SALE 30% OFF + ROOTS & CAPSULES + FEATURE CARDS) */}
+            <div className="products-ashwagandha-mobile-visual">
+              <img
+                src="/images/products-ashwagandha-hero-mobile.png"
+                alt="Ashwagandha - Pure, Potent, Natural. For a Stronger, Healthier You"
+                className="products-ashwagandha-mobile-img"
+              />
+              <div className="products-ashwagandha-mobile-fade" />
+            </div>
+
+            {/* LIVE CODED CONTENT */}
             <div
-              style={{
-                position: "relative",
-                zIndex: 2,
-                padding: "clamp(24px, 3.8vw, 44px) clamp(24px, 4vw, 50px)",
-                maxWidth: "520px",
-                width: "100%",
-              }}
               className="products-ashwagandha-content-left"
             >
               {/* BADGE */}
