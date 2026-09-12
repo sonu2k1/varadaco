@@ -5103,3 +5103,20 @@ em {
     grid-column: span 1;
   }
 }
+
+/* Sample Checkout Modal Responsive Grid */
+@media (max-width: 860px) {
+  .checkout-two-col-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+}
+
+@media (min-width: 1140px) {
+  .checkout-doodle-text {
+    display: block !important;
+  }
+  .success-doodle-text {
+    display: block !important;
+  }
+}

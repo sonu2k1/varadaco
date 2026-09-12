@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderConfirmationModal from "./OrderConfirmationModal";
+import SampleCheckoutModal from "./SampleCheckoutModal";
 import RazorpayModal, { RazorpayPaymentDetails } from "./RazorpayModal";
 import {
   Check,
@@ -878,6 +879,7 @@ export default function ProductJourneyModal({
 
   const [sampleOrdered, setSampleOrdered] = useState(false);
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
+  const [showSampleCheckout, setShowSampleCheckout] = useState(false);
   const [showRazorpay, setShowRazorpay] = useState(false);
   const [razorpayPayment, setRazorpayPayment] = useState<RazorpayPaymentDetails | null>(null);
   const [sampleForm, setSampleForm] = useState({
@@ -3614,9 +3616,7 @@ export default function ProductJourneyModal({
                     </div>
 
                     <button
-                      onClick={() => {
-                        window.open("https://razorpay.com", "_blank");
-                      }}
+                      onClick={() => setShowSampleCheckout(true)}
                       style={{
                         marginTop: "12px",
                         background: "#15803D",
@@ -3712,6 +3712,18 @@ export default function ProductJourneyModal({
           shippingMethod: "Standard shipping",
           orderId: "ID12345",
         }}
+      />
+
+      {/* Sample Checkout & Payment Modal (Exact User Spec) */}
+      <SampleCheckoutModal
+        isOpen={showSampleCheckout}
+        onClose={() => setShowSampleCheckout(false)}
+        productName={productName}
+        dosage="200 mg"
+        units={selectedMoq}
+        bottleImage={selectedBottle.image || "/images/ashwagandha-why-product.png"}
+        bottleName={selectedBottle.name}
+        totalAmount={calculations.totalInvestment || 54500}
       />
 
       {/* Razorpay Standard Checkout Modal */}
