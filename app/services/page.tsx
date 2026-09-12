@@ -62,7 +62,7 @@ const serviceList = [
     ],
     ctaText: "Start Product Development →",
     ctaLink: "/contact?service=product-development",
-    image: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=900&q=80",
+    image: "/images/unsplash/photo-1579165466741-7f35e4755660.jpg",
     icon: FlaskConical,
     badge: "Turnkey Formulation",
   },
@@ -81,7 +81,7 @@ const serviceList = [
     ],
     ctaText: "Explore Packaging →",
     ctaLink: "/contact?service=packaging",
-    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80",
+    image: "/images/unsplash/photo-1587854692152-cbe660dbde88.jpg",
     icon: Package,
     badge: "Market-Ready Presentation",
   },
@@ -96,7 +96,7 @@ export default function ServicesPage() {
       <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
-            src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1920&q=85"
+            src="/images/unsplash/photo-1532187863486-abf9dbad1b69.jpg"
             alt="Pharmaceutical formulation laboratory and cleanroom manufacturing"
           />
         </div>

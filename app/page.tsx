@@ -97,7 +97,7 @@ const timelineSteps = [
     step: "01",
     name: "Discover",
     desc: "Understand product idea, target customer & market requirement",
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
     badge: "01 • Discovery & Concept",
     alt: "Concept research and molecular botanical discovery",
   },
@@ -105,7 +105,7 @@ const timelineSteps = [
     step: "02",
     name: "Develop & Sample",
     desc: "Work on formulation, product format and sample prototypes",
-    image: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/unsplash/photo-1579165466741-7f35e4755660.jpg",
     badge: "02 • Formulation & Sampling",
     alt: "Formulation laboratory scientist testing bioavailable nutrition",
   },
@@ -113,7 +113,7 @@ const timelineSteps = [
     step: "03",
     name: "Refine & Manufacture",
     desc: "Make required improvements & move toward commercial production",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/unsplash/photo-1581091226825-a6a2a5aee158.jpg",
     badge: "03 • Cleanroom Commercial Scaling",
     alt: "Automated high-speed pharmaceutical manufacturing",
   },
@@ -121,7 +121,7 @@ const timelineSteps = [
     step: "04",
     name: "Package & Launch",
     desc: "Complete the product with suitable packaging and labelling",
-    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/unsplash/photo-1587854692152-cbe660dbde88.jpg",
     badge: "04 • Shelf-Ready Packaging",
     alt: "Automated pharmaceutical bottle filling and packaging line",
   },
@@ -131,49 +131,49 @@ const portfolioItems = [
   {
     title: "Ayurvedic & Herbal Products",
     desc: "Classical and proprietary herbal wellness formulations and standardized extracts.",
-    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1615397349754-cfa2066a298e.jpg",
     href: "/products",
   },
   {
     title: "Nutraceutical Supplements",
     desc: "High-potency vitamin blends, minerals, and bio-available vitality complexes.",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1584308666744-24d5c474f2ae.jpg",
     href: "/products",
   },
   {
     title: "Digestive & Gut Health",
     desc: "Triphala, prebiotics, digestive enzymes and gastrointestinal support.",
-    image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1498837167922-ddd27525d352.jpg",
     href: "/products",
   },
   {
     title: "Women's Wellness",
     desc: "Targeted formulations for hormonal balance, bone density, and energy.",
-    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1543362906-acfc16c67564.jpg",
     href: "/products",
   },
   {
     title: "Men's Wellness",
     desc: "Stamina, vitality, and physical performance adaptogen formulations.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1534438327276-14e5300c3a48.jpg",
     href: "/products",
   },
   {
     title: "Immunity & Antioxidant Support",
     desc: "Curcumin, Vitamin C, Zinc and cellular defense botanical complexes.",
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1518531933037-91b2f5f229cc.jpg",
     href: "/products",
   },
   {
     title: "Weight Management",
     desc: "Metabolism boosters, garcinia extracts and clean nutritional powders.",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1517836357463-d25dfeac3438.jpg",
     href: "/products",
   },
   {
     title: "Heart & Brain Wellness",
     desc: "Omega complexes, Brahmi, CoQ10 and cognitive clarity formulations.",
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
+    image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
     href: "/products",
   },
 ];
@@ -321,7 +321,7 @@ export default function Home() {
                 <span>Explore Our Products</span>
                 <ArrowRight size={15} />
               </Link>
-              <Link href="/contact" className="pharma-hero-btn" style={{ background: "rgba(255, 255, 255, 0.15)", border: "1px solid rgba(255, 255, 255, 0.3)" }}>
+              <Link href="/contact" className="pharma-hero-btn" style={{ background: "rgba(21, 128, 61, 0.08)", border: "1.5px solid #15803D", color: "#15803D" }}>
                 <span>Partner With Us</span>
                 <ArrowRight size={15} />
               </Link>
@@ -884,7 +884,7 @@ export default function Home() {
           <div className="globe-sphere-wrapper">
             <div className="globe-atmosphere-glow" />
             <img
-              src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=1200&q=85"
+              src="/images/unsplash/photo-1614730321146-b6fa6a46bcb4.jpg"
               alt="Global nutraceutical supply network"
               className="globe-image"
             />

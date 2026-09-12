@@ -465,7 +465,7 @@ export default function FormulationSimulator() {
                 onError={(e) => {
                   // Fallback to botanical unsplash photo if needed
                   e.currentTarget.src =
-                    "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=85";
+                    "/images/unsplash/photo-1615485290382-441e4d049cb5.jpg";
                 }}
               />
 
@@ -844,7 +844,7 @@ export default function FormulationSimulator() {
 
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <img
-                  src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=100&q=80"
+                  src="/images/unsplash/photo-1584308666744-24d5c474f2ae.jpg"
                   alt="Bottle"
                   style={{ width: "32px", height: "38px", objectFit: "contain", borderRadius: "4px" }}
                 />
@@ -856,7 +856,7 @@ export default function FormulationSimulator() {
 
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <img
-                  src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=100&q=80"
+                  src="/images/unsplash/photo-1530587191325-3db32d826c18.jpg"
                   alt="Packaging"
                   style={{ width: "32px", height: "38px", objectFit: "contain", borderRadius: "4px" }}
                 />
@@ -868,7 +868,7 @@ export default function FormulationSimulator() {
 
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <img
-                  src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=100&q=80"
+                  src="/images/unsplash/photo-1556228720-195a672e8a03.jpg"
                   alt="Label"
                   style={{ width: "32px", height: "38px", objectFit: "contain", borderRadius: "4px" }}
                 />

@@ -28,7 +28,7 @@ const categories = [
     id: "ayurvedic-herbal",
     title: "Ayurvedic & Herbal Products",
     shortDesc: "Classical and proprietary herbal wellness formulations and standardized extracts.",
-    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1615397349754-cfa2066a298e.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "Ashwagandha, Shilajit, Mulethi, Triphala, Brahmi",
     packSize: "60 Capsules / 100g / 500g Bulk",
@@ -41,7 +41,7 @@ const categories = [
     id: "nutraceutical-supplements",
     title: "Nutraceutical Supplements",
     shortDesc: "High-potency vitamin blends, active minerals, and bioavailable vitality complexes.",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1584308666744-24d5c474f2ae.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "Multivitamins, Minerals, Amino Acids, Bioactive Peptides",
     packSize: "30 / 60 / 90 Count, 250g Powders",
@@ -54,7 +54,7 @@ const categories = [
     id: "digestive-gut-health",
     title: "Digestive & Gut Health",
     shortDesc: "Triphala, prebiotics, digestive enzymes and gastrointestinal vitality.",
-    image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1498837167922-ddd27525d352.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "Triphala, Isabgol, Probiotic Blends, Digestive Enzymes",
     packSize: "60 Capsules / 120g Powder Jars",
@@ -67,7 +67,7 @@ const categories = [
     id: "womens-wellness",
     title: "Women's Wellness",
     shortDesc: "Targeted formulations for hormonal balance, bone density, and vitality.",
-    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1543362906-acfc16c67564.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "Shatavari, Iron + Folic Acid, Calcium D3, Myo-Inositol",
     packSize: "60 Count Bottles / Single Stick Packs",
@@ -80,7 +80,7 @@ const categories = [
     id: "mens-wellness",
     title: "Men's Wellness",
     shortDesc: "Stamina, vitality, and physical performance adaptogen formulations.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1534438327276-14e5300c3a48.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "Shilajit, Gokshura, Safed Musli, Zinc Monomethionine",
     packSize: "60 Capsules / 100g Resin/Powder",
@@ -93,7 +93,7 @@ const categories = [
     id: "immunity-antioxidants",
     title: "Immunity & Antioxidant Support",
     shortDesc: "Curcumin, Vitamin C, Zinc and cellular defense botanical complexes.",
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1518531933037-91b2f5f229cc.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "95% Standardized Curcuminoids, Piperine, Amla Extract, Zinc",
     packSize: "60 Count / Effervescent 20 Tubes",
@@ -106,7 +106,7 @@ const categories = [
     id: "weight-management",
     title: "Weight Management",
     shortDesc: "Metabolism boosters, garcinia extracts and clean nutritional powders.",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1517836357463-d25dfeac3438.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "Garcinia Cambogia, Green Tea EGCG, CLA, Plant Proteins",
     packSize: "60 Capsules / 500g Powders",
@@ -119,7 +119,7 @@ const categories = [
     id: "heart-brain-wellness",
     title: "Heart & Brain Wellness",
     shortDesc: "Omega complexes, Brahmi, CoQ10 and cognitive clarity formulations.",
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
     formats: "Capsule / Tablet / Powder",
     keyIngredients: "Brahmi (Bacopa 20%), Shankhpushpi, CoQ10, Flaxseed Omega",
     packSize: "60 Softgels / Capsules",
@@ -139,7 +139,7 @@ export default function PortfolioPage() {
       <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
-            src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=1920&q=85"
+            src="/images/unsplash/photo-1512069772995-ec65ed45afd6.jpg"
             alt="Botanical herbs and nutraceutical ingredients"
           />
         </div>

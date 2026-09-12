@@ -96,7 +96,7 @@ const products: Record<string, Product> = {
         shortDesc: "Helps body adapt to stress and improves energy.",
         fullDesc:
           "A powerful adaptogen that helps the body manage stress, improves stamina, supports hormonal balance and promotes overall well-being.",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1509316975850-ff9c5deb0cd9.jpg",
         dosage: "600mg Standardized Extract",
         benefits: ["Reduces Stress & Anxiety", "Improves Sleep Quality", "Enhances Strength", "Supports Immune System"],
       },
@@ -107,7 +107,7 @@ const products: Record<string, Product> = {
         shortDesc: "Supports brain function and reduces anxiety.",
         fullDesc:
           "Natural nitrogenous active plant compounds that soothe neurological hyperactivity, promote calm cognitive clarity, and eliminate mental stress.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
         dosage: "120mg Active Complex",
         benefits: ["Calms Nervous Overactivity", "Sharpens Cognitive Focus", "Promotes Emotional Stability", "Protects Brain Cells from Fatigue"],
       },
@@ -118,7 +118,7 @@ const products: Record<string, Product> = {
         shortDesc: "Boosts immunity and improves physical performance.",
         fullDesc:
           "High-potency botanical glycosides that stimulate immune phagocytosis, support cardiovascular blood flow, and enhance physical stamina under exertion.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1512069772995-ec65ed45afd6.jpg",
         dosage: "85mg Active Glycosides",
         benefits: ["Elevates Macrophage Activity", "Increases Physical Endurance", "Accelerates Post-Exercise Recovery", "Fights Chronic Exhaustion"],
       },
@@ -129,7 +129,7 @@ const products: Record<string, Product> = {
         shortDesc: "Powerful antioxidants that protect cells from damage.",
         fullDesc:
           "Potent botanical polyphenols that scavenge reactive oxygen species, shield mitochondrial membranes, and reduce systemic micro-inflammation.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1540420773420-3366772f4999.jpg",
         dosage: "45mg Plant Polyphenols",
         benefits: ["Scavenges Free Radicals", "Reduces Muscle Soreness", "Supports Cardiovascular Health", "Promotes Youthful Vitality"],
       },
@@ -174,7 +174,7 @@ const products: Record<string, Product> = {
         shortDesc: "Supercharges cellular nutrient transport and energy.",
         fullDesc:
           "A powerful organic electrolyte that penetrates mitochondrial membranes, transporting vital minerals directly into cells for explosive energy.",
-        image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1518531933037-91b2f5f229cc.jpg",
         dosage: "500mg Purified Himalayan Extract",
         benefits: ["Boosts Mitochondrial ATP Energy", "Accelerates Deep Nutrient Uptake", "Promotes Cellular Detoxification", "Reduces Physical & Mental Fatigue"],
       },
@@ -184,7 +184,7 @@ const products: Record<string, Product> = {
         scientificName: "Macro & Micro Trace Spectrum",
         shortDesc: "Restores electrolyte balance and muscular endurance.",
         fullDesc: "Full spectrum of ionic zinc, magnesium, selenium, iron, and silica in micro-chelated bioavailable form.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
         dosage: "Natural Ionic Blend",
         benefits: ["Prevents Muscle Cramping & Fatigue", "Strengthens Bones & Connective Tissue", "Promotes Restorative Sleep", "Restores Daily Electrolyte Balance"],
       },
@@ -194,7 +194,7 @@ const products: Record<string, Product> = {
         scientificName: "High Molecular Humic Matrix",
         shortDesc: "Potent natural detoxifier and gut protector.",
         fullDesc: "Natural botanical humic matrix that binds to environmental toxins, supports digestion, and enhances nutrient absorption in the gut.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1540420773420-3366772f4999.jpg",
         dosage: "150mg Purified Humates",
         benefits: ["Strengthens Digestive Mucosa", "Neutralizes Heavy Metal Residues", "Protects Beneficial Microflora", "Supports Metabolic Balance"],
       },
@@ -204,7 +204,7 @@ const products: Record<string, Product> = {
         scientificName: "DBPs & Chromoproteins",
         shortDesc: "Protects and restores cellular CoQ10 levels.",
         fullDesc: "Rare bioactive compounds that shield muscle tissues against oxidative breakdown and sustain high-intensity physical performance.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1512069772995-ec65ed45afd6.jpg",
         dosage: "65mg Bioactive Complex",
         benefits: ["Elevates Muscle CoQ10 Levels", "Accelerates Workout Recovery", "Supports Healthy Testosterone", "Enhances Cardiovascular Stamina"],
       },
@@ -248,7 +248,7 @@ const products: Record<string, Product> = {
         scientificName: "Glycyrrhiza Glabra Extract",
         shortDesc: "Coats mucous membranes and eases throat discomfort.",
         fullDesc: "A natural botanical saponin that coats irritated vocal membranes, breaks up phlegm, and eases chronic dry coughing.",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1509316975850-ff9c5deb0cd9.jpg",
         dosage: "450mg Standardized Extract",
         benefits: ["Relieves Sore Throat & Hoarseness", "Soothes Acid Reflux & Gastritis", "Calms Persistent Coughing", "Strengthens Mucosal Barrier"],
       },
@@ -258,7 +258,7 @@ const products: Record<string, Product> = {
         scientificName: "Flavonoid Glycosides",
         shortDesc: "Relaxes bronchial airways and soothes spasms.",
         fullDesc: "Natural flavonoid glycosides with strong spasmolytic and anti-inflammatory properties that open bronchial airways.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1512069772995-ec65ed45afd6.jpg",
         dosage: "80mg Bioactive Matrix",
         benefits: ["Opens Constricted Airways", "Relieves Chest Tightness", "Eases Seasonal Allergy Symptoms", "Promotes Clear Breathing"],
       },
@@ -268,7 +268,7 @@ const products: Record<string, Product> = {
         scientificName: "Polyphenolic Isoflavane",
         shortDesc: "Protects against throat & digestive inflammation.",
         fullDesc: "One of the most potent plant-derived antioxidants that protects pharyngeal and esophageal tissues from acid wear.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
         dosage: "35mg Glabridin Extract",
         benefits: ["Neutralizes Gastric Acid Damage", "Calms Systemic Inflammation", "Protects Cellular DNA", "Supports Liver Health"],
       },
@@ -278,7 +278,7 @@ const products: Record<string, Product> = {
         scientificName: "Natural Polysaccharides",
         shortDesc: "Creates a gentle protective shield over tissues.",
         fullDesc: "Water-soluble plant fibers that form an instant protective liquid barrier along the throat and stomach lining.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1540420773420-3366772f4999.jpg",
         dosage: "120mg Plant Polysaccharides",
         benefits: ["Immediate Soothing Coating", "Eases Painful Swallowing", "Balances Stomach Acid", "Nourishes Gut Flora"],
       },
@@ -322,7 +322,7 @@ const products: Record<string, Product> = {
         scientificName: "Chelated Amino Acid Complex",
         shortDesc: "Highly absorbable chelated mineral for peak immunity.",
         fullDesc: "Gentle amino-acid bound zinc that fuels testosterone synthesis, white blood cell activity, and rapid tissue healing.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
         dosage: "25mg Elemental Zinc",
         benefits: ["Strengthens Innate Immune Defense", "Accelerates Muscle Recovery", "Supports Healthy Hormone Levels", "Prevents Daily Nutrient Depletion"],
       },
@@ -332,7 +332,7 @@ const products: Record<string, Product> = {
         scientificName: "Bioactive Coenzyme Vitamins",
         shortDesc: "Fuels cellular energy and eliminates mental fatigue.",
         fullDesc: "Pre-methylated folate (5-MTHF) and methylcobalamin B12 that convert carbohydrates and proteins directly into cellular ATP.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1512069772995-ec65ed45afd6.jpg",
         dosage: "High Potency B-Spectrum",
         benefits: ["Eliminates Afternoon Energy Crashes", "Sharpens Mental Alertness", "Enhances Red Blood Cell Oxygenation", "Nurtures Healthy Nervous System"],
       },
@@ -342,7 +342,7 @@ const products: Record<string, Product> = {
         scientificName: "Lichen D3 + MK-7 Menaquinone",
         shortDesc: "Synergistic duo for strong bones and heart health.",
         fullDesc: "Plant-derived cholecalciferol combined with natural fermented Menaquinone-7 to direct calcium into bones, not arteries.",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1509316975850-ff9c5deb0cd9.jpg",
         dosage: "2000 IU D3 + 55mcg K2",
         benefits: ["Maximizes Calcium Bone Deposition", "Elevates Mood and Vitality", "Supports Immune Cell Signaling", "Promotes Vascular Flexibility"],
       },
@@ -352,7 +352,7 @@ const products: Record<string, Product> = {
         scientificName: "Piperine & Bio-enhancers",
         shortDesc: "Combats daily oxidative stress & athletic fatigue.",
         fullDesc: "Standardized herbal actives including Piperine for 2000% increased nutrient absorption and sustained daily physical endurance.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1540420773420-3366772f4999.jpg",
         dosage: "100mg Bioactive Matrix",
         benefits: ["Multiplies Micronutrient Uptake", "Fights Exercise-Induced Soreness", "Balances Adrenal Response", "Promotes Longevity & Vigor"],
       },
@@ -396,7 +396,7 @@ const products: Record<string, Product> = {
         scientificName: "Emblica Officinalis",
         shortDesc: "Richest botanical source of Vitamin C and antioxidants.",
         fullDesc: "Potent rejuvenating rasayana that protects gut mucosal membranes, supports cellular immunity, and neutralizes free radicals.",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1509316975850-ff9c5deb0cd9.jpg",
         dosage: "250mg Pure Extract",
         benefits: ["High Vitamin C Immune Shield", "Enhances Digestive Absorption", "Rejuvenates Liver Tissue", "Promotes Longevity"],
       },
@@ -406,7 +406,7 @@ const products: Record<string, Product> = {
         scientificName: "Terminalia Bellirica",
         shortDesc: "Clears excess mucus, toxins, and internal congestion.",
         fullDesc: "Detoxifying fruit extract with powerful astringent qualities that breaks down stubborn mucosal toxins in the respiratory and GI tract.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1532094349884-543bc11b234d.jpg",
         dosage: "250mg Pure Extract",
         benefits: ["Clears Respiratory Phlegm", "Detoxifies Blood Vessels", "Eliminates Internal Toxins", "Supports Gut Flora"],
       },
@@ -416,7 +416,7 @@ const products: Record<string, Product> = {
         scientificName: "Terminalia Chebula",
         shortDesc: "The King of Medicines for complete colon harmony.",
         fullDesc: "Gentle natural bowel regulator that stimulates peristalsis without causing dependency, cramping, or loose stools.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1512069772995-ec65ed45afd6.jpg",
         dosage: "250mg Pure Extract",
         benefits: ["Stimulates Healthy Peristalsis", "Balances Stomach Acidity", "Promotes Nutrient Assimilation", "Soothes Gut Spasms"],
       },
@@ -426,231 +426,9 @@ const products: Record<string, Product> = {
         scientificName: "Commiphora Mukul Resin",
         shortDesc: "Standardized guggulsterones for healthy lipid metabolism.",
         fullDesc: "Purified resin rich in E- and Z-Guggulsterones that optimize cholesterol binding and alleviate joint swelling.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+        image: "/images/unsplash/photo-1540420773420-3366772f4999.jpg",
         dosage: "250mg Purified Resin",
         benefits: ["Optimizes HDL/LDL Balance", "Relieves Arthritis Pain", "Supports Thyroid Metabolism", "Cleanses Arterial Channels"],
-      },
-    ],
-  },
-  brahmi: {
-    id: "brahmi",
-    name: "Brahmi Shankhpushpi",
-    category: "Neuro-Cognitive Medicine",
-    tagline: "Brain Vitality, Memory & Calm Focus",
-    subtitle: "Standardized Medhya Rasayana • 50% Bacosides for Cognitive Sharpness",
-    price: 649,
-    originalPrice: 1199,
-    rating: 4.96,
-    reviewCount: 1890,
-    badge: "Brain Focus",
-    image: "/products/brahmi.jpg",
-    keyHighlights: [
-      "Enhances Memory Retention & Rapid Recall",
-      "Calms Mental Anxiety & Nervous Exhaustion",
-      "Sharpens Concentration During Long Cognitive Tasks",
-      "Protects Neural Synapses Against Oxidative Fatigue",
-    ],
-    badges: [
-      { label: "100% Natural", icon: "leaf" },
-      { label: "Lab Tested", icon: "flask" },
-      { label: "No Added Sugar", icon: "ban" },
-      { label: "Vegetarian", icon: "veg" },
-    ],
-    understandBenefits: [
-      "Enhances Memory & Recall",
-      "Calms Nervous Anxiety",
-      "Sharpens Brain Focus",
-      "Protects Synaptic Transmitters",
-      "Promotes Deep Mental Calm",
-    ],
-    ingredients: [
-      {
-        id: "bacopa",
-        name: "Bacopa Monnieri (50% Bacosides)",
-        scientificName: "Bacopa Monnieri Leaf Extract",
-        shortDesc: "Crosses blood-brain barrier to repair neural synapses.",
-        fullDesc: "Standardized Bacosides A & B that stimulate kinase activity, accelerating synaptic impulse transmission for swift mental processing.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
-        dosage: "300mg Standardized Extract",
-        benefits: ["Sharpens Memory Retention", "Repairs Damaged Neurons", "Enhances Verbal Recall", "Suppresses Mental Fog"],
-      },
-      {
-        id: "shankhpushpi",
-        name: "Shankhpushpi Extract",
-        scientificName: "Convolvulus Pluricaulis",
-        shortDesc: "Classical Ayurvedic brain tonic that quiets mental chatter.",
-        fullDesc: "Potent medhya herb that normalizes cortisol spikes and stimulates calm alpha brain waves for tranquil focus.",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
-        dosage: "200mg Botanical Extract",
-        benefits: ["Calms Mental Restlessness", "Supports Sound Sleep Quality", "Relieves Work Stress & Tension", "Nourishes Nervous Tissue"],
-      },
-      {
-        id: "gotukola",
-        name: "Gotu Kola Extract",
-        scientificName: "Centella Asiatica",
-        shortDesc: "Known as the Herb of Longevity for cerebral micro-circulation.",
-        fullDesc: "Triterpenoid asiaticosides that expand cerebral capillary oxygenation, preventing mental fatigue during intensive tasks.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
-        dosage: "150mg Triterpene Complex",
-        benefits: ["Increases Cerebral Blood Flow", "Reduces Mental Burnout", "Supports Collagen in Vessels", "Enhances Alertness"],
-      },
-      {
-        id: "jyotishmati",
-        name: "Jyotishmati Extract",
-        scientificName: "Celastrus Paniculatus",
-        shortDesc: "The Intellect Tree extract for lightning-fast memory.",
-        fullDesc: "Rare seed bioactives that elevate acetylcholine levels in the hippocampus, boosting processing speed and cognitive stamina.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
-        dosage: "100mg Active Seed Extract",
-        benefits: ["Elevates Acetylcholine Levels", "Improves Critical Reasoning", "Protects Brain Cells", "Enhances Cognitive Endurance"],
-      },
-    ],
-  },
-  karela: {
-    id: "karela",
-    name: "Karela Jamun & Giloy",
-    category: "Glucose & Pancreas Medicine",
-    tagline: "Blood Sugar Balance & Pancreatic Health",
-    subtitle: "Standardized Botanical Formula • Charantin + Polypeptide-P Complex",
-    price: 599,
-    originalPrice: 1099,
-    rating: 4.88,
-    reviewCount: 1620,
-    badge: "Glucose Control",
-    image: "/products/karela.jpg",
-    keyHighlights: [
-      "Regulates Fasting & Postprandial Blood Glucose",
-      "Supports Pancreatic Beta-Cell Insulin Sensitivity",
-      "Suppresses Stubborn Carbohydrate & Sugar Cravings",
-      "Purifies Blood Toxins & Boosts Metabolic Stamina",
-    ],
-    badges: [
-      { label: "100% Natural", icon: "leaf" },
-      { label: "Lab Tested", icon: "flask" },
-      { label: "No Added Sugar", icon: "ban" },
-      { label: "Vegetarian", icon: "veg" },
-    ],
-    understandBenefits: [
-      "Balances Healthy Glucose",
-      "Enhances Insulin Sensitivity",
-      "Curbs Sugar Cravings",
-      "Detoxifies Blood & Liver",
-      "Prevents Diabetic Fatigue",
-    ],
-    ingredients: [
-      {
-        id: "charantin",
-        name: "Momordica Charantia (Charantin)",
-        scientificName: "Bitter Melon Fruit Extract",
-        shortDesc: "Plant insulin analog that drives glucose uptake into cells.",
-        fullDesc: "Bioactive Charantin and Polypeptide-P act like natural insulin, facilitating glucose transport into muscular tissue.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
-        dosage: "300mg Standardized Charantin",
-        benefits: ["Lowers High Blood Glucose", "Facilitates Cellular Glycogen", "Supports Healthy Weight", "Reduces Sugar Spikes"],
-      },
-      {
-        id: "jamun",
-        name: "Jamun Seed Extract",
-        scientificName: "Syzygium Cumini Seed",
-        shortDesc: "Jamboline converts starch into energy instead of sugar.",
-        fullDesc: "Natural glycoside Jamboline slows down the enzymatic conversion of dietary starches into free sugars in the bloodstream.",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
-        dosage: "250mg Active Seed Extract",
-        benefits: ["Prevents Post-Meal Sugar Surges", "Protects Kidney & Liver Health", "Rich in Ellagic Acid", "Reduces Frequent Urination"],
-      },
-      {
-        id: "giloy",
-        name: "Giloy (Tinospora Cordifolia)",
-        scientificName: "Guduchi Stem Extract",
-        shortDesc: "Rasayana herb that protects organs against diabetic fatigue.",
-        fullDesc: "Immuno-modulatory cordifolioside that rejuvenates pancreatic islet cells and shields blood vessels from oxidative glycation.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
-        dosage: "200mg Stem Extract",
-        benefits: ["Rejuvenates Pancreatic Tissue", "Purifies Blood Toxins", "Strengthens Immunity", "Relieves Chronic Lethargy"],
-      },
-      {
-        id: "gurmar",
-        name: "Gurmar (Gymnema Sylvestre)",
-        scientificName: "Gymnemic Acid Complex",
-        shortDesc: "The Sugar Destroyer that blocks intestinal sugar absorption.",
-        fullDesc: "Gymnemic acids occupy glucose receptors on the tongue and intestinal wall, eliminating sugar cravings instantly.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
-        dosage: "150mg Standardized Leaves",
-        benefits: ["Blocks Intestinal Sugar Absorption", "Suppresses Sweet Food Cravings", "Supports Healthy HbA1c", "Regulates Lipid Profiles"],
-      },
-    ],
-  },
-  curcumin: {
-    id: "curcumin",
-    name: "Curcumin & Boswellia",
-    category: "Joint & Pain Medicine",
-    tagline: "Joint Flexibility & Rapid Pain Relief",
-    subtitle: "Standardized 95% Curcuminoids + AKBA 30% for Natural Anti-Inflammatory Action",
-    price: 749,
-    originalPrice: 1399,
-    rating: 4.94,
-    reviewCount: 2150,
-    badge: "Pain Relief",
-    image: "/products/curcumin.jpg",
-    keyHighlights: [
-      "Fast Relief from Knee, Back & Joint Inflammation",
-      "Standardized 95% Curcuminoids + AKBA 30% Boswellia",
-      "Rebuilds Joint Synovial Fluid & Cartilage Cushion",
-      "Zero Stomach Irritation or NSAID Side-Effects",
-    ],
-    badges: [
-      { label: "100% Natural", icon: "leaf" },
-      { label: "Lab Tested", icon: "flask" },
-      { label: "No Added Sugar", icon: "ban" },
-      { label: "Vegetarian", icon: "veg" },
-    ],
-    understandBenefits: [
-      "Relieves Chronic Joint Pain",
-      "Restores Knee Flexibility",
-      "Inhibits COX-2 & 5-LOX",
-      "Rebuilds Joint Cartilage",
-      "100% Safe on Stomach & Heart",
-    ],
-    ingredients: [
-      {
-        id: "curcumin95",
-        name: "Curcuma Longa (95% Curcuminoids)",
-        scientificName: "Standardized Turmeric Extract",
-        shortDesc: "Gold-standard plant antioxidant for joint inflammation.",
-        fullDesc: "Standardized to 95% Curcumin, Demethoxycurcumin & Bisdemethoxycurcumin to inhibit NF-kB inflammatory cytokines.",
-        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
-        dosage: "450mg Standardized Extract",
-        benefits: ["Inhibits Inflammatory Pathways", "Soothes Swollen Arthritic Joints", "Protects Cartilage Tissue", "Potent Antioxidant Shield"],
-      },
-      {
-        id: "boswellia",
-        name: "Boswellia Serrata (AKBA 30%)",
-        scientificName: "Shallaki Frankincense Gum Resin",
-        shortDesc: "Fast-acting frankincense resin that halts joint degeneration.",
-        fullDesc: "Standardized Acetyl-11-Keto-Beta-Boswellic Acid (AKBA) selectively inhibits 5-LOX enzyme without mucosal damage.",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
-        dosage: "250mg Purified Resin",
-        benefits: ["Inhibits 5-LOX Inflammatory Enzyme", "Prevents Cartilage Breakdown", "Increases Walking Distance", "Rapid Pain Reduction"],
-      },
-      {
-        id: "piperine",
-        name: "Black Pepper Extract (Piperine 95%)",
-        scientificName: "Piper Nigrum Extract",
-        shortDesc: "Increases Curcumin absorption by over 2000%.",
-        fullDesc: "Thermogenic alkaloid that inhibits hepatic glucuronidation, enabling maximum systemic bioavailability of joint bioactives.",
-        image: "https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80",
-        dosage: "10mg Bio-Enhancer",
-        benefits: ["Multiplies Curcumin Absorption 20x", "Enhances Cellular Bioavailability", "Aids Thermogenic Metabolism", "Prevents Liver Clearance"],
-      },
-      {
-        id: "gingerol",
-        name: "Zingiber Officinale (Gingerol 5%)",
-        scientificName: "Sunthi Dried Ginger Extract",
-        shortDesc: "Natural circulatory stimulant that eases morning stiffness.",
-        fullDesc: "Active gingerols provide synergistic analgesic relief, boosting blood supply to cold, stiff cartilage and joints.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80",
-        dosage: "100mg Standardized Extract",
-        benefits: ["Relieves Morning Joint Stiffness", "Improves Synovial Blood Flow", "Soothes Digestion", "Aids Musculoskeletal Comfort"],
       },
     ],
   },
@@ -979,16 +757,17 @@ export default function ProductsPage() {
               Quick Formula Select
             </span>
             <span style={{ fontSize: "12px", color: "#64748b" }}>
-              8 Formulations
+              5 Formulations
             </span>
           </div>
 
           <div
             style={{
               display: "flex",
-              gap: "18px",
+              justifyContent: "space-between",
+              gap: "clamp(16px, 2vw, 26px)",
               overflowX: "auto",
-              paddingBottom: "12px",
+              paddingBottom: "16px",
               paddingTop: "6px",
             }}
           >
@@ -1006,23 +785,23 @@ export default function ProductsPage() {
                     alignItems: "center",
                     cursor: "pointer",
                     flexShrink: 0,
-                    minWidth: "95px",
+                    minWidth: "clamp(115px, 8.5vw, 140px)",
                   }}
                 >
                   <div
                     style={{
-                      width: "82px",
-                      height: "82px",
+                      width: "clamp(105px, 7.8vw, 126px)",
+                      height: "clamp(105px, 7.8vw, 126px)",
                       borderRadius: "50%",
                       overflow: "hidden",
-                      border: isSelected ? "3px solid #15803D" : "2px solid #D5E0D5",
+                      border: isSelected ? "3.5px solid #15803D" : "2.5px solid #D5E0D5",
                       background: "#ffffff",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       boxShadow: isSelected
-                        ? "0 8px 22px rgba(21, 128, 61, 0.25)"
-                        : "0 4px 14px rgba(13, 38, 25, 0.06)",
+                        ? "0 10px 26px rgba(21, 128, 61, 0.28)"
+                        : "0 6px 18px rgba(13, 38, 25, 0.08)",
                       position: "relative",
                       transition: "all 0.2s",
                     }}
@@ -1040,11 +819,12 @@ export default function ProductsPage() {
 
                   <span
                     style={{
-                      marginTop: "8px",
-                      fontSize: "12.5px",
+                      marginTop: "12px",
+                      fontSize: "14px",
                       fontWeight: isSelected ? 800 : 700,
                       color: isSelected ? "#15803D" : "#1e293b",
                       textAlign: "center",
+                      letterSpacing: "-0.01em",
                     }}
                   >
                     {prod.name.split(" ")[0]}
@@ -1155,13 +935,8 @@ export default function ProductsPage() {
           </div>
 
           {/* Responsive 8-Product Grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "24px",
-            }}
-          >
+          {/* Responsive 5-Product Grid */}
+          <div className="products-clinical-grid">
             {Object.values(products).map((prod, index) => (
               <motion.div
                 key={prod.id}
@@ -1174,9 +949,9 @@ export default function ProductsPage() {
                 whileTap={{ scale: 0.98 }}
                 style={{
                   background: "#ffffff",
-                  borderRadius: "26px",
+                  borderRadius: "22px",
                   border: "1.5px solid #D5E0D5",
-                  padding: "24px 20px",
+                  padding: "18px 14px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -1200,14 +975,14 @@ export default function ProductsPage() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "14px",
-                    left: "14px",
+                    top: "10px",
+                    left: "10px",
                     background: "rgba(124, 168, 50, 0.1)",
                     color: "#7CA832",
                     border: "1px solid rgba(124, 168, 50, 0.25)",
-                    padding: "3px 10px",
+                    padding: "2px 8px",
                     borderRadius: "100px",
-                    fontSize: "11px",
+                    fontSize: "10.5px",
                     fontWeight: 800,
                     letterSpacing: "0.04em",
                     zIndex: 2,
@@ -1220,36 +995,36 @@ export default function ProductsPage() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "14px",
-                    right: "14px",
+                    top: "10px",
+                    right: "10px",
                     display: "flex",
                     alignItems: "center",
-                    gap: "4px",
-                    fontSize: "12px",
+                    gap: "3px",
+                    fontSize: "11px",
                     fontWeight: 800,
                     color: "#1E251F",
                     background: "#ffffff",
-                    padding: "3px 8px",
+                    padding: "2px 7px",
                     borderRadius: "100px",
                     border: "1px solid #e2e8f0",
                     boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
                     zIndex: 2,
                   }}
                 >
-                  <Star size={12} fill="#E8A324" color="#E8A324" />
+                  <Star size={11} fill="#E8A324" color="#E8A324" />
                   <span>{prod.rating}</span>
                 </div>
 
                 {/* Real Commercial Product Photography Container */}
                 <div
                   style={{
-                    height: "210px",
+                    height: "170px",
                     width: "100%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    margin: "6px 0 16px",
-                    borderRadius: "18px",
+                    margin: "4px 0 12px",
+                    borderRadius: "14px",
                     overflow: "hidden",
                     background: "#f8fafc",
                     position: "relative",
@@ -1270,12 +1045,12 @@ export default function ProductsPage() {
                 {/* Category tag */}
                 <span
                   style={{
-                    fontSize: "11px",
+                    fontSize: "10px",
                     fontWeight: 800,
                     color: "#15803D",
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
-                    marginBottom: "4px",
+                    marginBottom: "3px",
                   }}
                 >
                   {prod.category}
@@ -1284,14 +1059,14 @@ export default function ProductsPage() {
                 {/* Product Title */}
                 <h3
                   style={{
-                    fontSize: "20px",
+                    fontSize: "16.5px",
                     fontWeight: 800,
                     color: "#1E251F",
-                    marginBottom: "6px",
+                    marginBottom: "5px",
                     lineHeight: 1.25,
                     textDecoration: "underline",
                     textDecorationColor: "#15803D",
-                    textUnderlineOffset: "5px",
+                    textUnderlineOffset: "4px",
                     textDecorationThickness: "2px",
                   }}
                 >
@@ -1301,28 +1076,15 @@ export default function ProductsPage() {
                 {/* Tagline */}
                 <p
                   style={{
-                    fontSize: "13px",
+                    fontSize: "12px",
                     color: "#475569",
-                    lineHeight: 1.45,
-                    marginBottom: "18px",
-                    minHeight: "38px",
+                    lineHeight: 1.4,
+                    marginBottom: "16px",
+                    minHeight: "34px",
                   }}
                 >
                   {prod.tagline}
                 </p>
-
-                {/* Price block */}
-                <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "16px" }}>
-                  <span style={{ fontSize: "22px", fontWeight: 900, color: "#1E251F" }}>
-                    ₹{prod.price}
-                  </span>
-                  <span style={{ fontSize: "14px", color: "#94a3b8", textDecoration: "line-through" }}>
-                    ₹{prod.originalPrice}
-                  </span>
-                  <span style={{ background: "#D5E0D5", color: "#7CA832", fontSize: "11px", fontWeight: 800, padding: "2px 8px", borderRadius: "100px" }}>
-                    SAVE 46%
-                  </span>
-                </div>
 
                 {/* High-Converting Interactive Product Modal CTA */}
                 <motion.button
@@ -1334,25 +1096,26 @@ export default function ProductsPage() {
                   }}
                   style={{
                     width: "100%",
-                    padding: "12px 14px",
+                    marginTop: "auto",
+                    padding: "10px 10px",
                     background: "linear-gradient(135deg, #15803D 0%, #166534 100%)",
                     color: "#ffffff",
-                    borderRadius: "14px",
+                    borderRadius: "12px",
                     border: "none",
-                    fontSize: "13.5px",
+                    fontSize: "12px",
                     fontWeight: 800,
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: "8px",
-                    boxShadow: "0 6px 20px rgba(21, 128, 61, 0.28)",
+                    gap: "6px",
+                    boxShadow: "0 6px 18px rgba(21, 128, 61, 0.25)",
                     letterSpacing: "0.01em",
                   }}
                 >
-                  <Sparkles size={15} color="#86EFAC" />
-                  <span>Customize & Explore Formula</span>
-                  <ArrowRight size={15} />
+                  <Sparkles size={13} color="#86EFAC" />
+                  <span>Customize & Explore</span>
+                  <ArrowRight size={13} />
                 </motion.button>
               </motion.div>
             ))}

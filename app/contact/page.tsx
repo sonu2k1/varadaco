@@ -77,7 +77,7 @@ export default function ContactPage() {
       <section
         style={{
           background: "linear-gradient(135deg, #E8F5ED 0%, #F2FBF5 45%, #E1F4EA 100%)",
-          padding: "70px 4.5vw 80px",
+          padding: "140px 4.5vw 80px",
           borderBottom: "1px solid #D5E7DC",
           position: "relative",
           overflow: "hidden",
@@ -89,27 +89,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                background: "rgba(254, 240, 138, 0.55)",
-                border: "1px solid rgba(234, 179, 8, 0.4)",
-                padding: "6px 14px",
-                borderRadius: "30px",
-                fontSize: "11px",
-                fontWeight: 800,
-                color: "#1E3A2F",
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                marginBottom: "20px",
-              }}
-            >
-              <span>10. CONTACT US</span>
-              <span>•</span>
-              <span>DIRECT CLIENT DESK</span>
-            </div>
+
 
             <h1
               style={{

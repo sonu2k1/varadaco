@@ -225,7 +225,7 @@ export default function AboutPage() {
               }}
             >
               <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85"
+                src="/images/unsplash/photo-1581091226825-a6a2a5aee158.jpg"
                 alt="Varadaco Manufacturing Process Video Thumbnail"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PolicyModal from "@/components/PolicyModal";
+import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
 
 export const metadata: Metadata = {
   title: "Varadaco Industries | Science-driven nutrition & manufacturing",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body style={{ fontFamily: 'Inter, Manrope, Helvetica Neue, Arial, sans-serif' }}>
         {children}
         <PolicyModal />
+        <WhatsAppFloatingButton />
       </body>
     </html>
   );

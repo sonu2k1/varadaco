@@ -115,7 +115,7 @@ export default function RndPage() {
       <section className="subpage-hero hero-centered">
         <div className="subpage-hero-bg">
           <img
-            src="https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=1920&q=85"
+            src="/images/unsplash/photo-1579165466741-7f35e4755660.jpg"
             alt="Biomedical laboratory research and analytical science"
             style={{ objectPosition: "center 40%" }}
           />

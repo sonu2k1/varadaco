@@ -8,8 +8,10 @@ import Link from "next/link";
 export default function PolicyModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Check if user has already accepted policies
     try {
       const consent = localStorage.getItem("varadaco_policy_accepted");
@@ -25,6 +27,8 @@ export default function PolicyModal() {
       setIsOpen(true);
     }
   }, []);
+
+  if (!mounted) return null;
 
   const handleAcceptAll = () => {
     try {

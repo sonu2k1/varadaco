@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderConfirmationModal from "./OrderConfirmationModal";
 import RazorpayModal, { RazorpayPaymentDetails } from "./RazorpayModal";
@@ -22,6 +22,9 @@ import {
   SlidersHorizontal,
   Scale,
   TrendingUp,
+  Settings,
+  Zap,
+  Heart,
 } from "lucide-react";
 
 interface IngredientItem {
@@ -72,7 +75,7 @@ const INITIAL_INGREDIENTS: IngredientItem[] = [
     name: "Ashwagandha Extract",
     botanical: "Withania somnifera (KSM-66 / 5% Withanolides)",
     desc: "Helps reduce cortisol, relieve chronic stress, and boost physical stamina.",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1615485290382-441e4d049cb5.jpg",
     baseDosage: 300,
     unit: "mg",
     basePrice: 28.0,
@@ -89,7 +92,7 @@ const INITIAL_INGREDIENTS: IngredientItem[] = [
     name: "Black Pepper Extract",
     botanical: "Piper nigrum (95% Piperine)",
     desc: "Improves gut absorption and maximizes bioavailability of herbal extracts.",
-    image: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1599940824399-b87987ceb72a.jpg",
     baseDosage: 10,
     unit: "mg",
     basePrice: 5.0,
@@ -106,7 +109,7 @@ const INITIAL_INGREDIENTS: IngredientItem[] = [
     name: "L-Theanine",
     botanical: "Natural Amino Acid",
     desc: "Promotes calm relaxation without sedation, synergy with adaptogens.",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1544367567-0f2fcb009e0b.jpg",
     baseDosage: 50,
     unit: "mg",
     basePrice: 12.0,
@@ -123,7 +126,7 @@ const INITIAL_INGREDIENTS: IngredientItem[] = [
     name: "Zinc",
     botanical: "Zinc Citrate / Bisglycinate",
     desc: "Supports immune defense, cellular repair, and hormonal homeostasis.",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1584308666744-24d5c474f2ae.jpg",
     baseDosage: 10,
     unit: "mg",
     basePrice: 3.0,
@@ -140,7 +143,7 @@ const INITIAL_INGREDIENTS: IngredientItem[] = [
     name: "Vitamin D3",
     botanical: "Cholecalciferol",
     desc: "Supports bone density, neuromuscular integrity, and positive mood.",
-    image: "https://images.unsplash.com/photo-1550572017-ed200f5e6343?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1550572017-ed200f5e6343.jpg",
     baseDosage: 600,
     unit: "IU",
     basePrice: 4.0,
@@ -157,7 +160,7 @@ const INITIAL_INGREDIENTS: IngredientItem[] = [
     name: "Excipients & Others",
     botanical: "Clean-label Plant Binders",
     desc: "Pharmaceutical-grade plant cellulose and natural glidant complex.",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1584308666744-24d5c474f2ae.jpg",
     baseDosage: 120,
     unit: "mg",
     basePrice: 6.0,
@@ -253,35 +256,35 @@ const LABEL_OPTIONS: LabelOption[] = [
     name: "Basic Label",
     subtext: "(Sticker Label)",
     price: 1.0,
-    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1522335789203-aabd1fc54bc9.jpg",
   },
   {
     id: "premium_label",
     name: "Premium Label",
     subtext: "(Glossy Finish)",
     price: 2.0,
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1556228720-195a672e8a03.jpg",
   },
   {
     id: "matte_label",
     name: "Matte Label",
     subtext: "(Premium Soft-Touch)",
     price: 3.0,
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1584308666744-24d5c474f2ae.jpg",
   },
   {
     id: "embossed_label",
     name: "Embossed Label",
     subtext: "(Luxury Foil Stamp)",
     price: 4.0,
-    image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1608571423902-eed4a5ad8108.jpg",
   },
   {
     id: "custom_design",
     name: "Custom Design",
     subtext: "(Zenon Creative Team)",
     price: 5.0,
-    image: "https://images.unsplash.com/photo-1542744094-3a31727221eb?auto=format&fit=crop&w=400&q=80",
+    image: "/images/unsplash/photo-1542744094-3a31727221eb.jpg",
   },
 ];
 
@@ -812,15 +815,35 @@ function BottleWithCapPreview({ selectedCap }: { selectedCap: CapOption }) {
   );
 }
 
+function BrainIcon({ size = 18, color = "#16A34A" }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z" />
+      <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z" />
+    </svg>
+  );
+}
+
+function AyurvedaLeafIcon({ size = 28, color = "#16A34A" }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 28 28" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 3C14 3 6 11 6 17C6 21.4183 9.58172 25 14 25C18.4183 25 22 21.4183 22 17C22 11 14 3 14 3Z" />
+      <path d="M14 10V20" strokeLinecap="round" />
+      <path d="M14 14.5C16.5 13.5 18 14.5 18 14.5" strokeLinecap="round" />
+      <path d="M14 17.5C11.5 16.5 10 17.5 10 17.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const STEPS = [
-  { id: 1, name: "Why & Benefits" },
+  { id: 1, name: "Why" },
   { id: 2, name: "Ingredients" },
-  { id: 3, name: "Formulation & ROI" },
+  { id: 3, name: "Formula" },
   { id: 4, name: "Bottle" },
   { id: 5, name: "Cap" },
   { id: 6, name: "Packaging" },
   { id: 7, name: "Label" },
-  { id: 8, name: "MOQ & Sample" },
+  { id: 8, name: "MOQ" },
 ];
 
 interface ProductJourneyModalProps {
@@ -834,6 +857,7 @@ export default function ProductJourneyModal({
   onClose,
   productName = "Ashwagandha",
 }: ProductJourneyModalProps) {
+  const [hasSelectedJourneyMode, setHasSelectedJourneyMode] = useState<boolean>(false);
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [ingredients, setIngredients] = useState<IngredientItem[]>(INITIAL_INGREDIENTS);
   const [selectedBottle, setSelectedBottle] = useState<PackagingOption>(BOTTLE_OPTIONS[0]);
@@ -844,6 +868,13 @@ export default function ProductJourneyModal({
   const [selectedFoil, setSelectedFoil] = useState<FoilOption>(FOIL_OPTIONS[0]);
   const [selectedMoq, setSelectedMoq] = useState<number>(500);
   const [maxStepReached, setMaxStepReached] = useState<number>(1);
+
+  useEffect(() => {
+    if (isOpen) {
+      setHasSelectedJourneyMode(false);
+      setCurrentStep(1);
+    }
+  }, [isOpen]);
 
   const [sampleOrdered, setSampleOrdered] = useState(false);
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
@@ -1013,10 +1044,502 @@ export default function ProductJourneyModal({
           border: "1.5px solid rgba(21, 128, 61, 0.25)",
         }}
       >
-        {/* ========================================================
-            STICKY HEADER WITH STEPPER
-           ======================================================== */}
-        <div
+        {!hasSelectedJourneyMode ? (
+          <div
+            style={{
+              position: "relative",
+              padding: "44px 44px 36px 44px",
+              background: "linear-gradient(135deg, #F8FBF8 0%, #F1F8F2 50%, #FAFBF9 100%)",
+              borderRadius: "28px",
+              overflow: "hidden",
+            }}
+          >
+            {/* Top Close Button */}
+            <button
+              onClick={onClose}
+              aria-label="Close modal"
+              style={{
+                position: "absolute",
+                top: "24px",
+                right: "24px",
+                width: "38px",
+                height: "38px",
+                borderRadius: "50%",
+                background: "rgba(255, 255, 255, 0.95)",
+                border: "1px solid #E2E8F0",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                color: "#64748B",
+                zIndex: 10,
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.06)",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#E2E8F0";
+                e.currentTarget.style.color = "#0F172A";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(255, 255, 255, 0.95)";
+                e.currentTarget.style.color = "#64748B";
+              }}
+            >
+              <X size={18} />
+            </button>
+
+            {/* Main 3-column / 2-column layout */}
+            <div className="product-mode-select-grid" style={{ position: "relative", zIndex: 2 }}>
+              {/* Left Column: Heading & Doodle */}
+              <div>
+                <div
+                  style={{
+                    width: "36px",
+                    height: "4px",
+                    background: "#16A34A",
+                    borderRadius: "2px",
+                    marginBottom: "16px",
+                  }}
+                />
+                <h2
+                  style={{
+                    fontSize: "36px",
+                    fontWeight: 850,
+                    color: "#0F172A",
+                    lineHeight: 1.16,
+                    letterSpacing: "-0.03em",
+                    margin: 0,
+                  }}
+                >
+                  How would you <br />
+                  like to create <br />
+                  <span style={{ color: "#16A34A" }}>your product?</span>
+                </h2>
+                <p
+                  style={{
+                    fontSize: "16px",
+                    color: "#64748B",
+                    fontWeight: 500,
+                    margin: "12px 0 0 0",
+                  }}
+                >
+                  Two easy ways to get started
+                </p>
+
+                {/* Doodle arrow with playful note */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    marginTop: "36px",
+                    color: "#16A34A",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "17px",
+                      fontWeight: 700,
+                      fontFamily: "Comic Sans MS, cursive, sans-serif",
+                      transform: "rotate(-7deg)",
+                      lineHeight: 1.25,
+                      display: "inline-block",
+                    }}
+                  >
+                    Choose what<br />works for you
+                  </span>
+                  <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style={{ marginTop: "14px" }}>
+                    <path
+                      d="M3 24C16 20 28 14 42 6M42 6C36 5 31 8 31 8M42 6C41 13 39 18 39 18"
+                      stroke="#16A34A"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Middle Column: Two Cards */}
+              <div
+                className="product-mode-cards-row"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "18px",
+                }}
+              >
+                {/* Card 1: I'm New */}
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    borderRadius: "24px",
+                    border: "1.5px solid #E2E8F0",
+                    padding: "26px 20px 22px 20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "50%",
+                      background: "#EBF9EE",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    <Leaf size={28} color="#16A34A" />
+                  </div>
+                  <h3
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: 800,
+                      color: "#0F172A",
+                      margin: "0 0 4px 0",
+                    }}
+                  >
+                    I&apos;m New
+                  </h3>
+                  <div
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: "#16A34A",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Guide Me Step-by-Step
+                  </div>
+
+                  {/* Checklist */}
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "11px",
+                      marginBottom: "24px",
+                    }}
+                  >
+                    {[
+                      "Simple language",
+                      "No technical knowledge needed",
+                      "Get expert suggestions",
+                      "Best for first-time buyers",
+                    ].map((item, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "9px",
+                          fontSize: "13px",
+                          color: "#334155",
+                          fontWeight: 600,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        <Check size={16} color="#16A34A" strokeWidth={2.8} style={{ flexShrink: 0 }} />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <button
+                    onClick={() => {
+                      setHasSelectedJourneyMode(true);
+                      setCurrentStep(1);
+                    }}
+                    style={{
+                      width: "100%",
+                      padding: "13px 16px",
+                      borderRadius: "12px",
+                      background: "linear-gradient(135deg, #15803D 0%, #166534 100%)",
+                      color: "#FFFFFF",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      boxShadow: "0 4px 14px rgba(21, 128, 61, 0.25)",
+                      transition: "all 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-1px)";
+                      e.currentTarget.style.boxShadow = "0 6px 18px rgba(21, 128, 61, 0.35)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 4px 14px rgba(21, 128, 61, 0.25)";
+                    }}
+                  >
+                    <span>Start Guided Journey</span>
+                    <ArrowRight size={16} />
+                  </button>
+
+                  {/* Recommended Badge */}
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "5px",
+                      background: "#DCFCE7",
+                      color: "#15803D",
+                      border: "1px solid #86EFAC",
+                      fontSize: "11px",
+                      fontWeight: 800,
+                      padding: "4px 12px",
+                      borderRadius: "100px",
+                      marginTop: "12px",
+                    }}
+                  >
+                    <span>★</span>
+                    <span>Recommended</span>
+                  </div>
+                </div>
+
+                {/* Card 2: I Know What I Need */}
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    borderRadius: "24px",
+                    border: "1.5px solid #E2E8F0",
+                    padding: "26px 20px 22px 20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "50%",
+                      background: "#F0FDF4",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    <Settings size={28} color="#15803D" />
+                  </div>
+                  <h3
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: 800,
+                      color: "#0F172A",
+                      margin: "0 0 4px 0",
+                    }}
+                  >
+                    I Know What I Need
+                  </h3>
+                  <div
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: "#0F172A",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Quick Order
+                  </div>
+
+                  {/* Checklist */}
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "11px",
+                      marginBottom: "24px",
+                    }}
+                  >
+                    {[
+                      "Direct configuration",
+                      "Choose your specifications",
+                      "Get instant pricing",
+                      "Add to cart and order",
+                    ].map((item, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "9px",
+                          fontSize: "13px",
+                          color: "#334155",
+                          fontWeight: 600,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        <Check size={16} color="#16A34A" strokeWidth={2.8} style={{ flexShrink: 0 }} />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <button
+                    onClick={() => {
+                      setHasSelectedJourneyMode(true);
+                      setMaxStepReached(8);
+                      setCurrentStep(3);
+                    }}
+                    style={{
+                      width: "100%",
+                      padding: "13px 16px",
+                      borderRadius: "12px",
+                      background: "#FFFFFF",
+                      color: "#0F172A",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      border: "1.5px solid #CBD5E1",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      boxShadow: "0 2px 6px rgba(0, 0, 0, 0.04)",
+                      transition: "all 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "#0F172A";
+                      e.currentTarget.style.background = "#F8FAFC";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "#CBD5E1";
+                      e.currentTarget.style.background = "#FFFFFF";
+                    }}
+                  >
+                    <span>Quick Order</span>
+                    <ArrowRight size={16} />
+                  </button>
+
+                  {/* Spacer to align heights */}
+                  <div style={{ height: "29px", marginTop: "12px" }} />
+                </div>
+              </div>
+
+              {/* Right Column: Expert Photo */}
+              <div
+                className="product-mode-expert-col"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "flex-end",
+                  position: "relative",
+                  height: "100%",
+                }}
+              >
+                <img
+                  src="/images/product-guide-expert.png"
+                  alt="Product Expert"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    maxHeight: "360px",
+                    objectFit: "contain",
+                    borderRadius: "16px",
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Bottom Strip: WhatsApp Help */}
+            <div
+              style={{
+                marginTop: "32px",
+                background: "#EDFDF4",
+                border: "1px solid #BBF7D0",
+                borderRadius: "20px",
+                padding: "12px 24px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "16px",
+                flexWrap: "wrap",
+                position: "relative",
+                zIndex: 2,
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                <div
+                  style={{
+                    width: "42px",
+                    height: "42px",
+                    borderRadius: "50%",
+                    background: "#25D366",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 4px 12px rgba(37, 211, 102, 0.35)",
+                    flexShrink: 0,
+                  }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.761.79 2.796.79 3.18 0 5.767-2.587 5.767-5.766.001-3.187-2.575-5.776-5.767-5.776zm3.365 8.163c-.14.394-.74.724-1.026.745-.271.02-.622.03-1.85-.477-1.464-.606-2.42-2.073-2.493-2.17-.074-.097-.597-.794-.597-1.514s.374-1.077.507-1.225c.133-.148.291-.185.388-.185.097 0 .194.002.278.006.09.004.21-.034.328.25.121.291.412 1.006.449 1.079.036.073.06.158.012.254-.049.097-.073.158-.145.242-.073.085-.154.19-.22.255-.073.072-.15.15-.064.297.085.146.377.622.809 1.006.557.494 1.026.647 1.172.72.146.073.23.06.315-.037.085-.097.364-.424.461-.57.097-.145.194-.121.328-.073.133.049.848.4 1 .473.151.073.254.109.291.17.037.06.037.643-.103 1.037z" />
+                  </svg>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: "14.5px", color: "#0F172A" }}>
+                    Need help?
+                  </div>
+                  <div style={{ fontSize: "12.5px", color: "#475569", fontWeight: 500 }}>
+                    Talk to our product experts on WhatsApp
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={`https://wa.me/919822767273?text=${encodeURIComponent(`Hi, I would like to consult with a product expert about creating/customizing ${productName}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "#0D2619",
+                  color: "#FFFFFF",
+                  padding: "10px 22px",
+                  borderRadius: "100px",
+                  fontWeight: 700,
+                  fontSize: "13.5px",
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "7px",
+                  boxShadow: "0 2px 8px rgba(13, 38, 25, 0.2)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#15803D";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "#0D2619";
+                }}
+              >
+                <span>Chat Now</span>
+                <ArrowRight size={15} />
+              </a>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* ========================================================
+                STICKY HEADER WITH STEPPER
+               ======================================================== */}
+            <div
           style={{
             position: "sticky",
             top: 0,
@@ -1098,38 +1621,69 @@ export default function ProductJourneyModal({
               </div>
             </div>
 
-            <button
-              onClick={onClose}
-              aria-label="Close journey modal"
-              style={{
-                background: "#F1F5F9",
-                border: "1px solid #E2E8F0",
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                color: "#64748B",
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#E2E8F0";
-                e.currentTarget.style.color = "#0F172A";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#F1F5F9";
-                e.currentTarget.style.color = "#64748B";
-              }}
-            >
-              <X size={18} />
-            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <button
+                onClick={() => setHasSelectedJourneyMode(false)}
+                title="Switch creation mode"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  padding: "6px 12px",
+                  borderRadius: "8px",
+                  border: "1px solid #CBD5E1",
+                  background: "#FFFFFF",
+                  color: "#475569",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#15803D";
+                  e.currentTarget.style.color = "#15803D";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "#CBD5E1";
+                  e.currentTarget.style.color = "#475569";
+                }}
+              >
+                <ChevronLeft size={14} />
+                <span>Switch Mode</span>
+              </button>
+              <button
+                onClick={onClose}
+                aria-label="Close journey modal"
+                style={{
+                  background: "#F1F5F9",
+                  border: "1px solid #E2E8F0",
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  color: "#64748B",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#E2E8F0";
+                  e.currentTarget.style.color = "#0F172A";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "#F1F5F9";
+                  e.currentTarget.style.color = "#64748B";
+                }}
+              >
+                <X size={18} />
+              </button>
+            </div>
           </div>
 
-          {/* Stepper Navigation (1 to 7) */}
-          <div style={{ overflowX: "auto", paddingBottom: "4px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minWidth: "680px" }}>
+          {/* Stepper Navigation */}
+          <div style={{ overflowX: "auto", paddingBottom: "2px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minWidth: "660px" }}>
               {STEPS.map((s, idx) => {
                 const isCurrent = currentStep === s.id;
                 const isDone = currentStep > s.id;
@@ -1145,10 +1699,10 @@ export default function ProductJourneyModal({
                         border: "none",
                         cursor: isUnlocked ? "pointer" : "not-allowed",
                         display: "flex",
+                        flexDirection: "column",
                         alignItems: "center",
-                        gap: "8px",
+                        gap: "6px",
                         padding: "4px 8px",
-                        borderRadius: "20px",
                         opacity: isUnlocked ? 1 : 0.45,
                         transition: "all 0.2s ease",
                       }}
@@ -1156,18 +1710,18 @@ export default function ProductJourneyModal({
                     >
                       <div
                         style={{
-                          width: "28px",
-                          height: "28px",
+                          width: "30px",
+                          height: "30px",
                           borderRadius: "50%",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          fontSize: "12px",
+                          fontSize: "12.5px",
                           fontWeight: 800,
-                          background: isCurrent ? "#DCFCE7" : isDone ? "#15803D" : isUnlocked ? "#E2E8F0" : "#F1F5F9",
-                          color: isCurrent ? "#15803D" : isDone ? "#ffffff" : isUnlocked ? "#334155" : "#94A3B8",
-                          border: isCurrent ? "2px solid #15803D" : isDone ? "2px solid #15803D" : "1.5px solid #E2E8F0",
-                          boxShadow: isCurrent ? "0 0 0 4px rgba(34, 197, 94, 0.22)" : "none",
+                          background: isCurrent ? "#057A44" : isDone ? "#15803D" : "#FFFFFF",
+                          color: isCurrent ? "#FFFFFF" : isDone ? "#FFFFFF" : "#64748B",
+                          border: isCurrent ? "2px solid #057A44" : isDone ? "2px solid #15803D" : "1.5px solid #CBD5E1",
+                          boxShadow: isCurrent ? "0 0 0 3px rgba(5, 122, 68, 0.2)" : "none",
                           transition: "all 0.25s ease",
                         }}
                       >
@@ -1175,9 +1729,9 @@ export default function ProductJourneyModal({
                       </div>
                       <span
                         style={{
-                          fontSize: "12.5px",
+                          fontSize: "12px",
                           fontWeight: isCurrent ? 800 : isDone ? 700 : 500,
-                          color: isCurrent ? "#15803D" : isDone ? "#15803D" : isUnlocked ? "#334155" : "#94A3B8",
+                          color: isCurrent ? "#057A44" : isDone ? "#15803D" : "#64748B",
                           whiteSpace: "nowrap",
                         }}
                       >
@@ -1188,10 +1742,11 @@ export default function ProductJourneyModal({
                     {idx < STEPS.length - 1 && (
                       <div
                         style={{
-                          height: "2px",
+                          height: "1.5px",
                           flex: 1,
-                          margin: "0 8px",
-                          background: isDone ? "#15803D" : s.id < maxStepReached ? "#86EFAC" : "#E5E7EB",
+                          margin: "0 6px",
+                          marginBottom: "20px",
+                          background: isDone ? "#15803D" : s.id < maxStepReached ? "#86EFAC" : "#E2E8F0",
                         }}
                       />
                     )}
@@ -1208,7 +1763,7 @@ export default function ProductJourneyModal({
         <div style={{ padding: "28px 32px" }}>
           <AnimatePresence mode="wait">
             {/* ----------------------------------------------------
-                STEP 1: WHY ASHWAGANDHA? (WITH REAL PLANT IMAGE)
+                STEP 1: WHY & BENEFITS (EXACT USER SPEC)
                ---------------------------------------------------- */}
             {currentStep === 1 && (
               <motion.div
@@ -1217,121 +1772,267 @@ export default function ProductJourneyModal({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.25 }}
+                style={{
+                  background: "linear-gradient(135deg, #F8FBF8 0%, #F1F8F2 50%, #FAFBF9 100%)",
+                  borderRadius: "24px",
+                  padding: "36px 40px",
+                  border: "1px solid #E2E8F0",
+                }}
               >
-                <div
-                  style={{
-                    background: "#FFFFFF",
-                    borderRadius: "22px",
-                    border: "1px solid #E5E7EB",
-                    padding: "32px",
-                    display: "grid",
-                    gridTemplateColumns: "1.15fr 0.85fr",
-                    gap: "36px",
-                    alignItems: "stretch",
-                  }}
-                  className="ashwagandha-overview-grid"
-                >
-                  {/* Left: 4 Benefits */}
-                  <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                    <div>
-                      <span style={{ fontSize: "12px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#15803D", display: "block", marginBottom: "6px" }}>
-                        STEP 1
+                {/* Heading Area */}
+                <div style={{ marginBottom: "26px" }}>
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "4px",
+                      background: "#16A34A",
+                      borderRadius: "2px",
+                      marginBottom: "14px",
+                    }}
+                  />
+                  <h2
+                    style={{
+                      fontSize: "36px",
+                      fontWeight: 850,
+                      color: "#0F172A",
+                      margin: "0 0 6px 0",
+                      letterSpacing: "-0.03em",
+                    }}
+                  >
+                    Why <span style={{ color: "#16A34A" }}>{productName}?</span>
+                  </h2>
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      color: "#475569",
+                      margin: 0,
+                      fontWeight: 500,
+                    }}
+                  >
+                    A time-tested herb for modern wellness.
+                  </p>
+                </div>
+
+                {/* 3-Column Content Layout */}
+                <div className="why-benefits-main-grid">
+                  {/* Left Column: Real Bottle Display with Handwritten Doodle */}
+                  <div
+                    className="why-benefits-product-col"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <img
+                      src="/images/ashwagandha-why-product.png"
+                      alt={`${productName} Premium Formulation`}
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "360px",
+                        height: "auto",
+                        objectFit: "contain",
+                        filter: "drop-shadow(0 12px 28px rgba(0, 0, 0, 0.09))",
+                      }}
+                    />
+                  </div>
+
+                  {/* Middle Column: Benefits Card */}
+                  <div
+                    style={{
+                      background: "#FFFFFF",
+                      borderRadius: "24px",
+                      border: "1.5px solid #E2E8F0",
+                      padding: "24px 22px",
+                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                    }}
+                  >
+                    {[
+                      { icon: "leaf", text: "Supports stress management" },
+                      { icon: "zap", text: "Boosts energy & stamina" },
+                      { icon: "brain", text: "Helps improve focus" },
+                      { icon: "shield", text: "Supports overall well-being" },
+                      { icon: "heart", text: "Widely used & trusted" },
+                    ].map((b, idx, arr) => (
+                      <div
+                        key={idx}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "14px",
+                          padding: "11px 4px",
+                          borderBottom: idx < arr.length - 1 ? "1px solid #F1F5F9" : "none",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "36px",
+                            height: "36px",
+                            borderRadius: "10px",
+                            background: "#EBF9EE",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {b.icon === "leaf" && <Leaf size={18} color="#16A34A" strokeWidth={2.2} />}
+                          {b.icon === "zap" && <Zap size={18} color="#16A34A" strokeWidth={2.2} />}
+                          {b.icon === "brain" && <BrainIcon size={18} color="#16A34A" />}
+                          {b.icon === "shield" && <ShieldCheck size={18} color="#16A34A" strokeWidth={2.2} />}
+                          {b.icon === "heart" && <Heart size={18} color="#16A34A" strokeWidth={2.2} />}
+                        </div>
+                        <span
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            color: "#1E293B",
+                            lineHeight: 1.35,
+                          }}
+                        >
+                          {b.text}
+                        </span>
+                      </div>
+                    ))}
+
+                    {/* 100% Natural Extract Pill Badge */}
+                    <div
+                      style={{
+                        background: "#EDFDF4",
+                        border: "1px solid #BBF7D0",
+                        borderRadius: "14px",
+                        padding: "10px 16px",
+                        marginTop: "12px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "50%",
+                          background: "#DCFCE7",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Sprout size={17} color="#15803D" />
+                      </div>
+                      <span
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: 800,
+                          color: "#15803D",
+                          letterSpacing: "-0.01em",
+                        }}
+                      >
+                        100% Natural Extract
                       </span>
-                      <h2 style={{ fontSize: "clamp(26px, 3vw, 36px)", fontWeight: 800, color: "#111827", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
-                        Why <span style={{ color: "#15803D" }}>{productName}</span>?
-                      </h2>
-                      <p style={{ color: "#4B5563", fontSize: "15px", lineHeight: 1.55, marginBottom: "26px" }}>
-                        Understand the ingredient, common wellness positioning, typical use cases and what makes it interesting for a new product.
+                    </div>
+                  </div>
+
+                  {/* Right Column: Explanatory info & CTA */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      height: "100%",
+                      paddingLeft: "8px",
+                    }}
+                  >
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                        <AyurvedaLeafIcon size={30} color="#16A34A" />
+                        <h3
+                          style={{
+                            fontSize: "21px",
+                            fontWeight: 850,
+                            color: "#0F172A",
+                            margin: 0,
+                            letterSpacing: "-0.01em",
+                          }}
+                        >
+                          What is {productName}?
+                        </h3>
+                      </div>
+
+                      <p
+                        style={{
+                          fontSize: "14.5px",
+                          color: "#475569",
+                          lineHeight: 1.6,
+                          margin: "0 0 28px 0",
+                          fontWeight: 500,
+                        }}
+                      >
+                        A powerful adaptogen traditionally used in Ayurveda. Commonly used in modern wellness products to help the body manage stress and promote vitality.
                       </p>
 
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                        <div style={{ background: "#FAF9F6", border: "1px solid #EAE5DE", borderRadius: "14px", padding: "18px" }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                            <span style={{ color: "#15803D", fontWeight: 800 }}>✓</span>
-                            <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#111827", margin: 0 }}>Stress support</h4>
-                          </div>
-                          <p style={{ fontSize: "13px", color: "#6B7280", margin: 0, lineHeight: 1.45 }}>Commonly positioned for everyday stress management.</p>
-                        </div>
-
-                        <div style={{ background: "#FAF9F6", border: "1px solid #EAE5DE", borderRadius: "14px", padding: "18px" }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                            <span style={{ color: "#15803D", fontWeight: 800 }}>✓</span>
-                            <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#111827", margin: 0 }}>Energy & stamina</h4>
-                          </div>
-                          <p style={{ fontSize: "13px", color: "#6B7280", margin: 0, lineHeight: 1.45 }}>Often used in wellness and active-lifestyle products.</p>
-                        </div>
-
-                        <div style={{ background: "#FAF9F6", border: "1px solid #EAE5DE", borderRadius: "14px", padding: "18px" }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                            <span style={{ color: "#15803D", fontWeight: 800 }}>✓</span>
-                            <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#111827", margin: 0 }}>Recovery support</h4>
-                          </div>
-                          <p style={{ fontSize: "13px", color: "#6B7280", margin: 0, lineHeight: 1.45 }}>Can be positioned around active lifestyle recovery.</p>
-                        </div>
-
-                        <div style={{ background: "#FAF9F6", border: "1px solid #EAE5DE", borderRadius: "14px", padding: "18px" }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                            <span style={{ color: "#15803D", fontWeight: 800 }}>✓</span>
-                            <h4 style={{ fontSize: "15px", fontWeight: 700, color: "#111827", margin: 0 }}>Daily wellness</h4>
-                          </div>
-                          <p style={{ fontSize: "13px", color: "#6B7280", margin: 0, lineHeight: 1.45 }}>Useful for general wellness product concepts.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div style={{ marginTop: "28px", display: "flex", justifyContent: "flex-end" }}>
                       <button
                         onClick={() => goToStep(2)}
                         style={{
-                          background: "#15803D",
-                          color: "#ffffff",
-                          padding: "14px 28px",
-                          borderRadius: "10px",
+                          background: "linear-gradient(135deg, #057A44 0%, #0D2619 100%)",
+                          color: "#FFFFFF",
+                          padding: "14px 26px",
+                          borderRadius: "12px",
                           fontWeight: 700,
                           fontSize: "15px",
                           border: "none",
                           cursor: "pointer",
                           display: "inline-flex",
                           alignItems: "center",
-                          gap: "8px",
-                          boxShadow: "0 4px 14px rgba(21, 128, 61, 0.3)",
+                          justifyContent: "center",
+                          gap: "9px",
+                          boxShadow: "0 4px 14px rgba(5, 122, 68, 0.28)",
+                          transition: "all 0.2s ease",
+                          width: "fit-content",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = "translateY(-1px)";
+                          e.currentTarget.style.boxShadow = "0 6px 18px rgba(5, 122, 68, 0.38)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = "translateY(0)";
+                          e.currentTarget.style.boxShadow = "0 4px 14px rgba(5, 122, 68, 0.28)";
                         }}
                       >
-                        Next: Choose Ingredients
-                        <ArrowRight size={18} />
+                        <span>Next: Choose Ingredients</span>
+                        <ArrowRight size={17} />
                       </button>
                     </div>
-                  </div>
 
-                  {/* Right: Real Plant Image & Callout */}
-                  <div style={{ background: "#F4F7F3", borderRadius: "18px", border: "1px solid #DFEADB", padding: "22px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                    <div>
-                      <div style={{ position: "relative", height: "230px", borderRadius: "14px", overflow: "hidden", boxShadow: "0 6px 18px rgba(0,0,0,0.08)", marginBottom: "16px", background: "#E8EFE7" }}>
-                        <img
-                          src="/products/ashwagandha_plant_real.jpg"
-                          alt="Real living Ashwagandha plant with leaves, berries, and roots"
-                          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                        />
-                        <div style={{ position: "absolute", bottom: "10px", left: "10px", background: "rgba(13, 38, 25, 0.85)", backdropFilter: "blur(6px)", color: "#A7F3D0", padding: "4px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: 600 }}>
-                          🌿 Real Withania Somnifera (Living Plant & Roots)
-                        </div>
-                      </div>
-
-                      <h3 style={{ fontSize: "20px", fontWeight: 800, color: "#111827", margin: "0 0 4px" }}>
-                        {productName}
-                      </h3>
-                      <p style={{ fontSize: "13px", color: "#4B5563", margin: "0 0 16px", lineHeight: 1.4 }}>
-                        A botanical ingredient commonly used in wellness formulations.
-                      </p>
-                    </div>
-
-                    <div style={{ background: "#FFFFFF", borderRadius: "10px", border: "1px solid #E5E7EB", borderLeft: "4px solid #15803D", padding: "14px 16px" }}>
-                      <h4 style={{ fontSize: "14px", fontWeight: 700, color: "#111827", margin: "0 0 4px" }}>
-                        Build your business with us.
-                      </h4>
-                      <p style={{ fontSize: "12.5px", color: "#4B5563", margin: 0, lineHeight: 1.45 }}>
-                        We can help you explore formulation, packaging, pricing and sample development.
-                      </p>
+                    {/* Playful Handwritten Doodle Note */}
+                    <div
+                      style={{
+                        marginTop: "36px",
+                        textAlign: "right",
+                        color: "#16A34A",
+                        fontFamily: "Comic Sans MS, cursive, sans-serif",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "13.5px",
+                          fontWeight: 700,
+                          display: "inline-block",
+                          transform: "rotate(-3deg)",
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        Rooted in<br />Tradition, Backed<br />by Science
+                      </span>
+                      <svg width="68" height="8" viewBox="0 0 68 8" fill="none" style={{ display: "block", marginLeft: "auto", marginTop: "3px" }}>
+                        <path d="M2 5.5C22 1.5 44 1.5 66 5" stroke="#16A34A" strokeWidth="1.8" strokeLinecap="round" />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -2983,7 +3684,9 @@ export default function ProductJourneyModal({
             )}
           </AnimatePresence>
         </div>
-      </motion.div>
+      </>
+    )}
+  </motion.div>
 
       {/* Order Confirmation & Invoice Modal (Exact Image 1 Spec) */}
       <OrderConfirmationModal

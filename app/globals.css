@@ -5013,3 +5013,93 @@ em {
     padding: 28px 20px !important;
   }
 }
+
+/* 5 Products Per Row Grid */
+.products-clinical-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 1200px) {
+  .products-clinical-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .products-clinical-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-clinical-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-clinical-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* Product Mode Selection Modal Grid */
+.product-mode-select-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.65fr 0.95fr;
+  gap: 28px;
+  align-items: center;
+}
+
+@media (max-width: 1040px) {
+  .product-mode-select-grid {
+    grid-template-columns: 1fr 1.3fr !important;
+  }
+  .product-mode-expert-col {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-mode-select-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .product-mode-cards-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Step 1 Why & Benefits Grid */
+.why-benefits-main-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.1fr 0.95fr;
+  gap: 28px;
+  align-items: center;
+}
+
+@media (max-width: 1040px) {
+  .why-benefits-main-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 22px !important;
+  }
+  .why-benefits-product-col {
+    grid-column: span 2;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-benefits-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .why-benefits-product-col {
+    grid-column: span 1;
+  }
+}
